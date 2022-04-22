@@ -1,0 +1,77 @@
+.withdraw-data {
+  font-size: .85rem;
+  width: 100%;
+  line-height: 1;
+
+  .b-tooltip {
+    .tooltip-content {
+      line-height: 1.5;
+    }
+  }
+
+  &.is-spaced {
+    margin-top: -.75rem;
+
+    &:not(:last-child) {
+      margin-bottom: 1.25rem;
+    }
+
+    + .help {
+      margin-top: -1rem;
+    }
+  }
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      color: $primary;
+      margin-left: .5rem;
+      text-align: right;
+
+      > span {
+        margin-left: 0;
+      }
+
+      &.has-low-anonymity {
+        margin-left: 0.5rem;
+
+        > span {
+          margin-left: 1.1rem;
+          position: relative;
+          border-bottom: 1px dotted $warning;
+          margin-bottom: -1px;
+          color: $warning;
+
+          &:before {
+            content: '';
+            position: absolute;
+            background-image: url("data:image/svg+xml,%3Csvg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ff8a00' d='m13 14h-2v-4h2m0 8h-2v-2h2m-12 5h22l-11-19z'/%3E%3C/svg%3E");
+            background-size: contain;
+            height: 14px;
+            width: 14px;
+            left: -18px;
+            top: -1px;
+          }
+        }
+      }
+
+      &.is-alone {
+        margin-left: auto;
+      }
+    }
+
+    .b-tooltip {
+      flex-shrink: 0;
+
+      &:after {
+        line-height: 1.5;
+      }
+    }
+
+    + .withdraw-data-item {
+      margin-top: .6rem;
+    }
+  }
+}

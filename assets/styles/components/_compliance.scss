@@ -1,0 +1,354 @@
+.compliance {
+  @media print {
+    margin-top: -2rem;
+  }
+  .title {
+    color: #fff;
+    text-align: center;
+
+    span {
+      color: $primary;
+    }
+    .print {
+      display: none;
+    }
+    @media print {
+      .not-print {
+        display: none;
+      }
+      .print {
+        display: inline-block;
+      }
+      font-size: 2.5rem !important;
+      font-weight: 700;
+      color: #000;
+      text-align: left;
+
+      span {
+        color: #000;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .label {
+    @media print {
+      color: #000;
+    }
+  }
+
+  .subtitle {
+    text-align: center;
+  }
+
+  .p {
+    font-size: 0.857rem;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    @media print {
+      display: none;
+    }
+  }
+
+  .field {
+    margin-bottom: 1.5rem;
+
+    .input {
+      @media print {
+        display: none;
+      }
+    }
+
+    .print-help {
+      display: none;
+
+      @media print {
+        display: block;
+        word-break: break-all;
+        word-wrap: break-word;
+        font-weight: 700;
+        color: #000;
+      }
+    }
+  }
+
+  .columns {
+    margin-top: 1.5rem;
+
+    &-blocks {
+      @include touch {
+        margin: 1rem 0;
+      }
+
+      @include desktop {
+        .column {
+          &.is-5-desktop {
+            width: calc(50% - 40px);
+          }
+          &.is-2-desktop {
+            width: 80px;
+          }
+        }
+      }
+
+      @media print {
+        display: flex;
+        .column {
+          &.is-5-desktop {
+            flex: none;
+            width: 50%;
+
+            &:first-child {
+              padding-right: 1rem !important;
+            }
+
+            &:last-child {
+              margin-left: 1rem !important;
+            }
+          }
+        }
+      }
+    }
+
+    &.has-verified {
+      @include touch {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+    }
+  }
+
+  .block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &-withdrawal {
+      @include mobile {
+        margin-top: 1rem;
+      }
+    }
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        color: $primary;
+
+        @media print {
+          color: #000;
+        }
+      }
+
+      &--title {
+        font-size: 1.25rem;
+        line-height: 1.25;
+
+        @media print {
+          margin-bottom: 0.5rem;
+          color: #000;
+
+          span {
+            font-weight: 700;
+          }
+        }
+      }
+
+      &--status {
+        color: #616161;
+        margin-bottom: 2rem;
+
+        &.is-success {
+          color: $primary;
+        }
+
+        &.is-warning {
+          color: $warning;
+        }
+
+        .fee {
+          color: #616161;
+        }
+
+        @media print {
+          color: #000 !important;
+          font-size: 0.85rem;
+
+          .fee {
+            color: #000;
+          }
+        }
+      }
+
+      &--data {
+        font-size: 0.9rem;
+
+        @include mobile {
+          flex-direction: column;
+        }
+
+        .label {
+          font-size: inherit;
+          width: 106px;
+          flex: none;
+        }
+
+        .value {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          color: $primary;
+          margin-left: 1rem;
+          flex-grow: 1;
+
+          @include mobile {
+            margin-left: 0;
+            text-align: left;
+            word-break: break-all;
+            overflow: visible;
+            margin-bottom: 1rem;
+          }
+
+          @include touch {
+            &[data-value] {
+              font: 0/0 a;
+              color: transparent;
+
+              &::after {
+                display: block;
+                font-size: 0.9rem;
+                line-height: 1.5;
+                font-family: 'PT Mono';
+                color: $primary;
+                content: attr(data-value);
+              }
+            }
+          }
+
+          &.copy {
+            cursor: pointer;
+          }
+        }
+
+        @media print {
+          flex-direction: column;
+          margin-bottom: 1rem;
+
+          .value {
+            overflow: visible;
+            word-break: break-all;
+            text-align: left;
+            margin-left: 0;
+            color: #000;
+            font-weight: 700;
+
+            &[data-value] {
+              font: 0/0 a;
+              color: transparent;
+
+              &::after {
+                display: block;
+                font-size: 0.9rem;
+                line-height: 1.5;
+                font-weight: 700;
+                font-family: 'PT Mono', monospace;
+                color: #000;
+                content: attr(data-value);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .arrow {
+    height: 100%;
+    width: 100%;
+    background-size: 46px 41px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('../img/icons/arrow.svg');
+
+    @include touch {
+      background-size: 41px 46px;
+      width: 41px;
+      height: 46px;
+      transform: rotate(90deg);
+      margin: 0 auto;
+    }
+  }
+
+  .verified {
+    margin: 1rem 0 1rem auto;
+    height: 100px;
+    width: 100px;
+    display: block;
+
+    @include touch {
+      margin-top: 1rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stroke {
+      fill: none;
+      fill-rule: evenodd;
+      stroke: #94febf;
+    }
+
+    .fill {
+      fill: #94febf;
+      fill-rule: evenodd;
+    }
+
+    @media print {
+      .stroke {
+        stroke: #000;
+      }
+
+      .fill {
+        fill: #000;
+      }
+      margin-top: -2rem;
+    }
+  }
+
+  .generate {
+    &-container {
+      position: relative;
+      text-align: center;
+      margin: 2rem 0 !important;
+
+      @media print {
+        display: none;
+      }
+    }
+
+    @include desktop {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .print {
+    display: none;
+
+    @media print {
+      display: block;
+      color: #000;
+    }
+
+    &-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &-p {
+      font-size: 0.9rem;
+    }
+  }
+}

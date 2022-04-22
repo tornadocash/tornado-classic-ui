@@ -1,0 +1,196 @@
+.field {
+  &:not(:last-child) {
+    margin-bottom: 1.25rem;
+  }
+
+  .control {
+    &.has-icons-right {
+      .input {
+        padding-right: calc(1.25em - 1px);
+
+        + .icon.is-right {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .label-with-buttons {
+    display: flex;
+    align-items: center;
+
+    .label {
+      margin-right: auto;
+
+      .b-tooltip {
+        .button {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .button {
+      margin-bottom: 0.5em;
+
+      &.is-icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      @include touch {
+        .b-tooltip {
+          &:before,
+          &:after {
+            content: none;
+          }
+        }
+      }
+
+      + .button {
+        margin-left: 0.75rem;
+      }
+
+      &.is-primary-text {
+        color: $primary;
+        padding: 0;
+        height: auto;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px dotted $primary;
+        border-radius: 0;
+        font-size: 0.85rem;
+        line-height: 1;
+
+        &:focus:not(:active) {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  &.has-custom-field {
+    margin-top: -0.65rem;
+
+    + .help {
+      margin-top: -1rem;
+    }
+  }
+
+  &-withdraw {
+    margin-top: -0.6rem;
+  }
+
+  &.has-addons {
+    .input {
+      border-right: 0;
+    }
+
+    .control {
+      &.has-text {
+        border: 1px solid #393939;
+        transition: border-color 0.15s ease-in-out;
+        border-left: 0;
+        display: inline-flex;
+        align-items: center;
+
+        span {
+          color: #6b6b6b;
+          font-size: 0.929rem;
+        }
+
+        &:not(:last-child) {
+          border-right: 0;
+          padding-right: 0.643rem;
+        }
+
+        &:last-child {
+          border-bottom-right-radius: 4px;
+          border-top-right-radius: 4px;
+          padding-right: 0.643rem;
+        }
+      }
+
+      &.has-button {
+        display: inline-flex;
+        align-items: center;
+        transition: border-color 0.15s ease-in-out;
+        border: 1px solid #393939;
+        border-left: 0;
+        padding-right: 0.357rem;
+
+        .button {
+          padding: 0.25rem 0.5rem;
+          font-size: 0.929rem;
+          height: 28px;
+          border-bottom-right-radius: 2px;
+          border-top-right-radius: 2px;
+        }
+
+        &:not(:last-child) {
+          border-right: 0;
+          padding-right: 0.643rem;
+        }
+
+        &:last-child {
+          border-bottom-right-radius: 4px;
+          border-top-right-radius: 4px;
+
+          &:not(:only-child) .button {
+            border-bottom-left-radius: 2px;
+            border-top-left-radius: 2px;
+          }
+        }
+
+        &:not(:first-child):not(:last-child) .button {
+          border-radius: 2px;
+        }
+      }
+    }
+
+    &:hover {
+      .input,
+      .control {
+        border-color: $input-hover-border-color;
+      }
+    }
+
+    &:focus,
+    &:focus-within {
+      .input,
+      .control {
+        border-color: $input-focus-border-color;
+      }
+    }
+  }
+
+  &.is-warning {
+    .has-addons {
+      .input,
+      .control {
+        border-color: $warning;
+      }
+    }
+  }
+
+  &.is-grouped {
+    @include mobile {
+      flex-wrap: wrap;
+
+      > .field.is-expanded {
+        &:not(:last-child) {
+          margin-right: 0;
+          margin-bottom: 1.25rem;
+        }
+
+        flex: none;
+        width: 100%;
+      }
+    }
+  }
+
+  & > .field {
+    + .help {
+      margin-top: -1rem;
+    }
+  }
+}

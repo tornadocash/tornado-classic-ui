@@ -1,0 +1,146 @@
+.b-steps {
+  margin-bottom: 1.25rem;
+
+  .steps {
+    + .step-content {
+      display: none;
+    }
+
+    .step-items {
+      .step-item {
+        .step-details {
+          margin-top: 1rem;
+
+          @include until(375px) {
+            word-spacing: 100px;
+          }
+        }
+
+        .step-link {
+          transition: color .15s ease-in-out;
+
+          &:not(.is-clickable) {
+            color: #393939;
+
+            .step-marker {
+              border-color: #393939;
+
+              &:before {
+                background-color: #393939;
+              }
+            }
+          }
+        }
+
+        .step-marker {
+          position: relative;
+
+          &:before {
+            content: "";
+            display: flex;
+            position: absolute;
+            left: 50%;
+            margin-left: calc(-1.5rem/2);
+            bottom: 50%;
+            margin-bottom: calc(-1.5rem/2);
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: transform 150ms ease-out;
+            border-radius: 50%;
+            transform: scale(0);
+            background-color: $primary;
+          }
+        }
+
+        &:not(:first-child) {
+          &::before {
+            content: none;
+          }
+
+          .step-link {
+            &::before {
+              content: '';
+              display: block;
+              position: absolute;
+              background-color: $primary;
+              height: .2em;
+              width: 100%;
+              left: -50%;
+              bottom: 0;
+              top: .7rem;
+            }
+
+            &:not(.is-clickable) {
+              &::before {
+                background-color: #393939;
+              }
+            }
+          }
+        }
+
+        &:first-child, &:last-child {
+          .step-link {
+            &::after {
+              content: '';
+              display: block;
+              position: absolute;
+              background: $primary;
+              height: .2em;
+              width: 50%;
+              bottom: 0;
+              top: .7rem;
+            }
+
+            &:not(.is-clickable) {
+              &::after {
+                background: #393939;
+              }
+            }
+          }
+        }
+
+        &:first-child {
+          .step-link {
+            &::after {
+              left: 0;
+            }
+          }
+        }
+
+        &:last-child {
+          .step-link {
+            &::after {
+              right: 0;
+            }
+          }
+        }
+
+        &.is-active {
+          .step-link {
+            color: $primary;
+
+            &:not(.is-clickable) {
+              color: #393939;
+            }
+
+            .step-marker {
+              background-color: $primary-invert;
+
+              &:before {
+                transform: scale(0.6);
+              }
+            }
+          }
+        }
+
+        &:not(.is-active) {
+          display: block;
+        }
+
+        &::before, &::after {
+          content: none;
+        }
+      }
+    }
+  }
+}

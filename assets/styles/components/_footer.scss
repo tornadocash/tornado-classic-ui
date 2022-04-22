@@ -1,0 +1,144 @@
+.footer {
+  font-size: 0.7rem;
+  line-height: 2;
+
+  @media print {
+    display: none;
+  }
+
+  .level {
+    &-item {
+      &.is-column {
+        flex-direction: column;
+      }
+    }
+
+    &-subitem {
+      display: flex;
+
+      @include mobile {
+        justify-content: center;
+
+        & + .level-subitem {
+          margin-top: 5px;
+        }
+      }
+    }
+
+    &-left {
+      .level-item {
+        &.is-column {
+          @include tablet {
+            align-items: flex-start;
+          }
+        }
+      }
+
+      & + .level-right {
+        @include mobile {
+          margin-top: 5px;
+        }
+      }
+    }
+
+    &-right {
+      .level-item {
+        &.is-column {
+          @include tablet {
+            align-items: flex-end;
+          }
+        }
+      }
+    }
+  }
+
+  @include tablet-only {
+    .level {
+      &-left {
+        .footer-address__name {
+          padding-right: 5px;
+        }
+      }
+
+      &-right {
+        .footer-address {
+          flex-direction: column;
+          align-items: flex-end;
+        }
+      }
+    }
+  }
+
+  &-address {
+    flex-wrap: wrap;
+
+    &__name {
+      @include desktop {
+        padding-right: 5px;
+      }
+    }
+
+    &__value {
+      color: $primary;
+
+      @include mobile {
+        width: 100%;
+        @include noWrap;
+        text-align: center;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .b-tooltip {
+      @include mobile {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .footer-version__value {
+    color: $primary;
+    padding-left: 5px;
+
+    @include mobile {
+      margin-bottom: 5px;
+    }
+  }
+
+  .buttons {
+    .button.is-icon:not(:last-child):not(.is-fullwidth) {
+      margin-right: 1.286rem;
+    }
+
+    .break {
+      margin-left: 0;
+      margin-right: 1.286rem;
+      background-color: #2a2a2a;
+    }
+
+    .icon,
+    .trnd {
+      width: 1.714rem;
+      height: 1.714rem;
+    }
+
+    @include until(425px) {
+      justify-content: center;
+      max-width: 200px;
+
+      .button.is-icon:not(:last-child):not(.is-fullwidth) {
+        margin: 0.5rem 0.7145rem;
+      }
+
+      .break {
+        margin: 0.5rem 0.7145rem;
+      }
+
+      .dropdown-langs {
+        margin: 0.5rem 0.7145rem;
+      }
+    }
+  }
+}

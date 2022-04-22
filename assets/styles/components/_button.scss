@@ -1,0 +1,326 @@
+.button {
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  font-weight: $weight-bold;
+
+  .trnd {
+    background-color: #eee;
+  }
+
+  svg {
+    & + span {
+      margin-left: 0.75em;
+    }
+  }
+
+  &.is-text {
+    text-decoration: none;
+
+    .trnd {
+      background-color: $button-text-color;
+    }
+
+    &:focus:not(:active),
+    &.is-focused:not(:active) {
+      box-shadow: none;
+    }
+  }
+
+  &.max-content {
+    max-width: max-content;
+  }
+
+  &.has-icon {
+    padding: 0;
+    width: 16px;
+    height: 16px;
+
+    .icon {
+      height: 8px;
+      width: 8px;
+
+      &.icon-info {
+        background-size: 6px 8px;
+      }
+    }
+    .icon-link {
+      height: 12px;
+      width: 12px;
+    }
+  }
+  &.is-icon {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+
+    .trnd {
+      width: 100%;
+      height: 100%;
+      background-color: #6b6b6b;
+    }
+
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+
+    &:hover {
+      path:not(.no-hover) {
+        fill: #87feb7;
+        transition: fill 0.15s ease-out;
+      }
+    }
+
+    &:focus:not(:active) {
+      box-shadow: none;
+    }
+  }
+  &.is-loading {
+    &::after {
+      border-radius: 100%;
+    }
+  }
+  &.is-black {
+    path {
+      fill: $primary;
+    }
+  }
+  &.is-primary {
+    path {
+      fill: $primary-invert;
+    }
+
+    .trnd {
+      background-color: $primary-invert;
+    }
+
+    &:hover {
+      background-color: #3bf0a1;
+    }
+
+    &[disabled] {
+      background-color: $primary;
+    }
+
+    &.is-outlined {
+      background-color: #0e1f17;
+
+      .trnd {
+        background-color: $primary;
+      }
+
+      &:hover,
+      &:focus,
+      &.is-hovered,
+      &.is-focused {
+        .trnd {
+          background-color: $primary-invert;
+        }
+      }
+
+      &[disabled] {
+        .trnd {
+          background-color: $primary;
+        }
+      }
+    }
+  }
+
+  &.is-danger {
+    &.is-outlined {
+      background-color: #1c080d;
+
+      .trnd {
+        background-color: $danger;
+      }
+
+      &:hover,
+      &:focus {
+        .trnd {
+          background-color: $danger-invert;
+        }
+      }
+
+      &[disabled] {
+        .trnd {
+          background-color: $danger;
+        }
+      }
+    }
+  }
+
+  &.is-dark {
+    path {
+      fill: $primary;
+    }
+
+    .trnd {
+      background-color: $primary;
+    }
+  }
+
+  &.is-primary-link {
+    color: $primary;
+    height: auto;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    font-size: 0.85rem;
+    line-height: 1;
+
+    &:hover {
+      span {
+        text-decoration: underline;
+      }
+    }
+
+    &:focus:not(:active) {
+      box-shadow: none;
+    }
+
+    &.is-underlined {
+      display: block;
+      margin: 0 auto;
+
+      span {
+        text-decoration: underline;
+      }
+
+      &:hover {
+        span {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .icon {
+    &:first-child:not(:last-child) {
+      margin-left: 0;
+      margin-right: 0.5em;
+    }
+    &:last-child:not(:first-child) {
+      margin-left: 0.5em;
+      margin-right: 0;
+    }
+    &:first-child:last-child {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &:not(.is-small):not(.is-primary-text) {
+    span:not(.icon):not(.b-tooltip):first-child:last-child {
+      padding: 0 0.5rem;
+    }
+  }
+
+  &.is-nav-icon {
+    width: 2.857rem;
+    padding: 0;
+    cursor: default;
+    background-color: #242424;
+    border-color: #4f4f4f;
+
+    .trnd {
+      background-color: #595959;
+    }
+
+    &:focus:not(:active) {
+      box-shadow: none;
+    }
+
+    &.walletConnect {
+      background-color: #07141e;
+      border-color: #3b99fc;
+
+      .trnd {
+        background-color: #3b99fc;
+      }
+    }
+
+    &.metamask {
+      background-color: #2d2419;
+      border-color: #f89c35;
+
+      .trnd {
+        background-color: #f89c35;
+      }
+    }
+
+    &.tornado {
+      background-color: #0e1f17;
+      border-color: $primary;
+
+      .trnd {
+        background-color: $primary;
+      }
+    }
+
+    &.network {
+      background-color: darken($primary, 80);
+      border-color: $primary;
+
+      .trnd {
+        background-color: $primary;
+      }
+    }
+  }
+
+  &.hide-icon-desktop {
+    @include desktop {
+      span.icon {
+        display: none;
+      }
+    }
+  }
+}
+
+.buttons {
+  &__social {
+    .button {
+      background-color: transparent;
+      border-color: transparent;
+      color: $primary;
+
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  &__halfwidth {
+    flex-wrap: nowrap;
+
+    .button,
+    .b-skeleton {
+      flex: 1 1 calc(50% - 0.5rem);
+
+      &:last-child {
+        margin-left: 0.5rem;
+      }
+    }
+
+    .b-skeleton {
+      margin-bottom: 0.5rem;
+
+      &:first-child {
+        margin-right: 0.5rem;
+      }
+
+      + .b-skeleton {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .break {
+    margin: 0 1rem 0.5rem 0.5rem;
+    width: 1px;
+    align-self: stretch;
+    background-color: $primary;
+  }
+}

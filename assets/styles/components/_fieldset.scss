@@ -1,0 +1,73 @@
+fieldset[disabled] {
+  cursor: not-allowed;
+  position: relative;
+  filter: grayscale(70%);
+  color: #5e5e5e;
+
+  .tooltip {
+    &:after {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      content: attr(data-label);
+      padding: 1rem 2rem;
+      border-radius: $radius-large;
+      font-size: 0.85rem;
+      font-weight: $weight-normal;
+      box-shadow: 0px 1px 2px 1px rgba(0, 1, 0, 0.2);
+      z-index: 888;
+      display: flex-block;
+      text-align: center;
+      width: 240px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #393939;
+      color: #eee;
+    }
+
+    &:not([data-label=""]):after {
+      transition-delay: inherit;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .notice {
+    position: relative;
+    border-color: #5c4d3c;
+    color: #5e5e5e;
+  }
+
+  .label {
+    @include unselectable;
+    color: #5e5e5e;
+
+    &.is-primary {
+      color: #558b6b;
+    }
+  }
+
+  .b-radio {
+    &.radio {
+      &:focus {
+        input[type=radio] {
+          + .check {
+            box-shadow: none;
+          }
+        }
+      }
+
+      input[type=radio] {
+        + .check {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .withdraw-data-item span {
+    color: #4f5e57;
+  }
+}

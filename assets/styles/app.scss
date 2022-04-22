@@ -1,0 +1,193 @@
+html {
+  @media print {
+    background-color: #fff !important;
+  }
+}
+
+body {
+  @media print {
+    color: #000;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  @media print {
+    background: none;
+  }
+
+  > .main-content {
+    flex: 1;
+
+    .is-centered-main-content & {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+@import 'components/fonts';
+@import 'components/base';
+
+@import 'components/header';
+@import 'components/button';
+@import 'components/tabs';
+@import 'components/box';
+@import 'components/footer';
+@import 'components/txs';
+@import 'components/checkbox';
+@import 'components/radio';
+@import 'components/loading';
+@import 'components/fieldset';
+@import 'components/video';
+@import 'components/wallets';
+@import 'components/steps';
+@import 'components/dropdown';
+@import 'components/field';
+@import 'components/deposit';
+@import 'components/withdraw-data';
+@import 'components/modal';
+@import 'components/has-eth-purchase';
+@import 'components/notification';
+@import 'components/icon';
+@import 'components/tab-with-corner';
+@import 'components/label';
+@import 'components/notice';
+@import 'components/flag';
+@import 'components/compliance';
+@import 'components/textarea';
+@import 'components/info';
+@import 'components/proposals';
+@import 'components/slider';
+@import 'components/account';
+
+.b-tooltip {
+  align-items: center;
+
+  .tooltip-trigger {
+    display: inline-flex;
+  }
+}
+
+.dialog {
+  .modal-card {
+    border: 1px solid #393939;
+    border-radius: 6px;
+
+    &-foot {
+      .button {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}
+
+.input {
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+  &.hide-spinner {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    -moz-appearance: textfield;
+  }
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  border-width: 1px;
+  border-radius: 1px;
+  margin-top: -0.4375rem;
+}
+
+.notices .toast {
+  @include until(375px) {
+    font-size: 0.85rem;
+  }
+}
+
+.geofence {
+  .footer .footer-address,
+  .break,
+  .dropdown-langs {
+    display: none;
+  }
+}
+
+.label-with-value {
+  margin-top: -0.25rem;
+  margin-bottom: 1rem;
+  line-height: 1.75;
+
+  span {
+    color: $primary;
+  }
+
+  a {
+    color: $primary;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.label {
+  font-size: 1rem;
+}
+
+.tag:not(body) {
+  font-weight: 700;
+  font-size: 0.857rem;
+  min-width: 70px;
+  height: 30px;
+}
+
+.progress {
+  height: 0.571rem;
+}
+
+.delete {
+  background-color: transparent;
+
+  &::before,
+  &::after {
+    background-color: #6b6b6b;
+    transition: background-color 0.15s ease-in-out;
+  }
+
+  &::before {
+    height: 1px;
+    width: 18px;
+  }
+
+  &::after {
+    height: 18px;
+    width: 1px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+
+    &::before,
+    &::after {
+      background-color: #fff;
+    }
+  }
+}
+
+%arrow {
+  @include arrow;
+  width: 0;
+  height: 0;
+  border-radius: 0;
+  border-style: solid;
+  border-width: 8px 0 0 8px;
+  border-color: transparent transparent transparent $white;
+}

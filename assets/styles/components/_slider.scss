@@ -1,0 +1,87 @@
+.field-slider {
+  .label {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input {
+    font-size: 0.857rem;
+    padding-left: 0.643rem;
+    padding-right: 0.643rem;
+    text-align: center;
+  }
+
+  .control.has-text {
+    font-size: 0.857rem;
+  }
+
+  .b-slider.is-primary {
+    margin: 0.429em 0 0;
+    padding-top: 8px;
+
+    .b-slider-track {
+      height: 2px;
+      border-radius: 0;
+    }
+
+    .b-slider-tick {
+      height: 2px;
+      width: 2px;
+
+      .b-slider-tick-label {
+        margin-top: 5px;
+        user-select: none;
+      }
+
+      &.is-tick-hidden {
+        &[style*='left: 0%'] {
+          .b-slider-tick-label {
+            left: 0;
+            transform: none;
+          }
+        }
+        &[style*='left: 100%'] {
+          .b-slider-tick-label {
+            left: auto;
+            right: 0;
+            transform: none;
+          }
+        }
+      }
+    }
+
+    .b-slider-thumb-wrapper {
+      &[style*='left: 0%'] {
+        transform: translate(0%, -50%);
+      }
+      &[style*='left: 100%'] {
+        transform: translate(-100%, -50%);
+      }
+    }
+
+    .b-slider-fill {
+      background-color: transparent !important;
+    }
+
+    .b-slider-thumb {
+      height: 16px;
+      width: 16px;
+      border-color: $primary;
+      background-color: $primary;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #0e1633;
+        left: calc(50% - 3px);
+        top: calc(50% - 3px);
+        border-radius: 6px;
+      }
+    }
+  }
+}

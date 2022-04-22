@@ -1,0 +1,31 @@
+.b-radio {
+  &.radio {
+    input[type=radio] {
+      + .check {
+        border-color: $primary;
+      }
+
+      &:checked {
+        + .check {
+          &:before {
+            transform: scale(.6);
+          }
+        }
+      }
+    }
+
+    + .radio {
+      margin-left: 1rem;
+    }
+
+    .control-label {
+      display: flex;
+      align-items: center;
+      color: $white;
+
+      .button {
+        margin-left: .45rem;
+      }
+    }
+  }
+}

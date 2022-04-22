@@ -1,0 +1,14 @@
+.label {
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .b-tooltip {
+    margin: 0 .45rem;
+  }
+
+  &.is-primary {
+    color: $primary;
+  }
+}

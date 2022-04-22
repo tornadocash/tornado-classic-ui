@@ -1,0 +1,62 @@
+.modal.is-pinned {
+  justify-content: flex-start;
+
+  .animation-content {
+    margin-top: 4rem;
+  }
+
+  @include desktop {
+    @media screen and (max-height: 720px - 1px) {
+      .dropdown {
+          .background {
+            display: block;
+          }
+
+          .dropdown-menu {
+              position: fixed;
+              width: calc(100vw - 40px);
+              max-width: 460px;
+              max-height: calc(100vh - 120px);
+              top: 25% !important;
+              left: 50% !important;
+              bottom: auto !important;
+              right: auto !important;
+              transform: translate3d(-50%, -25%, 0);
+              white-space: normal;
+              overflow-y: auto;
+              z-index: 50;
+          }
+      }
+    }
+
+    @media screen and (min-height: 720px) {
+      .box-modal {
+        position: static;
+      }
+
+      .animation-content {
+        position: relative;
+      }
+
+      .b-tabs .tab-content {
+        position: static;
+      }
+
+      .dropdown {
+        position: static;
+
+        .dropdown-menu {
+          padding: 0px 1.5rem;
+          margin-top: calc(2.857em + 4px);
+          top: initial;
+
+          > .dropdown-content {
+            overflow-y: auto;
+            max-height: calc(100vh - 20rem);
+            margin: 2px;
+          }
+        }
+      }
+    }
+  }
+}

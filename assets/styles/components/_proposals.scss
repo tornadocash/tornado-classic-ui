@@ -1,0 +1,377 @@
+.proposals {
+  &-list {
+    &--header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+
+      .title {
+        color: #fff;
+        font-size: 1.714rem;
+        margin-bottom: 0;
+        flex: 1;
+      }
+
+      .field {
+        margin-bottom: 0;
+
+        &-btn {
+          flex: 1;
+          text-align: right;
+        }
+      }
+
+      .b-radio.button {
+        border-radius: 0;
+        color: #6b6b6b;
+        background-color: #000403;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: 3px solid #2a2a2a;
+        padding-left: 1.75rem;
+        padding-right: 1.75rem;
+        min-width: 100px;
+
+        &:focus:not(:active),
+        &.is-focused:not(:active) {
+          box-shadow: none;
+        }
+
+        &:hover,
+        &.is-primary {
+          color: $primary;
+          border-bottom-color: $primary;
+        }
+      }
+
+      @include mobile {
+        flex-direction: column;
+
+        .title {
+          order: 1;
+          margin-top: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .field {
+          &.field-tabs {
+            order: 3;
+          }
+
+          &.field-btn {
+            order: 2;
+            margin-bottom: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  &-box {
+    margin: 1.25rem 0;
+    padding: 1.429rem;
+    background: #1f1f1f;
+    border-radius: 6px;
+    cursor: pointer;
+
+    .title {
+      color: #fff;
+      font-size: 1.143rem;
+      margin-bottom: 1rem;
+      line-height: 1.286;
+    }
+
+    &--info {
+      display: flex;
+
+      @include until(576px) {
+        flex-wrap: wrap;
+      }
+
+      @include from(576px) {
+        align-items: center;
+      }
+
+      .b-skeleton {
+        width: auto;
+      }
+    }
+
+    &--id {
+      @include until(576px) {
+        margin-bottom: 0.5rem;
+      }
+
+      margin-right: 0.714rem;
+
+      .tag {
+        color: #fff;
+        background: #363636;
+        min-width: 30px;
+      }
+    }
+
+    .date {
+      @include until(576px) {
+        margin-top: 0.5rem;
+        width: 100%;
+      }
+
+      @include from(576px) {
+        margin-left: 1.5rem;
+      }
+
+      span {
+        color: #6b6b6b;
+      }
+    }
+
+    .results {
+      background-color: #1a1a1a;
+      border-radius: 6px;
+      padding: 1.429rem;
+
+      @include mobile {
+        margin-top: 1rem;
+      }
+
+      @include tablet {
+        margin-top: -0.7145rem;
+        margin-bottom: -0.7145rem;
+        margin-right: -0.7145rem;
+      }
+
+      .result {
+        + .result {
+          margin-top: 0.7145rem;
+        }
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span.has-text-primary,
+        span.has-text-danger {
+          display: inline-flex;
+          align-items: center;
+          font-weight: 700;
+        }
+
+        span.icon {
+          margin-right: 0.5rem;
+        }
+
+        .b-skeleton {
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+.button.is-back {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: transparent;
+  border-color: transparent;
+  color: #94febf;
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+  }
+
+  &:focus:not(:active) {
+    box-shadow: none;
+  }
+
+  .trnd {
+    background-color: $primary;
+  }
+}
+
+.proposal {
+  .title {
+    color: #fff;
+    font-size: 1.714rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.286;
+  }
+
+  a {
+    color: $primary;
+  }
+
+  .description {
+    p {
+      line-height: 1.7;
+
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  &-block {
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    padding: 1.429rem;
+
+    .b-tooltip.fit-content {
+      width: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+
+      .buttons__halfwidth {
+        width: 100%;
+      }
+    }
+
+    @include mobile {
+      margin-top: 1.5rem;
+    }
+
+    + .proposal-block {
+      @include tablet {
+        margin-top: 1.5rem;
+      }
+    }
+
+    .title {
+      font-size: 1.143rem;
+
+      &:not(:last-child) {
+        margin-bottom: 1.25rem;
+      }
+    }
+
+    .label {
+      .percent {
+        margin-left: auto;
+        padding-left: 0.5rem;
+      }
+
+      .b-skeleton {
+        width: auto;
+      }
+    }
+
+    strong {
+      display: block;
+    }
+
+    .columns {
+      &.has-countdown {
+        .column {
+          &:not(:last-child) {
+            padding-bottom: 0;
+          }
+        }
+      }
+
+      &:not(.has-countdown) {
+        .column {
+          @include until(576px) {
+            &:not(:last-child) {
+              padding-bottom: 0;
+            }
+          }
+
+          @include from(576px) {
+            &:not(:nth-last-child(-n + 2)) {
+              padding-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+
+      .value {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        font-size: 0.929rem;
+        margin-top: 0.35rem;
+
+        .address {
+          font-size: 0.75rem;
+          line-height: 1.5;
+          @include noWrap;
+        }
+
+        .tag {
+          height: 1.714rem;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          min-width: auto;
+          font-size: 0.714rem;
+        }
+      }
+    }
+  }
+}
+
+.governance-head {
+  position: relative;
+  padding: 0 2.143rem 1.786rem;
+  margin-bottom: 4.85rem;
+
+  border: 1px solid #2a2a2a;
+  border-top-width: 0;
+
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+
+  .column {
+    &:first-child {
+      @include mobile {
+        padding-top: 0;
+      }
+    }
+
+    @include tablet {
+      padding-top: 0;
+
+      .info-value.without-label {
+        padding-top: 1.394rem;
+      }
+    }
+
+    @include touch {
+      text-align: center;
+
+      .info-value.has-tooltip {
+        justify-content: center;
+      }
+    }
+
+    button.is-text {
+      border-width: 0;
+      padding-left: 0;
+      padding-right: 0;
+      color: $primary;
+      height: 2.143rem;
+
+      .trnd {
+        background-color: $primary;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.is-loading::after {
+        border-left-color: $primary;
+        border-bottom-color: $primary;
+      }
+    }
+  }
+}

@@ -1,0 +1,382 @@
+.txs {
+  padding-top: 0.75rem;
+  font-size: 0.85rem;
+
+  .tx-filters {
+    @include tablet {
+      margin-bottom: 0;
+    }
+
+    @include mobile {
+      justify-content: center;
+
+      .break {
+        width: 100%;
+      }
+    }
+
+    .button {
+      &.is-primary.is-outlined {
+        &:not(.is-hovered):focus {
+          background-color: #0e1f17;
+          border-color: $primary;
+          color: $primary;
+        }
+      }
+    }
+
+    &-title {
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+      margin-right: 1rem;
+
+      @include mobile {
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+      }
+    }
+
+    .field {
+      &:not(:last-child) {
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .tx-head {
+    padding: 1.5rem 1.429rem 1.5rem 2.143rem;
+
+    @include mobile {
+      display: none;
+    }
+
+    .columns {
+      .column {
+        display: flex;
+        align-items: center;
+
+        &.is-sortable {
+          cursor: pointer;
+
+          > .icon {
+            height: 0.786rem;
+            width: 0.786rem;
+            margin-left: 0.5rem;
+            flex: none;
+          }
+
+          .b-tooltip {
+            margin-left: 0.45rem;
+          }
+        }
+      }
+    }
+
+    &-mobile {
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+
+  .columns {
+    .column {
+      flex: none;
+
+      &.is-time {
+        width: 15%;
+      }
+
+      &.is-amount {
+        width: 14%;
+      }
+
+      &.is-deposit {
+        width: 14.5%;
+      }
+
+      &.is-status {
+        width: 12%;
+      }
+
+      &.is-hash {
+        width: 10%;
+        @include desktop {
+          width: 12.5%;
+        }
+
+        flex-basis: 0;
+        flex-grow: 1;
+        flex-shrink: 1;
+      }
+
+      &-buttons {
+        width: 145px;
+        display: inline-flex;
+
+        @include tablet-only {
+          width: 102px;
+
+          .button {
+            span {
+              &:not(.icon) {
+                display: none;
+              }
+
+              &.icon {
+                margin-right: 0;
+              }
+            }
+          }
+        }
+
+        > .button:last-child {
+          margin-left: 0.65rem;
+        }
+      }
+    }
+  }
+
+  .box-tx {
+    background-color: #1f1f1f;
+    border: none;
+    padding: 1.571rem 1.429rem 1.571rem 2.143rem;
+
+    .columns {
+      min-height: 3.642rem;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 10px;
+      background-color: $primary;
+      border-radius: 6px 0px 0px 6px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
+
+    + .box-tx {
+      margin-top: 0.825rem;
+    }
+
+    &.is-spent {
+      background-color: #111312;
+      color: #878887;
+
+      &:before {
+        background-color: #538968;
+      }
+    }
+
+    &.is-violet {
+      &:before {
+        background-color: $violet;
+      }
+    }
+
+    &.is-waiting {
+      &:before {
+        background-color: #6b6b6b;
+      }
+    }
+
+    &.is-danger {
+      &:before {
+        background-color: $danger;
+      }
+
+      button.is-dark {
+        path {
+          fill: $danger;
+        }
+      }
+    }
+
+    &.is-white {
+      color: $white;
+      text-align: center;
+
+      &:before {
+        content: none;
+      }
+    }
+
+    .details {
+      .detail {
+        display: flex;
+
+        &-label {
+          flex: 1 0 128px;
+        }
+
+        &-description {
+          @include noWrap;
+        }
+
+        .button {
+          margin-left: 0.45rem;
+        }
+
+        + .detail {
+          padding-top: 0.5rem;
+        }
+      }
+    }
+
+    a {
+      color: $primary;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @include mobile {
+      .columns {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+
+        .column {
+          width: 50%;
+          flex: none;
+
+          &:before {
+            content: attr(data-label);
+            display: block;
+            color: $white;
+          }
+
+          &.is-time {
+            order: 1;
+          }
+
+          &.is-amount {
+            order: 2;
+          }
+
+          &.is-deposit {
+            order: 3;
+          }
+
+          &.is-status {
+            order: 4;
+          }
+
+          &.is-hash {
+            order: 5;
+            width: 100%;
+          }
+
+          &-buttons {
+            order: 7;
+            width: 100%;
+            display: inline-flex;
+
+            .b-tooltip {
+              flex-grow: 1;
+
+              .button {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .status-with-loading {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        margin-left: 0.5rem;
+      }
+    }
+
+    &.is-encrypted {
+      border: 1px solid $primary;
+
+      .lock {
+        height: 30px;
+        width: 30px;
+        border-radius: 4px;
+        background-color: #182922;
+        border: 1px solid $primary;
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-left: -7px;
+          margin-top: -7px;
+          background-color: $primary;
+          height: 14px;
+          width: 14px;
+          mask-image: url(../img/icons/lock.svg);
+          mask-position: center;
+          mask-repeat: no-repeat;
+        }
+
+        &-tooltip {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      &:before {
+        content: none;
+      }
+
+      &.is-danger {
+        border-color: $danger;
+
+        .lock {
+          background-color: #2a0c12;
+          border-color: $danger;
+
+          &:after {
+            background-color: $danger;
+          }
+        }
+      }
+
+      &.is-waiting {
+        border-color: #4c4c4c;
+
+        .lock {
+          background-color: #1a1a1a;
+          border-color: #4c4c4c;
+
+          &:after {
+            background-color: #4c4c4c;
+          }
+        }
+      }
+
+      &.is-spent {
+        border-color: #538968;
+
+        .lock {
+          background-color: #060a08;
+          border-color: #538968;
+
+          &:after {
+            background-color: #538968;
+          }
+        }
+      }
+    }
+  }
+}

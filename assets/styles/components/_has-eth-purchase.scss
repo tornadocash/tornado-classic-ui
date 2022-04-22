@@ -1,0 +1,145 @@
+.field.has-eth-purchase {
+  border: $button-border-width solid $button-border-color;
+  border-radius: 4px;
+  background-color: $button-background-color;
+  padding: 1.28rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.15s ease-in-out;
+
+  .columns {
+    margin-left: -1.28rem;
+    margin-right: -1.28rem;
+    margin-top: -1.28rem;
+  }
+
+  .columns:last-child {
+    margin-bottom: -1.28rem;
+  }
+
+  .column {
+    padding: 1.28rem;
+
+    &:first-child {
+      padding-right: 0.64rem;
+    }
+
+    &:last-child {
+      padding-left: 0.64rem;
+    }
+  }
+
+  .input {
+    border-color: transparent;
+    background-color: $primary-invert;
+    text-align: center;
+    font-size: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    height: 3.57rem;
+    box-shadow: none;
+    transition: color 0.15s ease-in-out;
+
+    @include until(375px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  .control.has-icons-right {
+    .input {
+      padding-right: 0;
+    }
+  }
+
+  .currency {
+    font-size: 1.125rem;
+    text-align: right;
+    line-height: 1;
+    margin-bottom: 0.78rem;
+    transition: color 0.15s ease-in-out;
+  }
+
+  .withdraw-data {
+    margin-top: 0.78rem;
+  }
+
+  .is-inverted {
+    background: $primary-invert;
+
+    .currency {
+      color: $primary;
+    }
+  }
+
+  .arrow-container {
+    padding: 0;
+    flex: none;
+    width: 30px;
+    margin: -1px -2px;
+    position: relative;
+
+    .arrow {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+
+      .arrow-border {
+        transition: fill 0.15s ease-in-out;
+      }
+    }
+  }
+
+  &.is-warning {
+    border-color: $warning;
+
+    .is-light {
+      .currency {
+        color: $warning;
+      }
+
+      .input {
+        color: $warning;
+      }
+    }
+
+    .arrow-container {
+      .arrow {
+        .arrow-border {
+          fill: $warning;
+        }
+      }
+    }
+  }
+
+  &.is-primary {
+    border-color: $primary;
+
+    .is-light {
+      .currency {
+        color: $primary;
+      }
+
+      .input {
+        color: $primary;
+      }
+    }
+
+    .arrow-container {
+      .arrow {
+        .arrow-border {
+          fill: $primary;
+        }
+      }
+    }
+  }
+
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

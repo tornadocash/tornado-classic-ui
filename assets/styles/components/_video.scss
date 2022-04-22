@@ -1,0 +1,32 @@
+.video {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 640px;
+  position: relative;
+
+  &.is-loading {
+    &:after {
+      @include loader;
+      position: absolute;
+      z-index: 0;
+      top: calc(50% - .5em);
+      left: calc(50% - .5em);
+    }
+  }
+
+  &--iframe {
+    padding-top: 56.25%;
+    position: relative;
+    background-color: #1B3147;
+    display: block;
+
+    iframe {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.deposit {
+  &-buttons.field {
+    .button {
+      width: 90px;
+    }
+
+    @include until($desktop) {
+      justify-content: space-between;
+
+      .control {
+        flex-basis: calc(50% - .75rem);
+
+        &:not(:last-child) {
+          margin-right: 0;
+        }
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+
+
+    + .deposit-buttons.field {
+      margin-bottom: .25rem;
+    }
+  }
+
+  &-p {
+    margin-bottom: 1rem;
+    font-size: .85rem;
+  }
+}

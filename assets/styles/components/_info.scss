@@ -1,0 +1,45 @@
+.info {
+  &-name {
+    font-size: 0.929rem;
+  }
+
+  &-value {
+    font-size: 1.429rem;
+    color: $primary;
+    font-weight: 700;
+
+    &.has-tooltip {
+      display: flex;
+      align-items: center;
+
+      .b-tooltip {
+        margin-left: 0.75rem;
+
+        .tooltip-trigger {
+          height: 18px;
+        }
+      }
+
+      @include mobile {
+        justify-content: center;
+      }
+    }
+  }
+
+  &-line {
+    display: none;
+
+    @include desktop {
+      width: 192px;
+      height: 42px;
+      display: inline-block;
+      position: relative;
+      background-image: url('../img/info-line.svg');
+      margin-top: -0.643rem;
+
+      .column:last-child & {
+        transform: scaleX(-1);
+      }
+    }
+  }
+}

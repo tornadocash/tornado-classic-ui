@@ -1,0 +1,42 @@
+.notice {
+  border-radius: 4px;
+  border: 1px solid $white;
+  color: $white;
+  padding: 0.75rem;
+
+  &:not(:last-child) {
+    margin-bottom: 1.25rem;
+  }
+
+  &__h {
+    margin-bottom: 0.75rem;
+  }
+
+  &.is-primary {
+    border-color: $primary;
+
+    .notice__h {
+      color: $primary;
+    }
+  }
+
+  &.is-warning {
+    border-color: $warning;
+
+    .notice__h {
+      color: $warning;
+    }
+  }
+
+  a {
+    text-decoration: underline;
+    text-transform: lowercase;
+    color: $primary;
+  }
+
+  &.is-recovery-key {
+    border-color: $input-border-color;
+    color: $primary;
+    word-break: break-all;
+  }
+}
