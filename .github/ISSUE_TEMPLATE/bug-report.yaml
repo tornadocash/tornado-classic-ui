@@ -1,0 +1,103 @@
+name: Bug Report
+description: Using TornadoCash, but it's not working as you expect?
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        ## **Before Submitting:**
+
+        * Save your note, clear your cache, use a different connection or VPN, and try again.
+        * If the error persists reach out to [customer support](https://discord.com/invite/TFDrM8K42j).
+        * Please search to make sure this issue has not been opened already.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Describe the bug
+      description: What happened? What did you expect to happen? Please include screenshots if applicable!
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: List all steps needed to reproduce the problem
+      value: |
+        1.
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error messages or log output
+      description: Please copy and paste any relevant error messages or log output. This will be automatically formatted, so there is no need for backticks.
+      render: shell
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: What gateway are you using?
+  - type: input
+    id: wallet
+    attributes:
+      label: Wallet
+      description: What wallet and which version are you running?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: TornadoCash version
+      description: Which version of TornadoCash are you running ?
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: Browser
+      description: Which browsers have you seen the problem on?
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Microsoft Edge
+        - Brave
+        - TOR
+        - Other (please elaborate in the "Additional Context" section)
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      description: Which operating systems have you seen the problem on?
+      multiple: true
+      options:
+        - Windows
+        - MacOS
+        - Linux
+        - Other (please elaborate in the "Additional Context" section)
+    validations:
+      required: true
+  - type: dropdown
+    id: hardware-wallet
+    attributes:
+      label: Hardware wallet
+      description: Are you using any of these hardware wallets? Please include the firmware version in the "Additional context" section below for any that you select here.
+      multiple: true
+      options:
+        - Ledger
+        - Trezor
+        - Keystone
+        - GridPlus Lattice1
+        - AirGap Vault
+        - Other (please elaborate in the "Additional Context" section)
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here, e.g. related issues, additional error messages or logs, or any potentially relevant details about the environment or situation the bug occurred in.
