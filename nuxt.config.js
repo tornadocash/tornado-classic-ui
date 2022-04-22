@@ -220,7 +220,7 @@ export default {
   },
 
   provider: {
-    rpcUrl: `https://mainnet.infura.io/v3/${process.env.INFURA_KEY}`
+    rpcUrl: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_MAINNET_KEY}`
   },
 
   // todo make custom loading page

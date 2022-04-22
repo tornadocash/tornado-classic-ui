@@ -28,13 +28,13 @@ export default {
     networkName: 'Ethereum Mainnet',
     deployedBlock: 9116966,
     rpcUrls: {
-      Infura: {
-        name: 'Infura',
-        url: `https://mainnet.infura.io/v3/${INFURA_KEY}`
-      },
       Alchemy: {
         name: 'Alchemy',
         url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_MAINNET_KEY}`
+      },
+      Infura: {
+        name: 'Infura',
+        url: `https://mainnet.infura.io/v3/${INFURA_KEY}`
       }
     },
     multicall: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
@@ -200,13 +200,13 @@ export default {
     multicall: '0x11ce4B23bD875D7F5C6a31084f55fDe1e9A87507',
     echoContractAccount: '0xa75BF2815618872f155b7C4B0C81bF990f5245E4',
     rpcUrls: {
-      Infura: {
-        name: 'Infura',
-        url: `https://polygon-mainnet.infura.io/v3/${INFURA_KEY}`
-      },
       Alchemy: {
         name: 'Alchemy',
         url: `https://polygon-mainnet.g.alchemy.com/v2/${ALCHEMY_POLYGON_KEY}`
+      },
+      Infura: {
+        name: 'Infura',
+        url: `https://polygon-mainnet.infura.io/v3/${INFURA_KEY}`
       }
     },
     tokens: {
