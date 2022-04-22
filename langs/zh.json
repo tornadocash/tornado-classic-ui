@@ -13,6 +13,7 @@
   "pleaseSelectYourWeb3Wallet": "请选择你的 Web3 钱包:",
   "otherWallet": "其它钱包",
   "currentNetworkIsNotSupported": "暂不支持这个网络",
+  "pleaseChangeNetwork": "应用的网络 ({network}) 与钱包中选择的网络不匹配。",
   "docs": "文档",
   "getFreeGETH": "获取免费的 gETH",
   "logout": "退出",
@@ -34,14 +35,18 @@
   "treatYourNote": "将您的笔记当作私钥-切勿与任何人共享，包括 Tornado.cash 开发人员。",
   "saveAsFile": "浏览器将要求将您的笔记另存为文件：",
   "iBackedUpTheNote": "我已备份了凭证",
+  "iEncryptedTheNote": "用您的账户{address}创建此凭证的链上备份",
   "yourNoteWontBeSaved": "你的存款凭证不会被存储在浏览器的缓存中，请确认已作好备份。",
+  "yourDontHaveAccount": "您还可以通过设置凭证账户将加密的凭证保存在链上。 在 {account} 页面上创建。",
   "sendDeposit": "发送存款",
   "clickToCopy": "点击复制",
   "copied": "已复制！",
   "preparingTransactionData": "正在准备交易数据",
   "viewInExplorer": "在浏览器中查看",
   "loading": "加载中",
+  "pleaseConfirmInWallet": "请确认允许在MetaMask中提供公钥",
   "pleaseConfirmTransactionInWallet": "请在 {wallet} 中确认交易",
+  "pleaseSignRequestInWallet": "Please sign request in {wallet}",
   "waitingForTransactionConfirmation": "正在等待交易确认",
   "relayerIsNowSendingYourTransaction": "中继者现在正在发送你的交易，操作应很快完成",
   "note": "凭证",
@@ -70,6 +75,9 @@
   "relayerFee": "中继者费用",
   "ethPurchase": "{currency} 购买",
   "ethPurchaseTooltip": "在提款的过程中将部分存款 {currency} 兑换成 {networkCurrency}，以便在以后的交易中用于支付矿工费。",
+  "incorrectAmount": "数量不正确。 请输入一个数字。",
+  "amountIsHigh": "数量太高。 最大值为 {value}。",
+  "amountIsLow": "数量太低。 最小值为 {value}。",
   "tokensToReceive": "接收代币",
   "relayer": "中继者",
   "relayerTooltip": "使用中继者服务来发送你的交易。由于矿工费是从存款中扣除的，所以匿名性更好。",
@@ -96,6 +104,7 @@
   "txHash": "交易 Hash",
   "status": "状态",
   "copyNote": "复制凭证",
+  "decryptCopyNote": "解密和复制凭证",
   "v1Deposit": "v1 存款",
   "waitingForReceipt": "等待收款中",
   "failed": "失败",
@@ -105,6 +114,7 @@
   "pleaseMakeSureYouHaveBackedUpYourNote": "如果你的凭证还没有被使用，请确认已经做好了备份。你是否确实希望从浏览器中删除这个凭证？",
   "remove": "删除",
   "noteHasBeenDeleted": "凭证已经被删除",
+  "accountHasBeenDeleted": "账号信息已被删除",
   "cancelButton": "取消",
   "donationsAddress": "捐赠地址:",
   "rate": "Pool Rate",
@@ -116,6 +126,9 @@
   "totalFee": "总费用",
   "networkFee": "网络费",
   "connectYourWalletFirst": "首先连接你的钱包",
+  "changeNetwork": "切换网络",
+  "changeNetworkNote": "您的凭证来自另一个网络，请在应用程序中更改网络。",
+  "changingNetwork": "网络切换中",
   "relayerShouldSupportSSL": "中继者应该支持 SSL",
   "relayerStatusOk": "中继者状态: OK",
   "proposalIsActive": "Proposal status must be active",
@@ -124,12 +137,12 @@
   "compliance": "来源证明",
   "complianceTool": "来源证明工具",
   "complianceReport": "来源证明报告",
-  "complianceSubtitle": "维护财务隐私对于保全我们的自由至关重要。{newline}。 借助Tornado.cash,您可以随时查看您的资金来源。为了显示您提款地址中持有资产的来源，这可能是必要的。{newline} 要生成来源证明报告，请您在下面输入 Tornado.cash 凭证。",
+  "complianceSubtitle": "维护财务隐私对于保全我们的自由至关重要。{newline}但是，它不应该以违规为代价。 借助Tornado.cash，您始终可以使用您存/取款的地址提供经过加密验证的交易历史证明。 这将会显示您的提款地址的资产来源。{newline}要生成资产来源报告，请在下面输入您的 Tornado.сash存款凭证。",
   "from": "从",
   "to": "到",
   "withdrawal": "提款",
   "noteHasNotBeenSpent": "该凭证还未被使用",
-  "thereIsNoRelatedDeposit": "无效凭证",
+  "thereIsNoRelatedDeposit": "无相关存款记录。凭证无效。",
   "warning": "警告",
   "doNotShareYouNote": "不要与任何人分享您的凭证，它可以被用于提取您的资金",
   "date": "日期",
@@ -179,6 +192,8 @@
   "createProposal": "创建提案",
   "startDate": "开始时间",
   "endDate": "结束时间",
+  "quorum": "法定人数",
+  "quorumTooltip": "提案的投票期为 {days}。 只有当多数票和 {votes} 票达到法定人数（赞成 + 反对票的总和大于 {votes}）时，该提案才会通过。",
   "for": "赞成",
   "against": "反对",
   "title": "标题",
@@ -186,8 +201,10 @@
   "proposalAddress": "提案地址",
   "lock": "锁入",
   "unlock": "解锁",
-  "proposalThresholdError": "锁入余额应大于等于 {PROPOSAL_THRESHOLD} TORN",
+  "proposalThresholdError": "锁定余额应大于或等于 {PROPOSAL_THRESHOLD} TORN",
   "castYourVote": "投票",
+  "back": "后退",
+  "yourCurrentVote": "您当前的投票：{vote}",
   "currentResults": "当前结果",
   "information": "信息",
   "amountToLock": "要锁入的余额",
@@ -231,6 +248,7 @@
   "viewOnEtherscan": "在 Etherscan 上查看",
   "awaitingExecution": "等待执行",
   "execute": "执行",
+  "executeProposal": "执行提案",
   "executingProposal": "提案正在执行",
   "locked": "已锁入",
   "lockedNotice": "已锁入",
@@ -252,7 +270,7 @@
   "onlyOneProposalErr": "每个地址一次只能提出一个提案",
   "max": "最大",
   "withDisconnectedWallet": "请连接钱包或更改提款类型",
-  "relayerError": "此中继者无法处理您的请求，请重试或在设置中更换一个中继者",
+  "relayerError": "选定的中继器无法发送您的交易。 请重试或在设置中选择其他中继器。",
   "relayerIsNotResponding": "此中继者无法处理您的请求，请重试或在设置中更换一个中继者",
   "transactionFailed": "交易失败",
   "none": "无",
@@ -273,6 +291,130 @@
     "button": "启动应用"
   },
   "rejectedRequest": "您拒绝了请求",
+  "updateCacheEvents": "同步存款事件中。请稍等",
+  "notEnoughTokens": "总费用高于要收到的代币数量。 这可能是由于高中继费用或临时网络拥塞。",
+  "gasPriceSlider": {
+    "low": "慢",
+    "standard": "标准",
+    "fast": "快"
+  },
+  "decrypt": "解密",
+  "account": {
+    "title": "凭证账户",
+    "description": "凭证账户允许在链上存储加密后的私人凭证。这使得资金的安全存储变得轻松无忧，以太坊区块链保障了每个凭证的安全性。",
+    "button": "账户",
+    "account": "凭证账户",
+    "backedUpWith": "备份",
+    "modals": {
+      "recoverAccount": {
+        "title": "使用凭证账户密钥连接",
+        "description": "请输入您的凭证账户密钥以导入您之前设置的账户。",
+        "warning": "凭证账户密钥无效。",
+        "connect": "连接"
+      },
+      "setupAccount": {
+        "title": "账户设置",
+        "label": "凭证账户密钥",
+        "description": "此密钥用于在以太坊区块链上加密和存储您的 Tornado.cash 私人凭证。 请备份它，永远不要与任何人分享。",
+        "setupAccount": "设置账户",
+        "setAccount": "完成",
+        "backedUp": "我已备份了凭证账户密钥",
+        "saveOnChain": "使用您的钱包为您的凭证账户密钥额外创建链上备份",
+        "isNotSupportedWithHw": "请注意，硬件钱包或移动钱包不支持您的凭证账户的链上备份",
+        "successfulNotice": "恭喜！ 您已成功设置凭证账户。 现在，您可以加密您的凭证并将其存储在链上。",
+        "yourRecoveryKeyWontBeSaved": "您的恢复密钥不会保存在浏览器缓存中，请确保您已备份好。"
+      },
+      "showRecoveryKey": {
+        "title": "当前凭证账户密钥",
+        "description": "",
+        "close": "关闭"
+      },
+      "checkRecoveryKey": {
+        "title": "会话更新",
+        "description": "凭证账户会话已闲置 5 分钟。 你想继续吗？",
+        "inactiveDescription": "你已经很久没有活动了。 出于安全原因，您的凭证账户会话已终止。",
+        "no": "否",
+        "yes": "是"
+      },
+      "decryptInfo": {
+        "title": "您的凭证",
+        "description": "所有凭证均已使用您的凭证账户密钥成功下载和解密",
+        "all": "下载的事件总数：",
+        "warning": "带有警告的凭证：",
+        "close": "关闭",
+        "unSpent": "发现您未使用的凭证：",
+        "spent": "发现您已使用的凭证：",
+        "redirect": "主页"
+      },
+      "removeAccount": {
+        "title": "清除账户信息",
+        "description": "从当前浏览器的会话中删除账户信息",
+        "cancel": "取消",
+        "remove": "移除"
+      }
+    },
+    "wallet": {
+      "label": "连接的 Web3 钱包",
+      "desc": "连接您的 Web3 钱包",
+      "disconnect": "与您的钱包断开连接",
+      "rpcDesc": "更改您的以太坊RPC",
+      "connectWeb3": "连接 Web3",
+      "logout": "登出",
+      "changeRpc": "更改PRC"
+    },
+    "setup": {
+      "decrypt": "请在 Web3 钱包中确认解密请求。",
+      "setTooltip": "一个账户已与此 Web3 钱包关联。 请使用下面的“恢复账户”。",
+      "recTooltip": "请设置一个账户。 该地址没有账户。",
+      "desc": "设置凭证账户以在以太坊区块链上存储加密凭证",
+      "account": "设置账户",
+      "recoverDesc": "恢复与此 Web3 钱包关联的凭证账户",
+      "recover": "恢复账户",
+      "enterRawDesc": "使用之前设置的凭证账户密钥",
+      "enterRaw": "输入账户密钥",
+      "accSetupDescription": "此密钥用于在以太坊区块链上加密和存储您的 Tornado.cash 私人凭证。 请备份它，永远不要与任何人分享。"
+    },
+    "control": {
+      "balance": "凭证账户余额：{value}",
+      "loadAllDesc": "使用当前凭证账户密钥加载和解密您的所有私人凭证",
+      "loadAll": "加载所有加密凭证",
+      "showRecoveryKeyDesc": "显示当前凭证账户密钥",
+      "showRecoveryKey": "显示",
+      "removeDesc": "从当前浏览器的会话中删除账户信息",
+      "remove": "清除账户信息",
+      "fileDesc": "存款时默认下载原始私人凭证"
+    },
+    "notification": {
+      "text": "Tornado.cash 添加了链上凭证备份。 立即设置您的 {note} 或 查看{medium}信息。",
+      "link": {
+        "note": "凭证账户",
+        "medium": "阅读更多"
+      }
+    }
+  },
+  "saveNote": "保存您的凭证",
+  "pleaseSetUpAccount": "请提供一个账户来解密您的凭证",
+  "decryptNote": "请确认凭证解密",
+  "decryptFailed": "解密失败。 请尝试使用其他账户登录",
+  "recoverFromKeyTitle": "当前凭证账户密钥",
+  "trezorNotSupported": "目前不支持 Trezor 钱包",
+  "ledgerNotSupported": "目前不支持 Ledger 钱包",
+  "startDecryptingNotes": "开始解密凭证",
+  "decryptingNotes": "解密凭证中",
+  "getAndValidateEvents": "接收和验证 {name} 事件",
+  "notConnected": "未连接",
+  "regular": "通常",
+  "encrypted": "已加密",
+  "notDecryptedWithBackup": "此凭证由 {address} 凭证账户加密，该账户已连接到 {backup} MetaMask账户。 请切换并解密。",
+  "notDecrypted": "此凭证由{address}凭证账户加密，请切换到该账户。",
+  "noteAccountKey": "解密失败。 连接到 {address} MetaMask账户以解密凭证账户密钥 {noteAddress}。",
+  "yourEncrypted": "此凭证将使用 {address} 账户加密。",
+  "lockTooltip": "存储在链上的这个凭证是加密的。 它可以通过凭证账户 {address} 恢复。",
+  "connected": "已连接",
+  "accountConnected": "凭证账户",
+  "web3connected": "Web3 已连接",
+  "haveAccountSetupWithWallet": "看起来您已经使用当前的 Web3 钱包设置了账户。 请使用“恢复账户”选项",
+  "connectAccount": "连接凭证账户",
   "fetchFile": "无法获取验证密钥，请检查互联网连接或尝试使用 VPN。",
   "mobileWallet": {
     "loading": {
@@ -283,5 +425,21 @@
       "disabled": "手机钱包不支持此功能"
     }
   },
-  "dayPlural": "0天 | {n}天 | {n}天"
+  "missingENSSubdomain": "缺少ENS子域",
+  "dayPlural": "0天 | {n}天 | {n}天",
+  "stakingReward": {
+    "title": "质押奖励",
+    "label": {
+      "tab": "领取",
+      "input": "可用的质押奖励"
+    },
+    "description": "您可以在此处领取您的质押奖励。 您获得的奖励与您在治理中锁定的 TORN 成正比。",
+    "action": "领取"
+  },
+  "relayerTotal": {
+    "label": "当前中继器",
+    "name": "名",
+    "fee": "费用"
+  },
+  "withdrawalQueueIsOverloaded": "提款队列已超载"
 }
