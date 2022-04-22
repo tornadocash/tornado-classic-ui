@@ -1,22 +1,26 @@
-# tornadocash ui
+# Tornado Cash Classic UI
 
 > UI for non-custodial Ethereum Privacy solution
 
-## Build Setup
+## Building locally
 
-```bash
-# install dependencies
-$ yarn install
+- Install [Node.js](https://nodejs.org) version 14
+    - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
+- Install [Yarn](https://yarnpkg.com/en/docs/install)
+- Install dependencies: `yarn`
+- Copy the `.env.example` file to `.env`
+    - Replace environment variables with your own personal.
+- Build the project to the `./dist/` folder with `yarn generate`.
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+## Development builds
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+To start a development build (e.g. with logging and file watching) run `yarn dev`.
 
-# generate static project
-$ yarn generate
-```
+## Deploy on IPFS
+
+- Make sure you set `PINATA_API_KEY` and `PINATA_SECRET_API_KEY` environment variables in `.env`
+- To deploy a production build run `yarn deploy-ipfs`.
+
+## Architecture
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
