@@ -46,6 +46,7 @@
   "loading": "Загрузка",
   "pleaseConfirmInWallet": "Подтвердите предоставление открытого ключа в metamask",
   "pleaseConfirmTransactionInWallet": "Подтвердите транзакцию в {wallet}",
+  "pleaseSignRequestInWallet": "Please sign request in {wallet}",
   "waitingForTransactionConfirmation": "Ожидание подтверждения транзакции",
   "relayerIsNowSendingYourTransaction": "Relayer отправляет вашу транзакцию. Ожидаем хэш транзакции",
   "note": "Note",
@@ -117,7 +118,7 @@
   "cancelButton": "Отмена",
   "donationsAddress": "Адрес для донатов:",
   "rate": "Курс",
-  "only": "",
+  "only": " ",
   "equalUserDeposit": "{only} {n} {equalUserDepositText}",
   "equalUserDepositPlural": "Депозиты отсутствуют | Один депозит | депозита | депозитов",
   "userDeposit": "депозиты отсутствуют | 1 депозит | {n} депозита | {n} депозитов",
@@ -136,12 +137,12 @@
   "compliance": "Соответствие",
   "complianceTool": "Проверка соответствия",
   "complianceReport": "Отчет о соответствии",
-  "complianceSubtitle": "Конфиденциальность финансов является необходимым условием сохранения наших свобод.{newline}Однако, она не должна достигаться за счёт несоблюдения установленных правил и стандартов.{newline}С Tornado.cash вы всегда сможете получить криптографически достоверное подтверждение истории транзакций. Для этого вам понадобится лишь адрес Ethereum, который вы использовали для ввода или вывода средств. Подтверждение может быть необходимо для того, чтобы обосновать происхождение активов, хранящихся по вашему адресу.{newline}Для создания отчета о соответствии, пожалуйста, введите идентификатор вашей Tornado.cash Note ниже.",
+  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado.cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
   "from": "Отправитель",
   "to": "Получатель",
   "withdrawal": "Вывод",
   "noteHasNotBeenSpent": "Note не потрачена",
-  "thereIsNoRelatedDeposit": "Такого депозита не существует. Note некорректна.",
+  "thereIsNoRelatedDeposit": "Не найдено депозита, соответствующего данной Note.  Введена некорректная Note. ",
   "warning": "Предупреждение",
   "doNotShareYouNote": "Note является приватной информацией, обладание ею позволяет осуществить вывод депозита!",
   "date": "Дата",
@@ -192,7 +193,7 @@
   "startDate": "Начало",
   "endDate": "Окончание",
   "quorum": "Кворум",
-  "quorumTooltip": "Голосование по предложению длится {days} и принимается только в случае, когда большинство проголосовало \"За\" и достижения кворума в {votes} голосов (сумма голосов \"За\" + \"Против\" должна быть больше {votes}).",
+  "quorumTooltip": "A proposal's voting period lasts {days}. The proposal is passed only if majority vote and quorum of {votes} voters are reached (sum of For + Against votes is greater than {votes}).",
   "for": "За",
   "against": "Против",
   "title": "Заголовок",
@@ -200,7 +201,7 @@
   "proposalAddress": "Адрес предложения",
   "lock": "Заблокировать",
   "unlock": "Разблокировать",
-  "proposalThresholdError": "Заблокированный баланс должен быть больше или равен {PROPOSAL_THRESHOLD} TORN",
+  "proposalThresholdError": "Locked balance should be more or equal to {PROPOSAL_THRESHOLD} TORN",
   "castYourVote": "Проголосовать",
   "back": "Назад",
   "yourCurrentVote": "Ваш голос: {vote}",
@@ -268,8 +269,8 @@
   "tokensLockedUntil": "Ваш баланс заблокирован до {date}",
   "onlyOneProposalErr": "Каждому пользователю разрешено только одно активное предложение. Подождите, пока ваше текущее предложение не будет завершено.",
   "max": "Макс",
-  "withDisconnectedWallet": "Пожалуйста, смените Кошелек или метод вывода",
-  "relayerError": "Выбранный Relayer не может отправить транзакцию. Повторите попытку или смените Relayer в настройках.",
+  "withDisconnectedWallet": "Please, connect a wallet or change the type of withdrawal",
+  "relayerError": "Selected relayer could not sent your tx. Please try again or choose a different relayer in settings.",
   "relayerIsNotResponding": "Relayer не отвечает. Повторите попытку или смените Relayer в настройках.",
   "transactionFailed": "Транзакция не выполнилась",
   "none": "нет",
@@ -320,8 +321,8 @@
         "backedUp": "Я сделал резервную копию ключа",
         "saveOnChain": "Создать дополнительную резервную копию ключа в блокчейне с помощью кошелька",
         "isNotSupportedWithHw": "Имейте в виду, что резервное копирование в блокчейн вашего Note аккаунта не поддерживается аппаратными или мобильными кошельками",
-        "successfulNotice": "Поздравляем! Вы успешно создали Note аккаунт. Теперь вы можете шифровать ваши Note и хранить их в блокчейне.",
-        "yourRecoveryKeyWontBeSaved": "Ваш ключ восстановления не будет сохранен в браузере. Убедитесь, что вы сделали резервную копию ключа."
+        "successfulNotice": "Ваш Note аккаунт был успешно создан. Теперь вы можете зашифровывать свои приватные ключи в блокчейне. ",
+        "yourRecoveryKeyWontBeSaved": "Your recovery key won't be saved in browser cache, please make sure it's backed up."
       },
       "showRecoveryKey": {
         "title": "Текущий ключ",
@@ -364,7 +365,7 @@
     "setup": {
       "decrypt": "Пожалуйста, подтвердите запрос на расшифровку в web3 кошельке.",
       "setTooltip": "С этим web3 кошельком уже связан аккаунт. Нажмите на кнопку \"Восстановить\".",
-      "recTooltip": "Вы должны создать аккаунт, поскольку для этотого адреса нет связанного аккаунта.",
+      "recTooltip": "Please set up an account. There is no account for this address.",
       "desc": "Создание аккаунта для хранения зашифрованных Note в блокчейне Ethereum",
       "account": "Создать",
       "recoverDesc": "Восстановление аккаунта, связанного с этим кошельком",
@@ -424,6 +425,7 @@
       "disabled": "Мобильные кошельки не поддерживают эту функцию в данный момент."
     }
   },
+  "missingENSSubdomain": "Missing ENS subdomain",
   "dayPlural": "0 дней | {n} день | {n} дня | {n} дней",
   "stakingReward": {
     "title": "Stake награда",
@@ -433,5 +435,11 @@
     },
     "description": "Здесь вы можете получить вознаграждение за stake. Ваша заработанная доля прямо пропорциональна балансу TORN токенов, заблокированных для голосования.",
     "action": "Получить"
-  }
+  },
+  "relayerTotal": {
+    "label": "Current Relayer",
+    "name": "Name",
+    "fee": "Fee"
+  },
+  "withdrawalQueueIsOverloaded": "Withdrawal queue is overloaded"
 }

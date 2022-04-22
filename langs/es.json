@@ -46,6 +46,7 @@
   "loading": "Cargando",
   "pleaseConfirmInWallet": "Por favor confirme la clave publica en Metamask",
   "pleaseConfirmTransactionInWallet": "Por favor confirme la transacción en {wallet}",
+  "pleaseSignRequestInWallet": "Please sign request in {wallet}",
   "waitingForTransactionConfirmation": "Esperando la confirmación de transacción",
   "relayerIsNowSendingYourTransaction": "El retransmisor esta enviando su transacción. Responderá con el hash de la transacción pronto",
   "note": "Ticket",
@@ -136,12 +137,12 @@
   "compliance": "Cumplimiento",
   "complianceTool": "herramienta de cumplimiento legal",
   "complianceReport": "Informe de cumplimiento legal",
-  "complianceSubtitle": "Mantener la privacidad financiera es esencial para preservar nuestra libertad.{newline}No obstante, no debería ser a costa del incumplimiento legal. Con Tornado.cash, usted siempre puede presentar una prueba criptográficamente verificada de su historial de transacciones correspondiente a la dirección Ethereum usada en depósitos o retiros de fondos. Esto puede ser necesario para demostrar el origen de los activos existentes en su dirección de retiro.{newline}Para generar un informe de cumplimiento legal, por favor introduzca su Ticket de Tornado.cash debajo.",
+  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado.cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
   "from": "Desde",
   "to": "A",
   "withdrawal": "Retiro",
   "noteHasNotBeenSpent": "El ticket no ha sido gastado",
-  "thereIsNoRelatedDeposit": "No hay depósitos relacionados. el ticket es inválida.",
+  "thereIsNoRelatedDeposit": "There is no related deposit. The note is invalid.",
   "warning": "Atención",
   "doNotShareYouNote": "No comparta su Ticket con nadie ya que ésto le PERMITIRÁ retirar sus fondos!",
   "date": "Fecha",
@@ -192,7 +193,7 @@
   "startDate": "Fecha Inicial",
   "endDate": "Fecha Final",
   "quorum": "Quórum",
-  "quorumTooltip": "La votación de una propuesta dura {days} y es aprobada solo en caso de mayoría Favorable y si un quórum de {votes} de los votantes es alcanzado (suma de votos Favorables + Contrarios es mayor que {votes}).",
+  "quorumTooltip": "A proposal's voting period lasts {days}. The proposal is passed only if majority vote and quorum of {votes} voters are reached (sum of For + Against votes is greater than {votes}).",
   "for": "Favorable",
   "against": "Contrario",
   "title": "Título",
@@ -200,7 +201,7 @@
   "proposalAddress": "Dirección de la Propuesta",
   "lock": "Bloquear",
   "unlock": "Desbloquear",
-  "proposalThresholdError": "Los balances bloqueados deben ser mayor o igual a {PROPOSAL_THRESHOLD} TORN",
+  "proposalThresholdError": "Locked balance should be more or equal to {PROPOSAL_THRESHOLD} TORN",
   "castYourVote": "Emita su voto",
   "back": "Volver",
   "yourCurrentVote": "Su voto actual: {vote}",
@@ -268,8 +269,8 @@
   "tokensLockedUntil": "Su balance permanecerá bloqueado hasta {date}",
   "onlyOneProposalErr": "Solamente se permite una propuesta activa por usuario. Por favor espere hasta que su propuesta actual haya finalizado.",
   "max": "Max",
-  "withDisconnectedWallet": "Por favor, conecte un monedero o cambie el tipo de retiro",
-  "relayerError": "El retransmisor seleccionado no pudo enviar su tx. Por favor pruebe de nuevo o pruebe un retransmisor diferente en configuración.",
+  "withDisconnectedWallet": "Please, connect a wallet or change the type of withdrawal",
+  "relayerError": "Selected relayer could not sent your tx. Please try again or choose a different relayer in settings.",
   "relayerIsNotResponding": "El retransmisor no responde. Por favor pruebe de nuevo o pruebe un retransmisor diferente en configuración.",
   "transactionFailed": "Transacción fallida",
   "none": "ninguno",
@@ -320,8 +321,8 @@
         "backedUp": "He asegurado la clave de Cuenta de Tickets",
         "saveOnChain": "Crear una copia segura adicional on-chain de su clave de Cuenta de Tickets con su monedero",
         "isNotSupportedWithHw": "Por favor tenga en cuenta que copias seguras adicionales on-chain de su Cuenta de Tickets no es compatible con monederos hardware o monederos móviles",
-        "successfulNotice": "Felicidades! Ha creado exitosamente una Cuenta de Tickets. Ahora puede encriptar sus tickets y guardarlos on-chain.",
-        "yourRecoveryKeyWontBeSaved": "Su clave de recuperación no se guardará en la cache del buscador, por favor asegúrese de que ha realizado una copia de seguridad."
+        "successfulNotice": "Congratulations! You have successfully set up a Note Account. Now, you can encrypt your notes and store them on chain.",
+        "yourRecoveryKeyWontBeSaved": "Your recovery key won't be saved in browser cache, please make sure it's backed up."
       },
       "showRecoveryKey": {
         "title": "Clave actual de Cuenta de Tickets",
@@ -364,7 +365,7 @@
     "setup": {
       "decrypt": "Por favor, confirme la petición de descifrado en el monedero web3.",
       "setTooltip": "Ya existe una cuenta asociada con este monedero web3. Por favor use 'Recuperar Cuenta' a continuación.",
-      "recTooltip": "Por favor configure una cuenta, no hay cuanta para esta dirección.",
+      "recTooltip": "Please set up an account. There is no account for this address.",
       "desc": "Configurar Cuenta de Tickets para guardar tickets encriptados en la blockchain Ethereum",
       "account": "Configurar cuenta",
       "recoverDesc": "Recuperar Cuenta de Tickets asociada con este monedero Web3",
@@ -424,5 +425,21 @@
       "disabled": "Esta característica actualmente no es compatible con los monederos móviles."
     }
   },
-  "dayPlural": "0 días | {n} día | {n} días"
+  "missingENSSubdomain": "Missing ENS subdomain",
+  "dayPlural": "0 días | {n} día | {n} días",
+  "stakingReward": {
+    "title": "Staking Reward",
+    "label": {
+      "tab": "Claim",
+      "input": "Available staking reward"
+    },
+    "description": "You can claim your staking reward here. Your earned reward is proportionate to your locked TORN in governance.",
+    "action": "Claim"
+  },
+  "relayerTotal": {
+    "label": "Current Relayer",
+    "name": "Name",
+    "fee": "Fee"
+  },
+  "withdrawalQueueIsOverloaded": "Withdrawal queue is overloaded"
 }

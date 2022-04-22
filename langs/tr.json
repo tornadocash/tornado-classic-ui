@@ -46,6 +46,7 @@
   "loading": "Yükleniyor",
   "pleaseConfirmInWallet": "Lütfen Metamaskta ortak anahtarı onaylayın",
   "pleaseConfirmTransactionInWallet": "Lütfen cüzdanınızda {wallet} işlemi onaylayın",
+  "pleaseSignRequestInWallet": "Please sign request in {wallet}",
   "waitingForTransactionConfirmation": "İşleminizin onaylanması bekleniyor.",
   "relayerIsNowSendingYourTransaction": "Relayer işleminizi gönderdi. Yakında bir işlem hash’i ile geri dönüş yapacak.",
   "note": "Not",
@@ -136,12 +137,12 @@
   "compliance": "Uyumluluk",
   "complianceTool": "uyumluluk aracı",
   "complianceReport": "Uyumluluk Raporu",
-  "complianceSubtitle": "Finansal gizliliği korumak, özgürlüklerimizi korumak için çok önemlidir.{newline} Ancak bu durum kurallara uymama pahasına olmamalıdır. Tornado.cash ile, para yatırmak veya para çekmek için kullandığınız Ethereum adresini kullanarak her zaman kriptografik olarak doğrulanmış işlem geçmişi kanıtını sağlayabilirsiniz. Bu kanıt, çekim adresinizde tutulan varlıkların kaynağını göstermek için gerekli olabilir.{newline} Bir uyumluluk raporu oluşturmak için lütfen aşağıya Tornado.cash Notunuzu girin.",
+  "complianceSubtitle": "Finansal gizliliği korumak, özgürlüğümüzü korumak için çok önemlidir.{newline}Ancak, uyumsuzluk pahasına olmamalıdır. Tornado.cash ile,para yatırmak veya para çekmek için kullandığınız Ethereum adresini kullanarak her zaman kriptografik olarak doğrulanmış işlem geçmişi kanıtını sağlayabilirsiniz. Çekim adresinizde tutulan varlıkların kaynağını göstermek için gerekli olabilir.{newline}Bir uygunluk raporu oluşturmak için lütfen aşağıya Tornado.сash Notunuzu girin.",
   "from": "Kimden",
   "to": "Kime",
   "withdrawal": "Çekim",
   "noteHasNotBeenSpent": "Note henuz kullanılmadı.",
-  "thereIsNoRelatedDeposit": "Yükleme ile bağlantı bulunamadı. Not geçerlisiz.",
+  "thereIsNoRelatedDeposit": "İlgili depozito yok. Not geçersiz.",
   "warning": "Uyarı",
   "doNotShareYouNote": "Notunuzu kimseyle paylaşmayın çünkü paranızı çekmek için KULLANILACAKTIR!",
   "date": "Tarih",
@@ -192,7 +193,7 @@
   "startDate": "Başlangıç tarihi",
   "endDate": "Bitiş tarihi",
   "quorum": "Quorum",
-  "quorumTooltip": "Bir öneri oylaması {days} sürer ve sadece çoğunluk ve yeter sayı olması {votes} durumunda kabul edilir. Geçerli oy sayısına ulaşıldı (Geçerli Oy + Aleyhte oyların toplamı {votes} değerinden büyük).",
+  "quorumTooltip": "Bir teklifin oylama süresi {gün} sürer. Teklif, yalnızca çoğunluk oyu ve {oy} seçmen yetersayısına ulaşılırsa kabul edilir (Oy + Aleyhte oyların toplamı {oy}'dan büyükse).",
   "for": "Öneriye Katıl",
   "against": "Karşı",
   "title": "Başlık",
@@ -200,7 +201,7 @@
   "proposalAddress": "Öneri adresi",
   "lock": "Kilitli",
   "unlock": "Kilitsiz",
-  "proposalThresholdError": "Kilitli bakiye, {PROPOSAL_THRESHOLD} TORN’a eşit veya daha fazla olmalıdır",
+  "proposalThresholdError": "Kilitli bakiye, {PROPOSAL_THRESHOLD} TORN'a eşit veya daha fazla olmalıdır",
   "castYourVote": "Oyunuzu kullanın",
   "back": "Geri",
   "yourCurrentVote": "Mevcut oyunuz: {vote}",
@@ -269,7 +270,7 @@
   "onlyOneProposalErr": "Kullanıcı başına yalnızca bir etkin öneriye izin verilir. Lütfen mevcut öneriniz bitene kadar bekleyin.",
   "max": "Maksimum",
   "withDisconnectedWallet": "Lütfen bir cüzdan bağlayın veya para çekme türünü değiştirin",
-  "relayerError": "Seçilen relayer tx’inizi gönderemedi. Lütfen tekrar deneyin veya ayarlarda farklı bir relayer seçin.",
+  "relayerError": "Seçilen aktarıcı tx'inizi gönderemedi. Lütfen tekrar deneyin veya ayarlarda farklı bir aktarıcı seçin.",
   "relayerIsNotResponding": "Relayer yanıt vermiyor. Lütfen tekrar deneyin veya ayarlarda farklı bir relayer seçin.",
   "transactionFailed": "İşlem başarısız",
   "none": "Yok",
@@ -320,8 +321,8 @@
         "backedUp": "Not hesabı anahtarımı yedekledim",
         "saveOnChain": "Cüzdanınızla Not Hesabı anahtarınızın zincir üzerinde ek yedeğini oluşturun",
         "isNotSupportedWithHw": "Lütfen unutmayın! Not Hesabınızın zincir üstü yedeklemesi, donanım cüzdanları veya mobil cüzdanlarla desteklenmez.",
-        "successfulNotice": "Tebrikler! Bir Not hesabını başarıyla kurdunuz. Artık notlarınızı şifreleyebilir ve zincirde saklayabilirsiniz.",
-        "yourRecoveryKeyWontBeSaved": "Kurtarma anahtarımız tarayıcı önbelleğine kaydedilmeyecek. Lütfen yedeklendiğinden emin olun."
+        "successfulNotice": "Tebrikler! Başarıyla bir Not Hesabı kurdunuz. Artık notlarınızı şifreleyebilir ve zincirde saklayabilirsiniz.",
+        "yourRecoveryKeyWontBeSaved": "Kurtarma anahtarınız tarayıcı önbelleğine kaydedilmeyecek, lütfen yedeklendiğinden emin olun."
       },
       "showRecoveryKey": {
         "title": "Mevcut Not hesabı anahtarı",
@@ -364,7 +365,7 @@
     "setup": {
       "decrypt": "Lütfen web3 cüzdanındaki şifre çözme isteğini onaylayın.",
       "setTooltip": "Bu web3 cüzdanıyla zaten bir hesap ilişkilendirilmiş. Lütfen aşağıdaki ‘Hesabı Kurtar’ seçeneğini kullanın.",
-      "recTooltip": "Lütfen bir hesap oluşturun. Mevcut adres için bir hesap yok.",
+      "recTooltip": "Lütfen bir hesap oluşturun. Bu adres için hesap yok.",
       "desc": "Ethereum blok zincirinde şifrelenmiş notları depolamak için Not Hesabı Kurulumu",
       "account": "Hesap kurulumu",
       "recoverDesc": "Bu Web3 cüzdanıyla ilişkili Not Hesabını Kurtar",
@@ -424,5 +425,21 @@
       "disabled": "Bu özellik şu anda mobil cüzdanlar tarafından desteklenmemektedir.."
     }
   },
-  "dayPlural": "0 gün | {n} gün | {n} gün"
+  "missingENSSubdomain": "ENS subdomain eksik",
+  "dayPlural": "0 gün | {n} gün | {n} gün",
+  "stakingReward": {
+    "title": "Staking Ödülü",
+    "label": {
+      "tab": "Talep et",
+      "input": "Mevcut Staking Ödülü"
+    },
+    "description": "Stake ödülünüzü buradan talep edebilirsiniz. Kazandığınız ödül, yönetişimdeki kilitli TORN'unuzla orantılıdır.",
+    "action": "Talep et"
+  },
+  "relayerTotal": {
+    "label": "Mevcut aktarıcı",
+    "name": "İsim",
+    "fee": "Ücret"
+  },
+  "withdrawalQueueIsOverloaded": "Çekim kuyruğu aşırı yoğun"
 }

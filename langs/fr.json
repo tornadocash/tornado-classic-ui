@@ -46,6 +46,7 @@
   "loading": "Chargement",
   "pleaseConfirmInWallet": "Veuillez confirmer la fourniture de votre clé publique dans metamask",
   "pleaseConfirmTransactionInWallet": "Veuillez confirmer la transaction à: {wallet}",
+  "pleaseSignRequestInWallet": "Please sign request in {wallet}",
   "waitingForTransactionConfirmation": "En attente de la confirmation de transaction",
   "relayerIsNowSendingYourTransaction": "Le Relais est maintenant en train d'envoyer votre transaction. Il va envoyer le hash de transaction bientôt",
   "note": "Note",
@@ -136,12 +137,12 @@
   "compliance": "Conformité",
   "complianceTool": "outil de conformité",
   "complianceReport": "Rapport de Conformité",
-  "complianceSubtitle": "Le maintien de la confidentialité financière est essentiel pour préserver nos libertés, mais il ne doit pas se faire au prix de la non-conformité. Avec Tornado.cash, vous pouvez fournir une preuve cryptographiquement vérifiée de l'historique des transactions en utilisant l'adresse Ethereum que vous avez utilisée pour déposer ou retirer des fonds. Cela peut être nécessaire pour montrer l'origine des actifs détenus dans votre adresse de retrait.{newline}Pour générer un rapport de conformité, veuillez saisir votre note d'enregistrement Tornado.cash ci-dessous.",
+  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado.cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
   "from": "De",
   "to": "À",
   "withdrawal": "Retrait",
   "noteHasNotBeenSpent": "La note d'enregistrement n'a pas été dépensée",
-  "thereIsNoRelatedDeposit": "Il n'y a pas de dépôt lié. La note d'enregistrement n'est pas valable.",
+  "thereIsNoRelatedDeposit": "There is no related deposit. The note is invalid.",
   "warning": "Avertissement",
   "doNotShareYouNote": "Ne partagez pas votre note avec qui que ce soit car elle sera utilisée pour retirer vos fonds !",
   "date": "Date",
@@ -192,7 +193,7 @@
   "startDate": "Date de début",
   "endDate": "Date de fin",
   "quorum": "Quorum",
-  "quorumTooltip": "Le vote d'une proposition dure {days} et n'est adopté qu'en cas de majorité de Pour et si un quorum de {votes} votants est atteint (la somme des votes Pour + Contre est supérieure à {votes}).",
+  "quorumTooltip": "A proposal's voting period lasts {days}. The proposal is passed only if majority vote and quorum of {votes} voters are reached (sum of For + Against votes is greater than {votes}).",
   "for": "Pour",
   "against": "Contre",
   "title": "Titre",
@@ -200,7 +201,7 @@
   "proposalAddress": "Adresse de proposition",
   "lock": "Verrouiller",
   "unlock": "Déverrouiller",
-  "proposalThresholdError": "Le solde bloqué doit être supérieur ou égal à {PROPOSAL_THRESHOLD} TORN",
+  "proposalThresholdError": "Locked balance should be more or equal to {PROPOSAL_THRESHOLD} TORN",
   "castYourVote": "Voter",
   "back": "Retour en arrière",
   "yourCurrentVote": "Votre vote actuel: {vote}",
@@ -268,8 +269,8 @@
   "tokensLockedUntil": "Votre solde est bloqué jusqu'à cette date: {date}",
   "onlyOneProposalErr": "Seulement une proposition active est autorisée par utilisateur. Veuillez patienter jusqu'à ce que votre proposition actuelle soit terminée.",
   "max": "Max",
-  "withDisconnectedWallet": "Veuillez, connecter un portefeuille ou changer le type de retrait",
-  "relayerError": "Le relais sélectionné ne peut pas envoyer votre transaction. Veuillez réessayer ou choisir un relais différent dans les réglages.",
+  "withDisconnectedWallet": "Please, connect a wallet or change the type of withdrawal",
+  "relayerError": "Selected relayer could not sent your tx. Please try again or choose a different relayer in settings.",
   "relayerIsNotResponding": "Le Relais ne répond pas. Veuillez réessayer ou choisir un relais différent dans les réglages.",
   "transactionFailed": "Transaction échouée",
   "none": "aucun",
@@ -320,8 +321,8 @@
         "backedUp": "J'ai sauvegardé la clé du compte de notes",
         "saveOnChain": "Créer une sauvegarde additionnelle de votre clé de compte de notes dans votre portefeuille, sur la Blockchain.",
         "isNotSupportedWithHw": "Veuillez garder à l'esprit que la sauvegarde supplémentaire de votre compte de notes sur la blockchain n'est pas prise en charge par les portefeuilles physiques - ou Hardware wallets ou portefeuilles mobiles.",
-        "successfulNotice": "Félicitations ! Vous avez réussi à configurer un compte de notes. Maintenant, vous pouvez encrypter vos notes et les stocker sur la blockchain.",
-        "yourRecoveryKeyWontBeSaved": "Votre clé de récupération ne sera pas enregistrée dans le cache du navigateur, assurez-vous de l'avoir sauvegardée."
+        "successfulNotice": "Congratulations! You have successfully set up a Note Account. Now, you can encrypt your notes and store them on chain.",
+        "yourRecoveryKeyWontBeSaved": "Your recovery key won't be saved in browser cache, please make sure it's backed up."
       },
       "showRecoveryKey": {
         "title": "Clé de compte de notes actuelle",
@@ -364,7 +365,7 @@
     "setup": {
       "decrypt": "Veuillez confirmer la demande de décryptage du portefeuille web3.",
       "setTooltip": "Un compte est déjà associé à ce portefeuille web3. Veuillez utiliser l'option 'Récupérer le compte' ci-dessous.",
-      "recTooltip": "Veuillez créer un compte, il n'y a pas de compte pour cette adresse.",
+      "recTooltip": "Please set up an account. There is no account for this address.",
       "desc": "Configurer un compte de notes pour stocker des notes encryptées sur la blockchain Ethereum.",
       "account": "Configurer Compte",
       "recoverDesc": "Récupérer le compte de notes associé à ce portefeuille Web3",
@@ -424,5 +425,21 @@
       "disabled": "Cette fonctionnalité n'est pas prise en charge par portefeuilles mobiles."
     }
   },
-  "dayPlural": "0 jours | {n} jour | {n} jours"
+  "missingENSSubdomain": "Missing ENS subdomain",
+  "dayPlural": "0 jours | {n} jour | {n} jours",
+  "stakingReward": {
+    "title": "Récompense de staking",
+    "label": {
+      "tab": "Réclamer",
+      "input": "Récompense de staking disponible"
+    },
+    "description": "Vous pouvez réclamer votre staking ici. Votre récompense gagnée est proportionnelle à vos TORN bloqués sur le contrat de gouvernance.",
+    "action": "Réclamer"
+  },
+  "relayerTotal": {
+    "label": "Current Relayer",
+    "name": "Name",
+    "fee": "Fee"
+  },
+  "withdrawalQueueIsOverloaded": "Withdrawal queue is overloaded"
 }
