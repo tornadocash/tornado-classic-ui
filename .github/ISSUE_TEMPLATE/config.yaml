@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Request a new feature
+    url: https://torn.community/
+    about: Request new features and vote on the ones that are important to you.
+  - name: Get support or ask a question
+    url: https://discord.com/invite/TFDrM8K42j
+    about: Join Discord community server to get help and ask questions
