@@ -139,11 +139,6 @@ class EventService {
     try {
       const { storeName, instanceName } = this.getStoreNames(type)
 
-      if (this.idb.isBlocked) {
-        await sleep(500)
-        return this.getEventsFromDB(type)
-      }
-
       const savedEvents = await this.idb.getAll({ storeName })
 
       if (!savedEvents || !savedEvents.length) {
