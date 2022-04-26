@@ -73,7 +73,7 @@ class IndexedDB {
 
   async getFromIndex(params) {
     if (this.isBlocked) {
-      return
+      return undefined
     }
 
     try {
@@ -114,6 +114,10 @@ class IndexedDB {
   }
 
   async getItem({ storeName, key }) {
+    if (this.isBlocked) {
+      return undefined
+    }
+
     try {
       const store = this.db.transaction(storeName).objectStore(storeName)
 
@@ -125,6 +129,10 @@ class IndexedDB {
   }
 
   async addItem({ storeName, data, key = '' }) {
+    if (this.isBlocked) {
+      return
+    }
+
     try {
       const tx = this.db.transaction(storeName, 'readwrite')
       const isExist = await tx.objectStore(storeName).get(key)
@@ -138,6 +146,10 @@ class IndexedDB {
   }
 
   async putItem({ storeName, data }) {
+    if (this.isBlocked) {
+      return
+    }
+
     try {
       const tx = this.db.transaction(storeName, 'readwrite')
       await tx.objectStore(storeName).put(data)
@@ -147,6 +159,10 @@ class IndexedDB {
   }
 
   async getAll({ storeName }) {
+    if (this.isBlocked) {
+      return []
+    }
+
     try {
       const tx = this.db.transaction(storeName, 'readonly')
       const store = tx.objectStore(storeName)
@@ -159,6 +175,10 @@ class IndexedDB {
   }
 
   async clearStore({ storeName, mode = 'readwrite' }) {
+    if (this.isBlocked) {
+      return
+    }
+
     try {
       const tx = this.db.transaction(storeName, mode)
 
@@ -169,6 +189,10 @@ class IndexedDB {
   }
 
   async createTransactions({ storeName, data, mode = 'readwrite' }) {
+    if (this.isBlocked) {
+      return
+    }
+
     try {
       const tx = this.db.transaction(storeName, mode)
 
@@ -180,6 +204,10 @@ class IndexedDB {
   }
 
   createMultipleTransactions({ storeName, data, index, mode = 'readwrite' }) {
+    if (this.isBlocked) {
+      return
+    }
+
     try {
       const tx = this.db.transaction(storeName, mode)
 
