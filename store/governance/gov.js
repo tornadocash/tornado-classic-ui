@@ -165,10 +165,13 @@ const actions = {
 
       const govInstance = getters.govContract({ netId })
       const json = JSON.stringify({ title, description })
-      const data = await govInstance.methods.propose(proposalAddress, json).encodeABI()
+
+      const [delegator] = state.delegators
+
+      const data = await govInstance.methods.proposeByDelegate(delegator, proposalAddress, json).encodeABI()
 
       const gas = await govInstance.methods
-        .propose(proposalAddress, json)
+        .proposeByDelegate(delegator, proposalAddress, json)
         .estimateGas({ from: ethAccount, value: 0 })
 
       const callParams = {
