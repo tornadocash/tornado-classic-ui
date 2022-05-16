@@ -24,7 +24,7 @@
     "@metamask/onboarding": "^1.0.0",
     "@nuxtjs/moment": "^1.6.0",
     "@ticket721/e712": "^0.4.1",
-    "@walletconnect/web3-provider": "1.7.7",
+    "@walletconnect/web3-provider": "1.7.8",
     "ajv": "^6.10.2",
     "arraybuffer-loader": "^1.0.8",
     "base-path-converter": "^1.0.2",
