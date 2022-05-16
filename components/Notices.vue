@@ -21,7 +21,7 @@
       <a v-if="notice.nova" href="https://nova.tornadocash.eth.link" target="_blank">
         Tornado Cash Nova
       </a>
-      <a v-if="notice.txHash" :href="txExplorerUrl(notice.txHash)" target="_blank">
+      <a v-if="notice.txHash" :href="txExplorerUrl(notice.txHash)" target="_blank" data-test="popup_message">
         {{ $t('viewOnEtherscan') }}
       </a>
       <n-link v-else-if="notice.routerLink" v-bind="notice.routerLink.params" @onClick="$forceUpdate()">

@@ -14,6 +14,7 @@
         class="is-disabled-resize"
         rows="2"
         :placeholder="$t('enterRecoveryKey')"
+        data-test="input_enter_recovery_key"
         :class="{ 'is-warning': hasAndValidKey }"
         @input="onInput"
       ></b-input>
@@ -33,6 +34,7 @@
       type="is-primary is-fullwidth"
       :disabled="hasAndValidKey"
       :loading="recoverAccountFromKeyRequest.isFetching"
+      data-test="button_connect_recovery_key"
       @click="handleRecoverAccount"
     >
       {{ $t('account.modals.recoverAccount.connect') }}

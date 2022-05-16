@@ -44,6 +44,7 @@
     <b-button
       v-if="!isBackuped && isSaveOnChain"
       type="is-primary is-fullwidth"
+      data-test="button_confirm_setup_account"
       :loading="setupAccountRequest.isFetching"
       @click="onSetupAccount"
     >

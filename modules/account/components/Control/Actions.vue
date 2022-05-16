@@ -6,7 +6,13 @@
       <div class="desc">
         {{ $t(action.description) }}
       </div>
-      <b-button type="is-primary" outlined @mousedown.prevent @click="action.onClick">
+      <b-button
+        type="is-primary"
+        outlined
+        :data-test="action.dataAttribute"
+        @mousedown.prevent
+        @click="action.onClick"
+      >
         {{ $t(action.button) }}
       </b-button>
     </div>
@@ -15,7 +21,9 @@
       <div class="desc">
         {{ $t('account.control.fileDesc') }}
       </div>
-      <b-switch :value="isEnabledSaveFile" size="is-medium" @input="handleEnabledSaveFile" />
+      <div data-test="download_notes__config_switch">
+        <b-switch :value="isEnabledSaveFile" size="is-medium" @input="handleEnabledSaveFile" />
+      </div>
     </div>
   </div>
 </template>
@@ -36,19 +44,22 @@ export default {
           icon: 'account-notes',
           onClick: this.getEncryptedNotes,
           button: 'account.control.loadAll',
-          description: 'account.control.loadAllDesc'
+          description: 'account.control.loadAllDesc',
+          dataAttribute: 'load_all_encrypted_notes_button'
         },
         {
           icon: 'account-key',
           onClick: this.openRecoverKeyModal,
           button: 'account.control.showRecoveryKey',
-          description: 'account.control.showRecoveryKeyDesc'
+          description: 'account.control.showRecoveryKeyDesc',
+          dataAttribute: 'reveal_current_note_account'
         },
         {
           icon: 'account-remove',
           button: 'account.control.remove',
           onClick: this.handleRemoveAccount,
-          description: 'account.control.removeDesc'
+          description: 'account.control.removeDesc',
+          dataAttribute: 'clear_account_info_button'
         }
       ]
     }

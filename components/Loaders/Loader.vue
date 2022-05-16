@@ -1,7 +1,7 @@
 <template>
   <b-loading v-model="enabled">
     <div class="loading-container">
-      <div class="loading-tornado"></div>
+      <div class="loading-tornado" data-test="tornado_loader"></div>
       <div class="loading-message">{{ message }}...</div>
       <approve-loader v-if="isApprove" />
     </div>

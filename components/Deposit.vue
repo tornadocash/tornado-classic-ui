@@ -1,14 +1,20 @@
 <template>
-  <b-tab-item :label="$t('deposit')">
+  <b-tab-item :label="$t('deposit')" header-class="button_tab_deposit">
     <fieldset>
-      <b-field :label="$t('token')">
+      <b-field :label="$t('token')" data-test="token_list_dropdown">
         <b-dropdown v-model="selectedToken" expanded aria-role="list">
           <div slot="trigger" class="control">
             <div class="input">
               <span>{{ selectedCurrency }}</span>
             </div>
           </div>
-          <b-dropdown-item v-for="(token, key) in tokens" :key="key" aria-role="listitem" :value="key">
+          <b-dropdown-item
+            v-for="(token, key) in tokens"
+            :key="key"
+            aria-role="listitem"
+            :value="key"
+            :data-test="token.dataTest"
+          >
             {{ token.symbol }}
           </b-dropdown-item>
         </b-dropdown>
@@ -18,7 +24,7 @@
           {{ $t('amount') }}
           <b-tooltip :label="$t('amountTooltip')" size="is-small" position="is-right" multilined>
             <button class="button is-primary has-icon">
-              <span class="icon icon-info"></span>
+              <span class="icon icon-info" data-test="choose_amount_info"></span>
             </button>
           </b-tooltip>
         </template>
@@ -30,13 +36,24 @@
           @input="changeAmount"
         >
           <template v-for="({ amount, address }, key) in amounts">
-            <b-step-item :key="key" :label="shortenAmount(amount)" :clickable="address !== ''"></b-step-item>
+            <b-step-item
+              :key="key"
+              :label="shortenAmount(amount)"
+              :clickable="address !== ''"
+              :header-class="`token-${selectedToken}-${amount}`"
+            ></b-step-item>
           </template>
         </b-steps>
       </b-field>
     </fieldset>
-    <connect-button v-if="!isLoggedIn" type="is-primary is-fullwidth" />
-    <b-button v-else type="is-primary is-fullwidth" :loading="isDepositBtnClicked" @click="onDeposit">
+    <connect-button v-if="!isLoggedIn" type="is-primary is-fullwidth" data-test="button_connect" />
+    <b-button
+      v-else
+      type="is-primary is-fullwidth"
+      :loading="isDepositBtnClicked"
+      data-test="button_deposit"
+      @click="onDeposit"
+    >
       {{ $t('depositButton') }}
     </b-button>
   </b-tab-item>
@@ -79,7 +96,14 @@ export default {
       }
     },
     tokens() {
-      return this.networkConfig.tokens
+      return Object.keys(this.networkConfig.tokens).reduce((acc, curr) => {
+        const item = this.networkConfig.tokens[curr]
+        acc[curr] = {
+          ...item,
+          dataTest: `token_list_${item.symbol.toLowerCase()}`
+        }
+        return acc
+      }, {})
     },
     selectedToken: {
       get() {
