@@ -2,7 +2,7 @@
   <div class="address">
     <div class="address-item">
       <div class="label">{{ $t('account.account') }}</div>
-      <div class="value">{{ accounts.backup }}</div>
+      <div class="value" data-test="note_account_address">{{ accounts.backup }}</div>
     </div>
     <div class="address-item">
       <div class="label">{{ $t('account.backedUpWith') }}</div>

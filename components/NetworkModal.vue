@@ -6,10 +6,11 @@
     </header>
     <div class="networks">
       <div
-        v-for="{ name, chainId } in networks"
+        v-for="{ name, chainId, dataTest } in networks"
         :key="chainId"
         class="item"
         :class="{ 'is-active': chainId === netId }"
+        :data-test="dataTest"
         @click="setNetwork(chainId)"
       >
         <b-icon class="network-icon" :icon="`${name}`.replace(/\)?\s\(?/g, '-').toLowerCase()" />
@@ -39,6 +40,7 @@ export default {
       return Object.keys(this.networkConfig).map((key) => {
         return {
           name: this.networkConfig[key].networkName,
+          dataTest: `${this.networkConfig[key].networkName.split(' ').join('_')}__network`,
           chainId: Number(key.replace('netId', ''))
         }
       })

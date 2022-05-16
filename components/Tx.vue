@@ -22,7 +22,12 @@
       <div class="column is-hash" :data-label="$t('txHash')">
         <div class="details">
           <p class="detail">
-            <a class="detail-description" :href="txExplorerUrl(tx.txHash)" target="_blank">
+            <a
+              class="detail-description"
+              data-test="txhash_text"
+              :href="txExplorerUrl(tx.txHash)"
+              target="_blank"
+            >
               {{ tx.txHash }}
             </a>
           </p>
@@ -39,11 +44,18 @@
             size="is-small"
             :disabled="!tx.note"
             icon-left="copy"
+            data-test="copy_note_button"
           >
             {{ $t('note') }}
           </b-button>
         </b-tooltip>
-        <b-button type="is-dark" size="is-small" icon-right="remove" @click="onClose" />
+        <b-button
+          data-test="remove_note_button"
+          type="is-dark"
+          size="is-small"
+          icon-right="remove"
+          @click="onClose"
+        />
       </div>
     </div>
   </div>

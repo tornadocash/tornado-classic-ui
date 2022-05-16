@@ -14,7 +14,12 @@
         <b-skeleton v-if="!job.txHash && job.status !== 'FAILED'" />
         <div v-else class="details">
           <p class="detail">
-            <a class="detail-description" :href="txExplorerUrl(job.txHash)" target="_blank">
+            <a
+              data-test="txhash_text"
+              class="detail-description"
+              :href="txExplorerUrl(job.txHash)"
+              target="_blank"
+            >
               {{ job.txHash }}
             </a>
           </p>

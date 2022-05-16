@@ -17,15 +17,15 @@
       </div>
       <div v-if="withdrawType === 'relayer'" class="withdraw-data-item">
         {{ $t('networkFee') }}
-        <span>{{ toDecimals(networkFee, null, 6) }} {{ networkCurrency }}</span>
+        <span data-test="label_network_fee">{{ toDecimals(networkFee, null, 6) }} {{ networkCurrency }}</span>
       </div>
       <div v-if="withdrawType === 'relayer'" class="withdraw-data-item">
         {{ $t('relayerFee') }}
-        <span>{{ toDecimals(relayerFee, null, 6) }} {{ currency }}</span>
+        <span data-test="label_relayer_fee">{{ toDecimals(relayerFee, null, 6) }} {{ currency }}</span>
       </div>
       <div v-if="withdrawType === 'relayer'" class="withdraw-data-item">
         {{ $t('totalFee') }}
-        <span>{{ toDecimals(totalRelayerFee, null, 6) }} {{ currency }}</span>
+        <span data-test="label_total_fee">{{ toDecimals(totalRelayerFee, null, 6) }} {{ currency }}</span>
       </div>
       <div v-if="isTokenSelected" class="withdraw-data-item">
         {{ $t('ethPurchase', { currency: networkCurrency }) }}
@@ -34,7 +34,7 @@
       <hr v-if="withdrawType === 'relayer'" />
       <div class="withdraw-data-item">
         {{ $t('tokensToReceive') }}
-        <span>{{ total }} {{ currency }}</span>
+        <span data-test="label_tokens_to_receive">{{ total }} {{ currency }}</span>
       </div>
       <div v-if="isTokenSelected" class="withdraw-data-item">
         <span class="is-alone">{{ ethToReceiveFromWei }} {{ networkCurrency }}</span>

@@ -2,7 +2,7 @@
   <div class="modal-card box box-modal is-wallet-modal">
     <header class="box-modal-header is-spaced">
       <div class="box-modal-title">{{ $t('yourWallet') }}</div>
-      <button type="button" class="delete" @click="$emit('close')" />
+      <button type="button" class="delete" data-test="close_popup_button" @click="$emit('close')" />
     </header>
     <div class="note">
       {{ $t('pleaseSelectYourWeb3Wallet') }}
@@ -22,11 +22,16 @@
         <button
           v-show="isMetamask"
           class="button is-small is-background is-metamask"
+          data-test="choose_metamask_option"
           @click="_web3Connect('metamask')"
         >
           Metamask
         </button>
-        <button class="button is-small is-background is-walletConnect" @click="_web3Connect('walletConnect')">
+        <button
+          class="button is-small is-background is-walletConnect"
+          data-test="choose_wallet_option"
+          @click="_web3Connect('walletConnect')"
+        >
           WalletConnect
         </button>
       </div>

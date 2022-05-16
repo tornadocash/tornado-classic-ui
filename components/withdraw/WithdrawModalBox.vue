@@ -4,10 +4,10 @@
       <div class="box-modal-title">{{ $t('withdrawalConfirmation') }}</div>
       <button type="button" class="delete" @click="$emit('close')" />
     </header>
-    <div class="note">
+    <div class="note" data-test="withdrawal_confirmation_text">
       {{ message }}
     </div>
-    <b-button type="is-primary is-fullwidth" @click="_sendWithdraw">
+    <b-button type="is-primary is-fullwidth" data-test="withdrawal_confirm_button" @click="_sendWithdraw">
       {{ $t('confirm') }}
     </b-button>
   </div>
@@ -57,7 +57,7 @@ export default {
       deep: true
     }
   },
-  mounted() {
+  beforeCreate() {
     this.$store.dispatch('loading/enable', { message: this.$t('generatingProof') })
   },
   methods: {

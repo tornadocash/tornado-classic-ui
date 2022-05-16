@@ -1,7 +1,7 @@
 <template>
   <b-navbar wrapper-class="container" class="header">
     <template slot="brand">
-      <b-navbar-item tag="router-link" to="/" active-class="">
+      <b-navbar-item tag="router-link" to="/" data-test="tornado_main_page" active-class="">
         <Logo />
       </b-navbar-item>
     </template>
@@ -27,9 +27,16 @@
       <b-navbar-item tag="div">
         <div class="buttons">
           <network-navbar-icon />
-          <metamask-navbar-icon />
-          <indicator />
-          <b-button icon-left="settings" type="is-primary" outlined @mousedown.prevent @click="onAccount">
+          <metamask-navbar-icon data-test="metamask_connection_state" />
+          <indicator data-test="note_account_connection_state" />
+          <b-button
+            icon-left="settings"
+            type="is-primary"
+            outlined
+            data-test="button_settings"
+            @mousedown.prevent
+            @click="onAccount"
+          >
             {{ $t('settings') }}
           </b-button>
         </div>

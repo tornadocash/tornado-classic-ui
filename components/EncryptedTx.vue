@@ -30,7 +30,12 @@
       <div class="column is-hash" :data-label="$t('txHash')">
         <div class="details">
           <p class="detail">
-            <a class="detail-description" :href="txExplorerUrl(tx.txHash)" target="_blank">
+            <a
+              data-test="txhash_text"
+              class="detail-description"
+              :href="txExplorerUrl(tx.txHash)"
+              target="_blank"
+            >
               {{ tx.txHash }}
             </a>
           </p>
@@ -42,6 +47,7 @@
         <b-tooltip :active="activeCopyTooltip" :label="tooltipCopy" position="is-left" multilined>
           <b-button
             type="is-primary hide-icon-desktop"
+            data-test="decrypt_note_button"
             size="is-small"
             icon-left="decrypt"
             :disabled="disableCopyButton"
@@ -50,7 +56,13 @@
             {{ $t('decrypt') }}
           </b-button>
         </b-tooltip>
-        <b-button type="is-dark" size="is-small" icon-right="remove" @click="onClose" />
+        <b-button
+          type="is-dark"
+          data-test="remove_note_button"
+          size="is-small"
+          icon-right="remove"
+          @click="onClose"
+        />
       </div>
     </div>
   </div>

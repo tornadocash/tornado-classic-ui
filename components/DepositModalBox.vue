@@ -46,7 +46,9 @@
       </i18n>
     </b-checkbox>
     <template v-if="!isSetupAccount || !isEncrypted">
-      <b-checkbox v-model="isBackuped">{{ $t('iBackedUpTheNote') }}</b-checkbox>
+      <b-checkbox v-model="isBackuped" data-test="backup_note_checkbox">{{
+        $t('iBackedUpTheNote')
+      }}</b-checkbox>
       <div v-if="isBackuped && isIPFS" class="notice is-warning">
         <div class="notice__p">{{ $t('yourNoteWontBeSaved') }}</div>
       </div>
@@ -56,6 +58,7 @@
       v-else
       type="is-primary is-fullwidth"
       :disabled="disableButton || (!isValidGasPrice && !eipSupported)"
+      data-test="send_deposit_button"
       @click="_sendDeposit"
     >
       {{ $t('sendDeposit') }}

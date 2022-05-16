@@ -22,10 +22,10 @@
       </template>
     </div>
     <div class="buttons buttons__halfwidth mt-3">
-      <b-button type="is-primary" outlined @click="onClose">
+      <b-button type="is-primary" outlined data-test="button_close_your_note_popup" @click="onClose">
         {{ $parent.$t('account.modals.decryptInfo.close') }}
       </b-button>
-      <b-button type="is-primary" @click="handleRedirect">
+      <b-button type="is-primary" data-test="button_main_page_your_notes_popup" @click="handleRedirect">
         {{ $parent.$t('account.modals.decryptInfo.redirect') }}
       </b-button>
     </div>
