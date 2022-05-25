@@ -237,17 +237,18 @@ export const actions = {
 
       const getIsUpdated = () => {
         const requiredMajor = hasEnabledLightProxy ? '5' : '4'
-        const { major, prerelease } = parseSemanticVersion(response.data.version)
+        const { major, patch, prerelease } = parseSemanticVersion(response.data.version)
 
         const isUpdatedMajor = major === requiredMajor
 
-        if (isUpdatedMajor && prerelease && netId === 42161) {
-          const minimalBeta = 10
+        if (isUpdatedMajor && prerelease) {
+          const minimalBeta = 11
           const [betaVersion] = prerelease.split('.').slice(-1)
           return Number(betaVersion) >= minimalBeta
         }
 
-        return isUpdatedMajor
+        const minimalPatch = 4
+        return isUpdatedMajor && Number(patch) >= minimalPatch
       }
 
       if (!getIsUpdated()) {
