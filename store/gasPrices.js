@@ -1,6 +1,12 @@
 /* eslint-disable no-console */
+import Web3 from 'web3'
 import { GasPriceOracle } from 'gas-price-oracle'
+import { serialize } from '@ethersproject/transactions'
 import { toHex, toWei, toBN, fromWei } from 'web3-utils'
+
+import networkConfig from '@/networkConfig'
+import OvmGasPriceOracleABI from '@/abis/OvmGasPriceOracle.abi.json'
+import { DUMMY_NONCE, DUMMY_WITHDRAW_DATA } from '@/constants/variables'
 
 export const state = () => {
   return {
@@ -31,11 +37,26 @@ export const state = () => {
         maxFeePerGas: 9,
         maxPriorityFeePerGas: 1
       }
-    }
+    },
+    l1Fee: '0'
   }
 }
 
 export const getters = {
+  ovmGasPriceOracleContract: (state, getters, rootState) => ({ netId }) => {
+    const config = networkConfig[`netId${netId}`]
+    const { url } = rootState.settings[`netId${netId}`].rpc
+    const address = config.ovmGasPriceOracleContract
+    if (address) {
+      const web3 = new Web3(url)
+      return new web3.eth.Contract(OvmGasPriceOracleABI, address)
+    }
+
+    return null
+  },
+  l1Fee: (state) => {
+    return state.l1Fee
+  },
   oracle: (state, getters, rootState, rootGetters) => {
     const netId = Number(rootGetters['metamask/netId'])
     const { gasPrices } = rootGetters['metamask/networkConfig']
@@ -108,6 +129,9 @@ export const mutations = {
     this._vm.$set(state.eip, 'fast', fast)
     this._vm.$set(state.eip, 'standard', standard)
     this._vm.$set(state.eip, 'low', low)
+  },
+  SAVE_L1_FEE(state, l1Fee) {
+    state.l1Fee = l1Fee
   }
 }
 
@@ -123,6 +147,8 @@ export const actions = {
         const gas = await dispatch('getGasPrice')
         commit('SAVE_ORACLE_GAS_PRICES', gas)
       }
+
+      await dispatch('fetchL1Fee')
 
       setTimeout(() => dispatch('fetchGasPrice'), 1000 * pollInterval)
     } catch (e) {
@@ -187,5 +213,36 @@ export const actions = {
   setDefault({ commit, rootGetters }) {
     const { gasPrices } = rootGetters['metamask/networkConfig']
     commit('SAVE_ORACLE_GAS_PRICES', gasPrices)
+  },
+  async fetchL1Fee({ commit, getters, dispatch, rootGetters }) {
+    const netId = rootGetters['metamask/netId']
+    const isOptimismConnected = rootGetters['application/isOptimismConnected']
+
+    const oracleInstance = getters.ovmGasPriceOracleContract({ netId })
+
+    if (isOptimismConnected && oracleInstance) {
+      try {
+        const gasLimit = rootGetters['application/withdrawGas']
+        const tornadoProxyInstance = rootGetters['application/tornadoProxyContract']({ netId })
+
+        const gasPrice = getters.fastGasPrice
+
+        const tx = serialize({
+          type: 0,
+          gasLimit,
+          gasPrice,
+          chainId: netId,
+          nonce: DUMMY_NONCE,
+          data: DUMMY_WITHDRAW_DATA,
+          to: tornadoProxyInstance._address
+        })
+
+        const l1Fee = await oracleInstance.methods.getL1Fee(tx).call()
+
+        commit('SAVE_L1_FEE', l1Fee)
+      } catch (err) {
+        console.error('fetchL1Fee has error:', err.message)
+      }
+    }
   }
 }

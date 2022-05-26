@@ -249,6 +249,7 @@ export default {
     deployedBlock: 2243689,
     multicall: '0x35A6Cdb2C9AD4a45112df4a04147EB07dFA01aB7',
     echoContractAccount: '0xa75BF2815618872f155b7C4B0C81bF990f5245E4',
+    ovmGasPriceOracleContract: '0x420000000000000000000000000000000000000F',
     rpcUrls: {
       Alchemy: {
         name: 'Alchemy',
