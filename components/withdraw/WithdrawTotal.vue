@@ -17,7 +17,7 @@
       </div>
       <div v-if="withdrawType === 'relayer'" class="withdraw-data-item">
         {{ $t('networkFee') }}
-        <span>{{ networkFeeInEth }} {{ networkCurrency }}</span>
+        <span>{{ toDecimals(networkFee, null, 6) }} {{ networkCurrency }}</span>
       </div>
       <div v-if="withdrawType === 'relayer'" class="withdraw-data-item">
         {{ $t('relayerFee') }}
@@ -76,9 +76,6 @@ export default {
     ...mapGetters('token', ['toDecimals', 'fromDecimals']),
     ...mapGetters('application', ['networkFee']),
     ...mapGetters('price', ['tokenRate']),
-    networkFeeInEth() {
-      return fromWei(this.networkFee)
-    },
     relayerFee() {
       const { amount } = this.selectedStatistic
       const total = toBN(this.fromDecimals(amount.toString()))

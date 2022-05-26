@@ -148,19 +148,18 @@ const getters = {
   currentContract: (state, getters) => (params) => {
     return getters.tornadoProxyContract(params)
   },
-  withdrawGas: (state, getters, rootState, rootGetters) => {
-    const netId = rootGetters['metamask/netId']
+  withdrawGas: (state, getters) => {
     let action = ACTION.WITHDRAW_WITH_EXTRA
 
     if (getters.hasEnabledLightProxy) {
       action = ACTION.WITHDRAW
     }
 
-    if (Number(netId) === 10) {
+    if (getters.isOptimismConnected) {
       action = ACTION.OP_WITHDRAW
     }
 
-    if (Number(netId) === 42161) {
+    if (getters.isArbitrumConnected) {
       action = ACTION.ARB_WITHDRAW
     }
 
@@ -169,7 +168,14 @@ const getters = {
   networkFee: (state, getters, rootState, rootGetters) => {
     const gasPrice = rootGetters['gasPrices/fastGasPrice']
 
-    return toBN(gasPrice).mul(toBN(getters.withdrawGas))
+    const networkFee = toBN(gasPrice).mul(toBN(getters.withdrawGas))
+
+    if (getters.isOptimismConnected) {
+      const l1Fee = rootGetters['gasPrices/l1Fee']
+      return networkFee.add(toBN(l1Fee))
+    }
+
+    return networkFee
   },
   relayerFee: (state, getters, rootState, rootGetters) => {
     const { currency, amount } = rootState.application.selectedStatistic
@@ -245,6 +251,14 @@ const getters = {
   },
   hasEnabledLightProxy: (state, getters, rootState, rootGetters) => {
     return Boolean(rootGetters['metamask/networkConfig']['tornado-proxy-light.contract.tornadocash.eth'])
+  },
+  isOptimismConnected: (state, getters, rootState, rootGetters) => {
+    const netId = rootGetters['metamask/netId']
+    return Number(netId) === 10
+  },
+  isArbitrumConnected: (state, getters, rootState, rootGetters) => {
+    const netId = rootGetters['metamask/netId']
+    return Number(netId) === 42161
   }
 }
 
