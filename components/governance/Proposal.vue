@@ -188,7 +188,13 @@ export default {
     ...mapState('metamask', ['ethAccount', 'isInitialized']),
     ...mapGetters('txHashKeeper', ['addressExplorerUrl']),
     ...mapGetters('metamask', ['networkConfig']),
-    ...mapGetters('governance/gov', ['votingPower', 'constants', 'votingPeriod', 'isFetchingBalances']),
+    ...mapGetters('governance/gov', [
+      'votingPower',
+      'constants',
+      'votingPeriod',
+      'isFetchingBalances',
+      'isEnabledGovernance'
+    ]),
     readyForAction() {
       return (
         this.data.status !== 'active' ||
@@ -219,7 +225,7 @@ export default {
   watch: {
     isInitialized: {
       handler(isInitialized) {
-        if (isInitialized) {
+        if (isInitialized && this.isEnabledGovernance) {
           this.fetchReceipt({ id: this.data.id })
         }
       },

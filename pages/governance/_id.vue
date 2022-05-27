@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     ...mapState('governance/gov', ['proposals']),
-    ...mapGetters('governance/gov', ['isFetchingProposals']),
+    ...mapGetters('governance/gov', ['isFetchingProposals', 'isEnabledGovernance']),
     ...mapState('metamask', ['isInitialized']),
     proposal() {
       return this.proposals[this.$route.params.id - 1]
@@ -30,7 +30,7 @@ export default {
   watch: {
     isInitialized: {
       handler(isInitialized) {
-        if (isInitialized) {
+        if (isInitialized && this.isEnabledGovernance) {
           this.fetchBalances()
           this.fetchedLockedTimestamp()
           this.fetchDelegatee()

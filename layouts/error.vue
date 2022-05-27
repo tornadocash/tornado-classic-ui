@@ -1,29 +1,61 @@
 <template>
   <div class="has-text-centered">
-    <Error404Icon />
+    <ErrorIcon :is404="statusCode === 404" />
     <h1 class="title is-1">{{ $t('errorPage.title') }}</h1>
-    <p class="p mb-6">{{ $t('errorPage.description') }}</p>
-    <b-button type="is-primary" icon-left="logo" outlined @click="handleRedirect">{{
-      $t('errorPage.button')
-    }}</b-button>
+    <template v-if="statusCode === 204">
+      <p class="p mb-6">
+        {{
+          $t('errorPage.switchNetwork.description', {
+            pageName: $t(`errorPage.switchNetwork.pageName.${error.pageName}`)
+          })
+        }}
+      </p>
+      <b-button type="is-primary" icon-left="logo" outlined @click="handleSwitchNetwork">{{
+        $t('errorPage.switchNetwork.button')
+      }}</b-button>
+    </template>
+    <template v-else>
+      <p class="p mb-6">{{ $t('errorPage.description') }}</p>
+      <b-button type="is-primary" icon-left="logo" outlined @click="handleRedirect">{{
+        $t('errorPage.button')
+      }}</b-button>
+    </template>
   </div>
 </template>
 <script>
-import { Error404Icon } from '@/components/icons'
+import { mapActions } from 'vuex'
+
+import { ErrorIcon } from '@/components/icons'
 
 export default {
   name: 'ErrorPage',
   components: {
-    Error404Icon
+    ErrorIcon
   },
-  data() {
-    return {}
+  props: {
+    error: {
+      type: Object,
+      default: null
+    }
   },
-  computed: {},
-  mounted() {},
+  computed: {
+    statusCode() {
+      return this.error?.statusCode || 404
+    }
+  },
   methods: {
+    ...mapActions('metamask', ['networkChangeHandler']),
     handleRedirect() {
       this.$router.push('/')
+    },
+    async handleSwitchNetwork() {
+      const providerName = window.localStorage.getItem('provider')
+
+      await this.networkChangeHandler({ netId: 1 })
+
+      if (!providerName) {
+        this.$router.go()
+      }
     }
   },
   head() {
@@ -35,3 +67,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.p {
+  max-width: 560px;
+  margin: 0 auto;
+}
+</style>
