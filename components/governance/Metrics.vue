@@ -60,7 +60,7 @@ export default {
       balance: (state) => fromWei(state.balance)
     }),
     ...mapState('governance/gov', ['lockedBalance', 'delegatedBalance']),
-    ...mapGetters('governance/gov', ['isFetchingBalances']),
+    ...mapGetters('governance/gov', ['isFetchingBalances', 'isEnabledGovernance']),
     ...mapGetters('governance/staking', ['reward', 'isCheckingReward']),
     ...mapGetters('token', ['toDecimals']),
     ...mapState('metamask', ['isInitialized']),
@@ -74,7 +74,7 @@ export default {
   watch: {
     isInitialized: {
       handler(isInitialized) {
-        if (isInitialized) {
+        if (isInitialized && this.isEnabledGovernance) {
           this.checkReward()
           this.fetchTokenBalance()
           this.fetchTokenAllowance()

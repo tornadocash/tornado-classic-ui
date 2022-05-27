@@ -288,7 +288,14 @@
   "errorPage": {
     "title": "Oooops!",
     "description": "Page not found.",
-    "button": "Launch App"
+    "button": "Launch App",
+    "switchNetwork": {
+      "pageName": {
+        "governance": "Tornado Cash Governance"
+      },
+      "description": "There is not {pageName} on the selected network. Please switch to Ethereum Mainnet.",
+      "button": "Switch network"
+    }
   },
   "rejectedRequest": "You rejected {description} request",
   "updateCacheEvents": "Syncing deposit events. Please wait",

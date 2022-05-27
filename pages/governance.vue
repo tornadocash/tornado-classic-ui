@@ -12,7 +12,7 @@ import Metrics from '@/components/governance/Metrics'
 export default {
   middleware({ store, error }) {
     if (!store.getters['governance/gov/isEnabledGovernance']) {
-      return error({ statusCode: 404 })
+      return error({ statusCode: 204, pageName: 'governance' })
     }
   },
   components: {
@@ -25,14 +25,16 @@ export default {
   watch: {
     isInitialized: {
       handler() {
-        this.fetchProposals({})
-        this.fetchConstants()
+        if (this.isEnabledGovernance) {
+          this.fetchProposals({})
+          this.fetchConstants()
+        }
       },
       immediate: true
     },
     isEnabledGovernance(isEnabled) {
       if (!isEnabled) {
-        this.$router.push('/')
+        this.$nuxt.error({ statusCode: 204, pageName: 'governance' })
       }
     }
   },
