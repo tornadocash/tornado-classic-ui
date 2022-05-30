@@ -136,6 +136,7 @@ export default {
         materialDesignIcons: false,
         defaultIconPack: 'trnd',
         defaultModalCanCancel: ['escape', 'button', 'outside'],
+        defaultProgrammaticPromise: true,
         customIconPacks: {
           trnd: {
             sizes: {
