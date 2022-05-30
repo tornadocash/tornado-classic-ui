@@ -25,6 +25,7 @@
 <script>
 import { mapActions } from 'vuex'
 
+import { sleep } from '@/utils'
 import { ErrorIcon } from '@/components/icons'
 
 export default {
@@ -45,16 +46,27 @@ export default {
   },
   methods: {
     ...mapActions('metamask', ['networkChangeHandler']),
+    ...mapActions('loading', ['enable', 'disable']),
     handleRedirect() {
       this.$router.push('/')
     },
     async handleSwitchNetwork() {
-      const providerName = window.localStorage.getItem('provider')
+      this.enable({ message: this.$t('changingNetwork') })
 
-      await this.networkChangeHandler({ netId: 1 })
+      await sleep(800)
 
-      if (!providerName) {
-        this.$router.go()
+      try {
+        const providerName = window.localStorage.getItem('provider')
+
+        await this.networkChangeHandler({ netId: 1 })
+
+        if (!providerName) {
+          this.$router.go()
+        }
+      } catch (err) {
+        console.log(`handleSwitchNetwork has error ${err.message}`)
+      } finally {
+        this.disable()
       }
     }
   },

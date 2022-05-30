@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import BN from 'bignumber.js'
 import { hexToNumber, numberToHex } from 'web3-utils'
-import { SnackbarProgrammatic as Snackbar } from 'buefy'
+import { SnackbarProgrammatic as Snackbar, DialogProgrammatic as Dialog } from 'buefy'
 
 import { PROVIDERS } from '@/constants'
 import networkConfig from '@/networkConfig'
@@ -307,8 +307,21 @@ const actions = {
   async networkChangeHandler({ state, getters, commit, dispatch }, params) {
     try {
       if (getters.isWalletConnect) {
-        await dispatch('mobileWalletReconnect', params)
-        this.$provider._onNetworkChanged({ id: params.netId })
+        dispatch('loading/disable', {}, { root: true })
+
+        const networkName = networkConfig[`netId${params.netId}`].networkName
+
+        const { result } = await Dialog.confirm({
+          title: this.app.i18n.t('changeNetwork'),
+          message: this.app.i18n.t('mobileWallet.reconnect.message', { networkName }),
+          cancelText: this.app.i18n.t('cancelButton'),
+          confirmText: this.app.i18n.t('mobileWallet.reconnect.action')
+        })
+
+        if (result) {
+          await dispatch('mobileWalletReconnect', params)
+          this.$provider._onNetworkChanged({ id: params.netId })
+        }
       } else {
         if (state.isInitialized) {
           await dispatch('switchNetwork', params)

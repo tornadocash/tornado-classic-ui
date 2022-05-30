@@ -424,6 +424,10 @@
   "connectAccount": "Connect Note Account",
   "fetchFile": "Cannot fetch proving keys, please check your internet connection or try to use VPN.",
   "mobileWallet": {
+    "reconnect": {
+      "message": "Your current connection will be terminated and you will need to reconnect through WalletConnect. Please make sure {networkName} is selected in your wallet before reconnecting.",
+      "action": "Reconnect"
+    },
     "loading": {
       "alert": "If you have not received a notification in your wallet, please reconnect your wallet",
       "action": "Reconnect"

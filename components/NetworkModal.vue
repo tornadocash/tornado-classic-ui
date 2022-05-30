@@ -21,6 +21,8 @@
 </template>
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
+
+import { sleep } from '@/utils'
 import config from '@/networkConfig'
 
 export default {
@@ -48,7 +50,7 @@ export default {
     async setNetwork(netId) {
       this.enable({ message: this.$t('changingNetwork') })
 
-      await this.sleep()
+      await sleep(800)
 
       try {
         const providerName = window.localStorage.getItem('provider')
@@ -67,13 +69,6 @@ export default {
         this.$emit('close')
         this.disable()
       }
-    },
-    sleep() {
-      return new Promise((resolve) =>
-        setTimeout(() => {
-          resolve()
-        }, 800)
-      )
     },
     checkSupportNetwork(netId) {
       const isSupport = Object.keys(this.networkConfig).includes(`netId${netId}`)
