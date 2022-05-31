@@ -85,7 +85,6 @@ async function main(type, netId) {
 
       console.log('numberParts', numberParts)
 
-      let events = []
       let toBlock = startBlock + part
 
       if (startBlock < currentBlockNumber) {
@@ -116,7 +115,6 @@ async function main(type, netId) {
           }
         }
       }
-      console.log({ events })
     } else {
       events = await contract.getPastEvents(type, {
         fromBlock: startBlock,
