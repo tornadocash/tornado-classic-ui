@@ -123,7 +123,7 @@
             <div class="column is-full-small">
               <strong>{{ $t('proposalAddress') }}</strong>
               <div class="value">
-                <a :href="contractUrl" class="address" target="_blank">
+                <a :href="contractUrl" class="address" target="_blank" rel="noopener noreferrer">
                   {{ data.target }}
                 </a>
               </div>

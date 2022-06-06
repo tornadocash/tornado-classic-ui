@@ -69,6 +69,7 @@ export default {
   },
   mounted() {
     this.$preventMultitabs()
+    window.addEventListener('focus', this.$preventMultitabs)
 
     if (process.browser) {
       window.onNuxtReady(() => {
@@ -107,6 +108,9 @@ export default {
         }, 500)
       })
     }
+  },
+  beforeDestroy() {
+    window.removeEventListener('focus', this.$preventMultitabs)
   },
   methods: {
     ...mapActions('settings', ['checkCurrentRpc', 'preselectRpc']),

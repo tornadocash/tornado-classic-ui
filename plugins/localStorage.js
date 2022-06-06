@@ -21,16 +21,23 @@ export default ({ store, isHMR }) => {
     return
   }
 
-  const paths = ['metamask.netId', 'application.selectedStatistic', 'application.selectedInstance']
-
   if (!store.$isLoadedFromIPFS()) {
-    paths.push('txHashKeeper', 'settings', 'account', 'relayer.jobs', 'encryptedNote.ui')
+    const paths = [
+      'metamask.netId',
+      'application.selectedStatistic',
+      'application.selectedInstance',
+      'txHashKeeper',
+      'settings',
+      'account',
+      'relayer.jobs',
+      'encryptedNote.ui'
+    ]
+
+    migrate()
+
+    createPersistedState({
+      key: STORE_NAME,
+      paths
+    })(store)
   }
-
-  migrate()
-
-  createPersistedState({
-    key: STORE_NAME,
-    paths
-  })(store)
 }

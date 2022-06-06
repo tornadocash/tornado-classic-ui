@@ -22,7 +22,12 @@
       <div class="column is-hash" :data-label="$t('txHash')">
         <div class="details">
           <p class="detail">
-            <a class="detail-description" :href="txExplorerUrl(tx.txHash)" target="_blank">
+            <a
+              class="detail-description"
+              :href="txExplorerUrl(tx.txHash)"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {{ tx.txHash }}
             </a>
           </p>

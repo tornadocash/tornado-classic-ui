@@ -18,10 +18,15 @@
         </template>
         <template v-slot:description>{{ notice.description }}</template>
       </i18n>
-      <a v-if="notice.nova" href="https://nova.tornadocash.eth.link" target="_blank">
+      <a
+        v-if="notice.nova"
+        href="https://nova.tornadocash.eth.link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Tornado Cash Nova
       </a>
-      <a v-if="notice.txHash" :href="txExplorerUrl(notice.txHash)" target="_blank">
+      <a v-if="notice.txHash" :href="txExplorerUrl(notice.txHash)" target="_blank" rel="noopener noreferrer">
         {{ $t('viewOnEtherscan') }}
       </a>
       <n-link v-else-if="notice.routerLink" v-bind="notice.routerLink.params" @onClick="$forceUpdate()">

@@ -3,20 +3,17 @@ export default ({ store, isHMR, app }, inject) => {
   inject('isLoadedFromIPFS', main)
 }
 function main() {
-  const domainWhiteList = [
-    'tornado.cash',
-    'localhost:3000',
-    'stage.tornado.cash',
-    'tornadocash.eth',
+  const whiteListedDomains = [
+    // 'localhost:3000',
     'tornadocash.eth.link',
-    'tornadocash.eth.limo',
-    'app.tornado.cash',
-    'donotshare.tornado.cash'
+    'tornadocash.eth.limo'
   ]
 
-  if (window.location.host.includes('tornadocash.netlify.app')) {
+  const NETLIFY_REGEXP = /https:\/\/deploy-preview-(\d+)--tornadocash\.netlify\.app/
+
+  if (NETLIFY_REGEXP.test(window.location.host)) {
     return false
-  } else if (!domainWhiteList.includes(window.location.host)) {
+  } else if (!whiteListedDomains.includes(window.location.host)) {
     console.warn('The page has been loaded from ipfs.io. LocalStorage is disabled')
     return true
   }

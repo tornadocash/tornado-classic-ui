@@ -48,6 +48,27 @@ export default {
     meta: [
       { charset: 'utf-8' },
       {
+        'http-equiv': 'Content-Security-Policy',
+        content: ''
+      },
+      // move to req middlevare
+      // {
+      //   'http-equiv': 'Permissions-Policy',
+      //   content: 'geolocation=()'
+      // },
+      // {
+      //   'http-equiv': 'Strict-Transport-Security',
+      //   content: 'max-age=31536000;'
+      // },
+      // {
+      //   'http-equiv': 'X-Content-Type-Options',
+      //   content: 'nosniff'
+      // },
+      {
+        name: 'Referer-Policy',
+        content: 'no-referrer'
+      },
+      {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
       },

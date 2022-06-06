@@ -3,7 +3,9 @@
     <template v-slot:content>
       <template v-if="isLoggedIn">
         <p>{{ $t('web3connected') }}</p>
-        <a :href="addressExplorerUrl(ethAccount)" target="_blank">{{ shortAddress(ethAccount) }}</a>
+        <a :href="addressExplorerUrl(ethAccount)" target="_blank" rel="noopener noreferrer">{{
+          shortAddress(ethAccount)
+        }}</a>
         <p><NumberFormat :value="balance" /> {{ currency }}</p>
       </template>
       <template v-else>

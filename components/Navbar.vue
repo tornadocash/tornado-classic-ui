@@ -18,7 +18,12 @@
       <b-navbar-item tag="router-link" to="/compliance">
         {{ $t('compliance') }}
       </b-navbar-item>
-      <b-navbar-item href="http://docs.tornado.cash" target="_blank" rel="noreferrer" class="has-tag">
+      <b-navbar-item
+        href="https://docs.tornado.cash"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="has-tag"
+      >
         <b-icon icon="open-book" size="is-small" class="mr-1" />
         <span>{{ $t('docs') }}</span>
       </b-navbar-item>

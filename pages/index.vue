@@ -14,6 +14,22 @@
     </b-notification>
 
     <b-notification
+      :active="isActiveNotification.third"
+      class="main-notification"
+      type="is-warning"
+      icon-pack="icon"
+      has-icon
+      :aria-close-label="$t('closeNotification')"
+      @close="disableNotification({ key: 'third' })"
+    >
+      <i18n path="trustBanner.trustLess">
+        <template v-slot:link>
+          <a href="https://tornado.cash/">{{ $t('trustBanner.link') }}</a>
+        </template>
+      </i18n>
+    </b-notification>
+
+    <b-notification
       :active="isActiveNotification.first"
       class="main-notification"
       type="is-info"
@@ -27,7 +43,7 @@
           <a
             href="https://twitter.com/TornadoCash/status/1204745639759884289"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             >{{ $t('indexNotificationLinkText') }}</a
           >
         </template>
@@ -82,21 +98,20 @@ export default {
   },
   created() {
     this.$store.dispatch('application/setNativeCurrency', { netId: this.netId })
-  },
-  mounted() {
-    if (this.$route.query.note) {
-      this.activeTab = 1
-    }
+    this.checkIsTrustedUrl()
   },
   methods: {
     ...mapActions('settings', ['disableNotification']),
+    checkIsTrustedUrl() {
+      const isIpfs = this.$isLoadedFromIPFS()
+      if (!isIpfs) {
+        this.disableNotification({ key: 'third' })
+      }
+    },
     onGetKey(fn) {
       this.getKeys = fn
     },
     async tabChanged(tabIndex) {
-      if (!this.$route.query.note) {
-        this.$root.$emit('resetWithdraw')
-      }
       if (tabIndex === 1) {
         this.$store.dispatch('relayer/pickRandomRelayer', { type: 'tornado' })
 
