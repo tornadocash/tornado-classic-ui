@@ -51,19 +51,6 @@ export default {
         'http-equiv': 'Content-Security-Policy',
         content: ''
       },
-      // move to req middlevare
-      // {
-      //   'http-equiv': 'Permissions-Policy',
-      //   content: 'geolocation=()'
-      // },
-      // {
-      //   'http-equiv': 'Strict-Transport-Security',
-      //   content: 'max-age=31536000;'
-      // },
-      // {
-      //   'http-equiv': 'X-Content-Type-Options',
-      //   content: 'nosniff'
-      // },
       {
         name: 'Referer-Policy',
         content: 'no-referrer'

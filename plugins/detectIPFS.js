@@ -3,11 +3,7 @@ export default ({ store, isHMR, app }, inject) => {
   inject('isLoadedFromIPFS', main)
 }
 function main() {
-  const whiteListedDomains = [
-    // 'localhost:3000',
-    'tornadocash.eth.link',
-    'tornadocash.eth.limo'
-  ]
+  const whiteListedDomains = ['localhost:3000', 'tornadocash.eth.link', 'tornadocash.eth.limo']
 
   const NETLIFY_REGEXP = /https:\/\/deploy-preview-(\d+)--tornadocash\.netlify\.app/
 
