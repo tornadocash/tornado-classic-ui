@@ -28,3 +28,31 @@ For detailed explanation on how things work, checkout [Nuxt.js docs](https://nux
 ## Audit
 
 [TornadoCash_Сlassic_dApp_audit_Decurity.pdf](https://tornado.cash/audits/TornadoCash_Сlassic_dApp_audit_Decurity.pdf)
+
+## Update cached files
+
+- For update deposits and withdrawals events use `yarn update:events {chainId}`
+- For update encrypted notes use `yarn update:encrypted {chainId}`
+- For update merkle tree use `yarn update:tree {chainId}`
+
+#### NOTE!
+
+After update cached files do not forget to use `yarn update:zip`
+
+### Example for Ethereum Mainnet:
+
+```
+yarn update:events 1
+yarn update:encrypted 1
+yarn update:tree 1
+
+yarn update:zip
+```
+
+### Example for Binance Smart Chain:
+
+```
+yarn update:events 56
+
+yarn update:zip
+```

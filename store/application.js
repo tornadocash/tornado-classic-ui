@@ -451,7 +451,7 @@ const actions = {
 
       let cachedEvents = await dispatch('getEncryptedEventsFromDb', { netId })
 
-      const networksWithCache = [1, 5]
+      const networksWithCache = [1, 5, 56]
 
       const LENGTH_CACHE =
         Number(netId) === 1
