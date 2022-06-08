@@ -50,10 +50,10 @@ export const addressType = { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' }
 // TODO auto update in yarn updateCache
 export const cachedEventsLength = {
   mainnet: {
-    ENCRYPTED_NOTES: 14550
+    ENCRYPTED_NOTES: 16890
   },
   goerli: {
-    ENCRYPTED_NOTES: 1350
+    ENCRYPTED_NOTES: 1366
   }
 }
 
