@@ -45,11 +45,13 @@ export default {
   },
   head: {
     title: 'Tornado.cash',
+    script: [{ src: 'headerScript.js', async: false, defer: true }],
     meta: [
       { charset: 'utf-8' },
       {
         'http-equiv': 'Content-Security-Policy',
-        content: ''
+        content:
+          "img-src 'self' data:;font-src data:;style-src 'self' 'unsafe-inline';connect-src *;script-src 'self' 'unsafe-eval' 'unsafe-inline';default-src 'self';object-src 'none';base-uri 'none';upgrade-insecure-requests"
       },
       {
         name: 'Referer-Policy',

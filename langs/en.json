@@ -454,7 +454,7 @@
   },
   "withdrawalQueueIsOverloaded": "Withdrawal queue is overloaded",
   "trustBanner": {
-    "trustLess": "You are using an public IPFS gateway. Tornado Cash dApp can not use all security features of your browser. Check out {link} for alternatives",
+    "trustLess": "You are using a public IPFS gateway. Tornado Cash dApp can not use all security features of your browser. Check out {link} for alternatives",
     "link": "landing page"
   }
 }
