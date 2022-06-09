@@ -445,7 +445,7 @@ const actions = {
     try {
       const { netId } = rootState.metamask
       const rpc = rootGetters['settings/currentRpc']
-      let { NOTE_ACCOUNT_BLOCK: deployedBlock } = networkConfig[`netId${netId}`].constants
+      let { ENCRYPTED_NOTES_BLOCK: deployedBlock } = networkConfig[`netId${netId}`].constants
 
       const contractInstance = getters.tornadoProxyContract({ netId })
 

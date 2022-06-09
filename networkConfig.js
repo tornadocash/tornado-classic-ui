@@ -116,7 +116,8 @@ export default {
     ensSubdomainKey: 'mainnet-tornado',
     pollInterval: 30,
     constants: {
-      NOTE_ACCOUNT_BLOCK: 14248730,
+      NOTE_ACCOUNT_BLOCK: 11842486,
+      ENCRYPTED_NOTES_BLOCK: 14248730,
       MINING_BLOCK_TIME: 15
     },
     'torn.contract.tornadocash.eth': '0x77777FeDdddFfC19Ff86DB637967013e6C6A116C',
@@ -174,7 +175,8 @@ export default {
     ensSubdomainKey: 'bsc-tornado',
     pollInterval: 60,
     constants: {
-      NOTE_ACCOUNT_BLOCK: 8159269
+      NOTE_ACCOUNT_BLOCK: 8159269,
+      ENCRYPTED_NOTES_BLOCK: 8159269
     },
     'tornado-proxy-light.contract.tornadocash.eth': '0x0D5550d52428E7e3175bfc9550207e4ad3859b17'
   },
@@ -224,7 +226,8 @@ export default {
     ensSubdomainKey: 'polygon-tornado',
     pollInterval: 60,
     constants: {
-      NOTE_ACCOUNT_BLOCK: 16257996
+      NOTE_ACCOUNT_BLOCK: 16257996,
+      ENCRYPTED_NOTES_BLOCK: 16257996
     },
     'tornado-proxy-light.contract.tornadocash.eth': '0x0D5550d52428E7e3175bfc9550207e4ad3859b17'
   },
@@ -275,7 +278,8 @@ export default {
     ensSubdomainKey: 'optimism-tornado',
     pollInterval: 20,
     constants: {
-      NOTE_ACCOUNT_BLOCK: 2243694
+      NOTE_ACCOUNT_BLOCK: 2243694,
+      ENCRYPTED_NOTES_BLOCK: 2243694
     },
     'tornado-proxy-light.contract.tornadocash.eth': '0x0D5550d52428E7e3175bfc9550207e4ad3859b17'
   },
@@ -329,7 +333,8 @@ export default {
     ensSubdomainKey: 'arbitrum-tornado',
     pollInterval: 20,
     constants: {
-      NOTE_ACCOUNT_BLOCK: 3430605
+      NOTE_ACCOUNT_BLOCK: 3430605,
+      ENCRYPTED_NOTES_BLOCK: 3430605
     },
     'tornado-proxy-light.contract.tornadocash.eth': '0x0D5550d52428E7e3175bfc9550207e4ad3859b17'
   },
@@ -375,7 +380,8 @@ export default {
     ensSubdomainKey: 'gnosis-tornado',
     pollInterval: 60,
     constants: {
-      NOTE_ACCOUNT_BLOCK: 17754564
+      NOTE_ACCOUNT_BLOCK: 17754564,
+      ENCRYPTED_NOTES_BLOCK: 17754564
     },
     'tornado-proxy-light.contract.tornadocash.eth': '0x0D5550d52428E7e3175bfc9550207e4ad3859b17'
   },
@@ -420,7 +426,8 @@ export default {
     ensSubdomainKey: 'avalanche-tornado',
     pollInterval: 60,
     constants: {
-      NOTE_ACCOUNT_BLOCK: 4429813
+      NOTE_ACCOUNT_BLOCK: 4429813,
+      ENCRYPTED_NOTES_BLOCK: 4429813
     },
     'tornado-proxy-light.contract.tornadocash.eth': '0x0D5550d52428E7e3175bfc9550207e4ad3859b17'
   },
@@ -528,6 +535,7 @@ export default {
     pollInterval: 30,
     constants: {
       NOTE_ACCOUNT_BLOCK: 4131375,
+      ENCRYPTED_NOTES_BLOCK: 4131375,
       MINING_BLOCK_TIME: 15
     },
     'torn.contract.tornadocash.eth': '0x77777FeDdddFfC19Ff86DB637967013e6C6A116C',
