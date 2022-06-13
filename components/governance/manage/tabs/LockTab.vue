@@ -1,5 +1,5 @@
 <template>
-  <b-tab-item :label="$t('lock')">
+  <b-tab-item :label="$t('lock')" header-class="lock_torn_tab">
     <div class="p">
       {{ $t('lockTabDesc') }}
     </div>
@@ -7,6 +7,7 @@
       <b-field :class="hasErrorAmount ? 'is-warning' : ''">
         <b-input
           v-model="computedAmountToLock"
+          data-test="input_torn_amount_to_lock"
           step="0.01"
           :min="minAmount"
           :max="maxAmountToLock"
@@ -18,6 +19,7 @@
         <div class="control has-button">
           <button
             class="button is-primary is-small is-outlined"
+            data-test="button_max_torn_amount_to_lock"
             @mousedown.prevent
             @click="setMaxAmountToLock"
           >
@@ -27,13 +29,26 @@
       </b-field>
     </b-field>
     <div class="label-with-value">
-      {{ $t('availableBalance') }}: <span><number-format :value="maxAmountToLock" /> TORN</span>
+      {{ $t('availableBalance') }}:
+      <span><number-format data-test="info_available_balance" :value="maxAmountToLock" /> TORN</span>
     </div>
     <div class="buttons buttons__halfwidth">
-      <b-button type="is-primary is-fullwidth" outlined :disabled="disabledApprove" @click="onApprove">
+      <b-button
+        type="is-primary is-fullwidth"
+        outlined
+        data-test="button_approve_torn"
+        :disabled="disabledApprove"
+        @click="onApprove"
+      >
         {{ $t('approve') }}
       </b-button>
-      <b-button type="is-primary is-fullwidth" outlined :disabled="disabledLock" @click="onLock">
+      <b-button
+        type="is-primary is-fullwidth"
+        outlined
+        data-test="button_lock_torn"
+        :disabled="disabledLock"
+        @click="onLock"
+      >
         {{ $t('lock') }}
       </b-button>
     </div>

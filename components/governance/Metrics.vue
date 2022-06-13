@@ -35,6 +35,7 @@
             type="is-text"
             :icon-left="isDataLoading ? '' : 'settings'"
             :loading="isDataLoading"
+            data-test="button_manage_torn"
             @click.native="onManage"
           >
             {{ $t('manage') }}
