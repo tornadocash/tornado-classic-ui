@@ -461,7 +461,7 @@ const actions = {
 
       if (
         ((isEmptyArray(cachedEvents) || !cachedEvents) && networksWithCache[Number(netId)]) ||
-        (cachedEvents.length < LENGTH_CACHE && networksWithCache[Number(netId)])
+        cachedEvents.length < LENGTH_CACHE
       ) {
         ;({ events: cachedEvents } = await dispatch('loadEncryptedEvents', { netId }))
       }
