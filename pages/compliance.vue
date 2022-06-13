@@ -13,6 +13,7 @@
       <div class="label">{{ $t('note') }}</div>
       <b-input
         v-model="withdrawNote"
+        data-test="input_enter_note_for_compliance"
         :placeholder="$t('pleaseEnterYourNote')"
         :custom-class="error ? error.type : 'is-primary'"
       ></b-input>
@@ -44,6 +45,7 @@
             </h3>
             <div
               class="block-item block-item--status"
+              data-test="note_status_info"
               :class="{
                 'is-success': txDepositInfo.txHash
               }"
@@ -118,6 +120,7 @@
             </h3>
             <div
               class="block-item block-item--status"
+              data-test="info_withdrawal_status"
               :class="{
                 'is-warning': !txDepositInfo.isSpent,
                 'is-success': txWithdrawalInfo.txHash
