@@ -1,5 +1,5 @@
 <template>
-  <b-tab-item :label="$t('unlock')">
+  <b-tab-item :label="$t('unlock')" header-class="unlock_torn_tab">
     <div class="p">
       {{ $t('unlockTabDesc') }}
     </div>
@@ -7,6 +7,7 @@
       <b-field :class="hasErrorAmount ? 'is-warning' : ''">
         <b-input
           v-model="computedAmountToUnlock"
+          data-test="input_torn_amount_to_unlock"
           step="0.01"
           :min="minAmount"
           :max="maxAmountToUnlock"
@@ -18,6 +19,7 @@
         <div class="control has-button">
           <button
             class="button is-primary is-small is-outlined"
+            data-test="button_max_torn_amount_to_unlock"
             @mousedown.prevent
             @click="setMaxAmountToUnlock"
           >
@@ -27,7 +29,8 @@
       </b-field>
     </b-field>
     <div class="label-with-value">
-      {{ $t('lockedBalance') }}: <span><number-format :value="maxAmountToUnlock" /> TORN</span>
+      {{ $t('lockedBalance') }}:
+      <span><number-format data-test="info_locked_balance" :value="maxAmountToUnlock" /> TORN</span>
     </div>
     <b-tooltip
       class="is-block"
@@ -36,7 +39,13 @@
       :active="!hasLockedBalance || !canWithdraw"
       multilined
     >
-      <b-button :disabled="disableUnlock" type="is-primary is-fullwidth" outlined @click="onUnlock">
+      <b-button
+        :disabled="disableUnlock"
+        type="is-primary is-fullwidth"
+        outlined
+        data-test="button_unlock_torn"
+        @click="onUnlock"
+      >
         {{ $t('unlock') }}
       </b-button>
     </b-tooltip>
