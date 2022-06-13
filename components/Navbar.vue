@@ -10,15 +10,22 @@
         v-if="isEnabledGovernance"
         tag="router-link"
         to="/governance"
+        data-test="voting_link"
         :active="$route.path.includes('governance')"
         class="has-tag"
       >
         {{ $t('governance') }} <span v-if="hasActiveProposals" class="navbar-item--tag"></span>
       </b-navbar-item>
-      <b-navbar-item tag="router-link" to="/compliance">
+      <b-navbar-item tag="router-link" to="/compliance" data-test="compliance_link">
         {{ $t('compliance') }}
       </b-navbar-item>
-      <b-navbar-item href="http://docs.tornado.cash" target="_blank" rel="noreferrer" class="has-tag">
+      <b-navbar-item
+        href="http://docs.tornado.cash"
+        target="_blank"
+        data-test="docs_link"
+        rel="noreferrer"
+        class="has-tag"
+      >
         <b-icon icon="open-book" size="is-small" class="mr-1" />
         <span>{{ $t('docs') }}</span>
       </b-navbar-item>
