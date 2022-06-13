@@ -18,12 +18,6 @@ async function saveEncryptedNote(netId) {
     'tornado-proxy-light.contract.tornadocash.eth': lightProxy
   } = networkConfig[`netId${netId}`]
 
-  let [{ url: rpcUrl }] = Object.values(networkConfig[`netId${netId}`].rpcUrls)
-
-  if (netId === '5') {
-    rpcUrl = `https://goerli.infura.io/v3/${process.env.INFURA_KEY}`
-  }
-
   const contractAddress = tornadoRouter || tornadoProxy || lightProxy
 
   let encryptedEvents = []
@@ -39,7 +33,6 @@ async function saveEncryptedNote(netId) {
 
   encryptedEvents = await getPastEvents({
     netId,
-    rpcUrl,
     type: 'EncryptedNote',
     events: encryptedEvents,
     fromBlock: cachedEvents.lastBlock + 1,

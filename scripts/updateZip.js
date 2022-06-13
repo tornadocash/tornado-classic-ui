@@ -11,9 +11,7 @@ function updateEncrypted(netId) {
     const file = `${EVENTS_PATH}encrypted_notes_${netId}.json`
 
     save(file)
-  } catch {
-    console.warn('Not detected any events files for chainId - ', netId)
-  }
+  } catch {}
 }
 async function updateCommon(netId) {
   const { nativeCurrency, tokens } = networkConfig[`netId${netId}`]

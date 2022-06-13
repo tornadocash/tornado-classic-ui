@@ -1,6 +1,7 @@
 import fs from 'fs'
 import Jszip from 'jszip'
 import Web3 from 'web3'
+import networkConfig from '../../networkConfig'
 
 const jszip = new Jszip()
 
@@ -48,8 +49,14 @@ export async function loadCachedEvents({ name, directory, deployedBlock }) {
   }
 }
 
-export async function getPastEvents({ type, fromBlock, netId, events, rpcUrl, contractAttrs }) {
+export async function getPastEvents({ type, fromBlock, netId, events, contractAttrs }) {
   let downloadedEvents = events
+
+  let [{ url: rpcUrl }] = Object.values(networkConfig[`netId${netId}`].rpcUrls)
+
+  if (netId === '5') {
+    rpcUrl = `https://goerli.infura.io/v3/${process.env.INFURA_KEY}`
+  }
 
   const provider = new Web3.providers.HttpProvider(rpcUrl)
   const web3 = new Web3(provider)
