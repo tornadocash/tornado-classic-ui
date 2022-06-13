@@ -361,8 +361,8 @@ export default {
     echoContractAccount: '0xa75BF2815618872f155b7C4B0C81bF990f5245E4',
     rpcUrls: {
       publicRpc: {
-        name: 'xDAI Chain RPC',
-        url: 'https://rpc.xdaichain.com/tornado'
+        name: 'Gnosis Chain RPC',
+        url: 'https://rpc.gnosischain.com/tornado'
       }
     },
     tokens: {

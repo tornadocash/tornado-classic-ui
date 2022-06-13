@@ -551,7 +551,7 @@ const actions = {
       },
       100: {
         chainId: '0x64',
-        chainName: 'Gnosis Chain (formerly xDai)',
+        chainName: 'Gnosis',
         rpcUrls: ['https://rpc.gnosischain.com'],
         nativeCurrency: {
           name: 'xDAI',
