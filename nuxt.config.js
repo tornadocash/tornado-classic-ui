@@ -45,7 +45,6 @@ export default {
   },
   head: {
     title: 'Tornado.cash',
-    script: [{ src: 'headerScript.js', async: false, defer: true }],
     meta: [
       { charset: 'utf-8' },
       {
