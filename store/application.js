@@ -451,16 +451,17 @@ const actions = {
 
       let cachedEvents = await dispatch('getEncryptedEventsFromDb', { netId })
 
-      const networksWithCache = [1, 5, 56]
+      const networksWithCache = {
+        1: cachedEventsLength.mainnet.ENCRYPTED_NOTES,
+        5: cachedEventsLength.goerli.ENCRYPTED_NOTES,
+        56: cachedEventsLength.bsc.ENCRYPTED_NOTES
+      }
 
-      const LENGTH_CACHE =
-        Number(netId) === 1
-          ? cachedEventsLength.mainnet.ENCRYPTED_NOTES
-          : cachedEventsLength.goerli.ENCRYPTED_NOTES
+      const LENGTH_CACHE = networksWithCache[Number(netId)]
 
       if (
-        ((isEmptyArray(cachedEvents) || !cachedEvents) && networksWithCache.includes(netId)) ||
-        (cachedEvents.length < LENGTH_CACHE && networksWithCache.includes(netId))
+        ((isEmptyArray(cachedEvents) || !cachedEvents) && networksWithCache[Number(netId)]) ||
+        (cachedEvents.length < LENGTH_CACHE && networksWithCache[Number(netId)])
       ) {
         ;({ events: cachedEvents } = await dispatch('loadEncryptedEvents', { netId }))
       }

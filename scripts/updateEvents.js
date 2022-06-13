@@ -9,7 +9,7 @@ import { loadCachedEvents, getPastEvents } from './helpers'
 
 const EVENTS_PATH = './static/events/'
 const EVENTS = ['Deposit', 'Withdrawal']
-const enabledChains = ['1', '56']
+const enabledChains = ['1', '56', '5']
 
 async function main(type, netId) {
   const { tokens, nativeCurrency, deployedBlock } = networkConfig[`netId${netId}`]
@@ -25,18 +25,11 @@ async function main(type, netId) {
     console.log('cachedEvents count - ', cachedEvents.events.length)
     console.log('lastBlock - ', cachedEvents.lastBlock)
 
-    let [{ url: rpcUrl }] = Object.values(networkConfig[`netId${netId}`].rpcUrls)
-
-    if (netId === '5') {
-      rpcUrl = `https://goerli.infura.io/v3/${process.env.INFURA_KEY}`
-    }
-
     let events = []
 
     events = await getPastEvents({
       type,
       netId,
-      rpcUrl,
       events,
       contractAttrs: [ABI, _contract],
       fromBlock: cachedEvents.lastBlock + 1

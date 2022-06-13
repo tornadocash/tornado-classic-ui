@@ -53,6 +53,7 @@ yarn update:zip
 
 ```
 yarn update:events 56
+yarn update:encrypted 56
 
 yarn update:zip
 ```
