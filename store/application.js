@@ -488,23 +488,27 @@ const actions = {
         deployedBlock = lastSyncBlock
       }
 
-      let NUMBER_PARTS = hasCache ? 2 : 10
+      const blockDifference = Math.ceil(currentBlockNumber - deployedBlock)
+      const divisor = hasCache ? 2 : 10
+
+      let blockRange = blockDifference > divisor ? blockDifference / divisor : blockDifference
 
       if (Number(netId) === 56) {
-        NUMBER_PARTS = parseInt((currentBlockNumber - deployedBlock) / 4950) || 1
+        blockRange = 4950
       }
 
-      const part = parseInt((currentBlockNumber - deployedBlock) / NUMBER_PARTS)
+      let numberParts = blockDifference === 0 ? 1 : Math.ceil(blockDifference / blockRange)
+      const part = Math.ceil(blockDifference / numberParts)
 
       let fromBlock = deployedBlock
       let toBlock = deployedBlock + part
 
       if (toBlock >= currentBlockNumber || toBlock === deployedBlock) {
         toBlock = 'latest'
-        NUMBER_PARTS = 1
+        numberParts = 1
       }
 
-      for (let i = 0; i < NUMBER_PARTS; i++) {
+      for (let i = 0; i < numberParts; i++) {
         const partOfEvents = await contractInstance.getPastEvents('EncryptedNote', {
           toBlock,
           fromBlock
