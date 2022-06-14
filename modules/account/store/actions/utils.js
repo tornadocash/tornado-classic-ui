@@ -54,7 +54,12 @@ async function getEventsFromBlockPart({ echoContract, address, currentBlockNumbe
         address
       })
       if (partOfEvents) {
-        events = events.concat(partOfEvents)
+        events = events.concat(
+          partOfEvents.map((event) => ({
+            address: event.returnValues.who,
+            encryptedAccount: event.returnValues.data
+          }))
+        )
       }
       fromBlock = toBlock
       toBlock += part
