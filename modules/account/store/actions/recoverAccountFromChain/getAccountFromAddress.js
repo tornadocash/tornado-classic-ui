@@ -11,8 +11,8 @@ export async function getAccountFromAddress({ getters, rootGetters }, address) {
 
     const events = await getEventsFromBlockPart({
       netId,
-      currentBlockNumber,
       address,
+      currentBlockNumber,
       echoContract: getters.echoContract
     })
 
@@ -22,15 +22,12 @@ export async function getAccountFromAddress({ getters, rootGetters }, address) {
       throw new Error(`Please setup account, account doesn't exist for this address`)
     }
 
-    const data = lastEvent.encryptedAccount ? lastEvent.encryptedAccount : lastEvent.returnValues.data
-    const backup = lastEvent.address ? lastEvent.address : lastEvent.returnValues.who
-
-    const encryptedMessage = unpackEncryptedMessage(data)
+    const encryptedMessage = unpackEncryptedMessage(lastEvent.encryptedAccount)
     const encryptedKey = Buffer.from(JSON.stringify(encryptedMessage)).toString('hex')
 
     return {
-      backup,
-      encryptedKey
+      encryptedKey,
+      backup: lastEvent.address
     }
   } catch (err) {
     throw new Error(`Method getAccountFromAddress has error: ${err.message}`)
