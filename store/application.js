@@ -333,9 +333,9 @@ const actions = {
     const { deployedBlock } = networkConfig[`netId${netId}`]
 
     if (currency === nativeCurrency && !lastEvent) {
-      lastBlock = await this.$indexedDB.getFromIndex({
+      lastBlock = await this.$indexedDB(netId).getFromIndex({
         indexName: 'name',
-        storeName: `lastEvents_${netId}`,
+        storeName: 'lastEvents',
         key: `${type}s_${currency}_${amount}`
       })
     }
@@ -430,11 +430,13 @@ const actions = {
   },
   async getEncryptedEventsFromDb(_, { netId }) {
     try {
-      if (this.$indexedDB.isBlocked) {
+      const idb = this.$indexedDB(netId)
+
+      if (idb.isBlocked) {
         return []
       }
 
-      const cachedEvents = await this.$indexedDB.getAll({ storeName: `encrypted_events_${netId}` })
+      const cachedEvents = await idb.getAll({ storeName: 'encrypted_events' })
 
       return cachedEvents
     } catch (err) {
@@ -541,13 +543,15 @@ const actions = {
     }
   },
   async saveEncryptedEventsToDB(_, { events, netId }) {
-    if (!events || !events.length || this.$indexedDB.isBlocked) {
+    const idb = this.$indexedDB(netId)
+
+    if (!events || !events.length || idb.isBlocked) {
       return
     }
 
-    await this.$indexedDB.createMultipleTransactions({
+    await idb.createMultipleTransactions({
       data: events,
-      storeName: `encrypted_events_${netId}`
+      storeName: `encrypted_events`
     })
   },
   async sendDeposit({ state, rootState, getters, rootGetters, dispatch, commit }, { isEncrypted, gasPrice }) {
@@ -670,7 +674,7 @@ const actions = {
     }
   },
   async buildTree({ dispatch }, { currency, amount, netId, commitmentHex }) {
-    const treeInstanceName = `${currency}_${amount}_${netId}`
+    const treeInstanceName = `${currency}_${amount}`
     const params = { netId, amount, currency }
 
     const treeService = treesInterface.getService({

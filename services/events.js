@@ -9,7 +9,7 @@ import { sleep, formatEvents, capitalizeFirstLetter } from '@/utils'
 
 class EventService {
   constructor({ netId, amount, currency, factoryMethods }) {
-    this.idb = window.$nuxt.$indexedDB
+    this.idb = window.$nuxt.$indexedDB(netId)
 
     const { nativeCurrency } = networkConfig[`netId${netId}`]
 
@@ -24,11 +24,8 @@ class EventService {
     this.hasCache = this.isNative && (Number(this.netId) === 1 || Number(this.netId) === 56)
   }
 
-  getStoreNames(type) {
-    const instanceName = `${type}s_${this.currency}_${this.amount}`
-    const storeName = `${instanceName}_${this.netId}`
-
-    return { instanceName, storeName }
+  getInstanceName(type) {
+    return `${type}s_${this.currency}_${this.amount}`
   }
 
   async getEvents(type) {
@@ -72,10 +69,10 @@ class EventService {
     }
   }
   async findEvent({ eventName, eventToFind, type }) {
-    const { storeName } = this.getStoreNames(type)
+    const instanceName = this.getInstanceName(type)
 
     let event = await this.idb.getFromIndex({
-      storeName,
+      storeName: instanceName,
       indexName: eventName,
       key: eventToFind
     })
@@ -106,7 +103,7 @@ class EventService {
 
   async getEventsFromCache(type) {
     try {
-      const { instanceName } = this.getStoreNames(type)
+      const instanceName = this.getInstanceName(type)
       if (!CONTRACT_INSTANCES.includes(String(this.amount))) {
         console.error(`Amount doesn't includes in contract instances`)
         return
@@ -137,16 +134,16 @@ class EventService {
 
   async getEventsFromDB(type) {
     try {
-      const { storeName, instanceName } = this.getStoreNames(type)
+      const instanceName = this.getInstanceName(type)
 
-      const savedEvents = await this.idb.getAll({ storeName })
+      const savedEvents = await this.idb.getAll({ storeName: instanceName })
 
       if (!savedEvents || !savedEvents.length) {
         return undefined
       }
 
       const event = await this.idb.getFromIndex({
-        storeName: `lastEvents_${this.netId}`,
+        storeName: 'lastEvents',
         indexName: 'name',
         key: instanceName
       })
@@ -334,11 +331,11 @@ class EventService {
         return
       }
 
-      const { instanceName, storeName } = this.getStoreNames(type)
+      const instanceName = this.getInstanceName(type)
 
       await this.idb.createMultipleTransactions({
         data: events,
-        storeName
+        storeName: instanceName
       })
 
       await this.idb.putItem({
@@ -346,7 +343,7 @@ class EventService {
           blockNumber: lastBlock,
           name: instanceName
         },
-        storeName: `lastEvents_${this.netId}`
+        storeName: 'lastEvents'
       })
     } catch (err) {
       console.error('saveEvents has error:', err.message)
