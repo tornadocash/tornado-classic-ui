@@ -26,7 +26,7 @@ class EventService {
 
   getStoreNames(type) {
     const instanceName = `${type}s_${this.currency}_${this.amount}`
-    const storeName = type === eventsType.DEPOSIT ? `${instanceName}_${this.netId}` : `${type}s_${this.netId}`
+    const storeName = `${instanceName}_${this.netId}`
 
     return { instanceName, storeName }
   }
@@ -338,9 +338,6 @@ class EventService {
 
       await this.idb.createMultipleTransactions({
         data: events,
-        index: {
-          instance: instanceName
-        },
         storeName
       })
 

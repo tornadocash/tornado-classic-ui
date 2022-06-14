@@ -39,7 +39,7 @@ class IndexedDB {
         return
       }
 
-      this.db = await openDB(this.dbName, 33, this.options) // version (optional): Schema version, or undefined to open the current version.
+      this.db = await openDB(this.dbName, 34, this.options) // version (optional): Schema version, or undefined to open the current version.
       this.onEventHandler()
 
       this.dbExists = true
@@ -224,12 +224,10 @@ class IndexedDB {
 
 export default async (ctx, inject) => {
   const DEPOSIT_INDEXES = [
-    { name: 'instance', unique: false },
     { name: 'transactionHash', unique: false },
     { name: 'commitment', unique: true }
   ]
   const WITHDRAWAL_INDEXES = [
-    { name: 'instance', unique: false },
     { name: 'nullifierHash', unique: true } // keys on which the index is created
   ]
   const LAST_EVENT_INDEXES = [{ name: 'name', unique: false }]
@@ -239,11 +237,6 @@ export default async (ctx, inject) => {
     {
       name: 'encrypted_events',
       keyPath: 'transactionHash'
-    },
-    {
-      name: 'withdrawals',
-      keyPath: 'transactionHash',
-      indexes: WITHDRAWAL_INDEXES
     },
     {
       name: 'lastEvents',
@@ -287,6 +280,12 @@ export default async (ctx, inject) => {
           name: `deposits_${token}_${amount}_${netId}`,
           keyPath: 'leafIndex', // the key by which it refers to the object must be in all instances of the storage
           indexes: DEPOSIT_INDEXES
+        })
+
+        stores.push({
+          name: `withdrawals_${token}_${amount}_${netId}`,
+          keyPath: 'transactionHash',
+          indexes: WITHDRAWAL_INDEXES
         })
 
         stores.push({
