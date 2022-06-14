@@ -147,9 +147,11 @@ async function getAllDeposits({ currency, amount, fromBlock, netId }) {
     const lastSyncBlock = await getMeta({ netId })
 
     const data = deposits.map((e) => ({
-      ...e,
+      timestamp: e.timestamp,
+      commitment: e.commitment,
       leafIndex: Number(e.index),
-      blockNumber: Number(e.blockNumber)
+      blockNumber: Number(e.blockNumber),
+      transactionHash: e.transactionHash
     }))
 
     const [lastEvent] = data.slice(-1)
@@ -270,10 +272,12 @@ async function getAllWithdrawals({ currency, amount, fromBlock, netId }) {
     const lastSyncBlock = await getMeta({ netId })
 
     const data = withdrawals.map((e) => ({
-      ...e,
+      to: e.to,
+      fee: e.fee,
+      timestamp: e.timestamp,
       nullifierHash: e.nullifier,
-      leafIndex: Number(e.index),
-      blockNumber: Number(e.blockNumber)
+      blockNumber: Number(e.blockNumber),
+      transactionHash: e.transactionHash
     }))
 
     const [lastEvent] = data.slice(-1)

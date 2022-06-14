@@ -16,10 +16,8 @@ export const GET_WITHDRAWALS = `
         amount: $amount,
         blockNumber_gte: $fromBlock
       }) {
-        id
         to
         fee
-        index
         nullifier
         timestamp
         blockNumber
@@ -48,7 +46,6 @@ export const GET_DEPOSITS = `
       currency: $currency,
       blockNumber_gte: $fromBlock
     }) {
-      id
       index
       timestamp
       commitment
