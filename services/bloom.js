@@ -3,14 +3,14 @@ import BloomFilter from 'bloomfilter.js'
 import { download } from '@/store/snark'
 
 class BloomService {
-  constructor({ amount, commitment, instanceName, fileName, fileFolder }) {
+  constructor({ netId, amount, commitment, instanceName, fileName, fileFolder }) {
     this.amount = amount
     this.fileFolder = fileFolder
     this.commitment = commitment
     this.instanceName = instanceName
     this.fileName = `${fileFolder}/${fileName}`
 
-    this.idb = window.$nuxt.$indexedDB
+    this.idb = window.$nuxt.$indexedDB(netId)
   }
 
   async downloadBloom() {

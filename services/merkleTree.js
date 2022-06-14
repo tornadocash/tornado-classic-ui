@@ -13,8 +13,9 @@ class MerkleTreeService {
     this.commitment = commitment
     this.instanceName = instanceName
 
-    this.idb = window.$nuxt.$indexedDB
+    this.idb = window.$nuxt.$indexedDB(netId)
     this.bloomService = bloomService({
+      netId,
       amount,
       commitment,
       instanceName,

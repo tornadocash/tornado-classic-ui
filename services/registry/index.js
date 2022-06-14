@@ -16,7 +16,7 @@ const subdomains = Object.values(networkConfig).map(({ ensSubdomainKey }) => ens
 class RelayerRegister {
   constructor(provider) {
     this.provider = provider
-    this.$indexedDB = window.$nuxt.$indexedDB
+    this.$indexedDB = window.$nuxt.$indexedDB(1)
 
     const { registryContract, aggregatorContract } = networkConfig.netId1
 
@@ -59,7 +59,7 @@ class RelayerRegister {
           blockNumber: lastSyncBlock,
           name: storeName
         },
-        storeName: 'lastEvents_1'
+        storeName: 'lastEvents'
       })
 
       if (events.length) {
@@ -83,7 +83,7 @@ class RelayerRegister {
       const lastBlock = await this.$indexedDB.getFromIndex({
         indexName: 'name',
         key: 'register_events',
-        storeName: 'lastEvents_1'
+        storeName: 'lastEvents'
       })
 
       if (lastBlock) {

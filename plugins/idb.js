@@ -1,7 +1,7 @@
 import { openDB, deleteDB } from 'idb'
 
 import networkConfig from '@/networkConfig'
-import { INDEX_DB_ERROR, NETWORKS } from '@/constants'
+import { INDEX_DB_ERROR } from '@/constants'
 
 // TODO method for migration, remove indexed
 class IndexedDB {
@@ -222,7 +222,9 @@ class IndexedDB {
   }
 }
 
-export default async (ctx, inject) => {
+export default (ctx, inject) => {
+  const instances = new Map()
+
   const DEPOSIT_INDEXES = [
     { name: 'transactionHash', unique: false },
     { name: 'commitment', unique: true }
@@ -232,7 +234,6 @@ export default async (ctx, inject) => {
   ]
   const LAST_EVENT_INDEXES = [{ name: 'name', unique: false }]
 
-  // TODO: generate from config
   const defaultState = [
     {
       name: 'encrypted_events',
@@ -245,66 +246,62 @@ export default async (ctx, inject) => {
     }
   ]
 
-  const stores = [
-    {
-      name: 'register_events',
-      keyPath: 'ensName'
-    }
-  ]
-
-  NETWORKS.forEach((netId) => {
-    defaultState.map((item) => {
-      stores.push({
-        ...item,
-        name: `${item.name}_${netId}`
-      })
-    })
-  })
-
-  Object.keys(networkConfig).forEach((key) => {
+  Object.keys(networkConfig).forEach(async (key) => {
     const { tokens, nativeCurrency } = networkConfig[key]
 
-    const netId = key.replace('netId', '')
+    const netId = Number(key.replace('netId', ''))
+
+    const stores = [...defaultState]
+
+    if (netId === 1) {
+      stores.push({
+        name: 'register_events',
+        keyPath: 'ensName'
+      })
+    }
 
     Object.keys(tokens).forEach((token) => {
       Object.keys(tokens[token].instanceAddress).forEach((amount) => {
-        if (nativeCurrency === token) {
-          // ToDo make good)
+        if (nativeCurrency === token && netId === 1) {
           stores.push({
-            name: `stringify_bloom_${token}_${amount}_${netId}`,
+            name: `stringify_bloom_${token}_${amount}`,
             keyPath: 'hashBloom'
           })
         }
 
-        stores.push({
-          name: `deposits_${token}_${amount}_${netId}`,
-          keyPath: 'leafIndex', // the key by which it refers to the object must be in all instances of the storage
-          indexes: DEPOSIT_INDEXES
-        })
-
-        stores.push({
-          name: `withdrawals_${token}_${amount}_${netId}`,
-          keyPath: 'transactionHash',
-          indexes: WITHDRAWAL_INDEXES
-        })
-
-        stores.push({
-          name: `stringify_tree_${token}_${amount}_${netId}`,
-          keyPath: 'hashTree'
-        })
+        stores.push(
+          {
+            name: `deposits_${token}_${amount}`,
+            keyPath: 'leafIndex', // the key by which it refers to the object must be in all instances of the storage
+            indexes: DEPOSIT_INDEXES
+          },
+          {
+            name: `withdrawals_${token}_${amount}`,
+            keyPath: 'transactionHash',
+            indexes: WITHDRAWAL_INDEXES
+          },
+          {
+            name: `stringify_tree_${token}_${amount}`,
+            keyPath: 'hashTree'
+          }
+        )
       })
     })
+
+    const options = {
+      stores,
+      dbName: `tornado_cash_${netId}`
+    }
+
+    const instance = new IndexedDB(options)
+
+    await instance.initDB()
+
+    instances.set(options.dbName, instance)
   })
 
-  const options = {
-    stores,
-    dbName: 'tornado_cash'
-  }
+  const getInstance = (netId) => instances.get(`tornado_cash_${netId}`)
 
-  const instance = new IndexedDB(options)
-
-  await instance.initDB()
-
-  ctx.$indexedDB = instance
-  inject('indexedDB', instance)
+  ctx.$indexedDB = getInstance
+  inject('indexedDB', getInstance)
 }
