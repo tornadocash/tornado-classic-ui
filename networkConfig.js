@@ -173,7 +173,7 @@ export default {
       }
     },
     ensSubdomainKey: 'bsc-tornado',
-    pollInterval: 60,
+    pollInterval: 10,
     constants: {
       NOTE_ACCOUNT_BLOCK: 8159269,
       ENCRYPTED_NOTES_BLOCK: 8159269
@@ -224,7 +224,7 @@ export default {
       }
     },
     ensSubdomainKey: 'polygon-tornado',
-    pollInterval: 60,
+    pollInterval: 10,
     constants: {
       NOTE_ACCOUNT_BLOCK: 16257996,
       ENCRYPTED_NOTES_BLOCK: 16257996
@@ -378,7 +378,7 @@ export default {
       }
     },
     ensSubdomainKey: 'gnosis-tornado',
-    pollInterval: 60,
+    pollInterval: 20,
     constants: {
       NOTE_ACCOUNT_BLOCK: 17754564,
       ENCRYPTED_NOTES_BLOCK: 17754564
@@ -424,7 +424,7 @@ export default {
       }
     },
     ensSubdomainKey: 'avalanche-tornado',
-    pollInterval: 60,
+    pollInterval: 10,
     constants: {
       NOTE_ACCOUNT_BLOCK: 4429813,
       ENCRYPTED_NOTES_BLOCK: 4429813
