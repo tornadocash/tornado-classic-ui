@@ -93,7 +93,9 @@ export default {
     this.selectedRpc = this.rpc.name
 
     if (this.selectedRpc === 'custom') {
-      this.customRpcUrl = this.rpc.url
+      this.$nextTick(() => {
+        this.customRpcUrl = this.rpc.url
+      })
     }
 
     this.checkRpc(this.rpc)
