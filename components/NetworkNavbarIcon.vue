@@ -1,5 +1,7 @@
 <template>
-  <b-button :icon-left="iconName" class="network-button" @click="onClick">{{ shortNetworkName }}</b-button>
+  <b-button :icon-left="iconName" class="network-button" data-test="button_network" @click="onClick">{{
+    shortNetworkName
+  }}</b-button>
 </template>
 
 <script>

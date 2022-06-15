@@ -24,6 +24,7 @@
           <p class="detail">
             <a
               class="detail-description"
+              data-test="txhash_text"
               :href="txExplorerUrl(tx.txHash)"
               target="_blank"
               rel="noopener noreferrer"
@@ -44,11 +45,18 @@
             size="is-small"
             :disabled="!tx.note"
             icon-left="copy"
+            data-test="copy_note_button"
           >
             {{ $t('note') }}
           </b-button>
         </b-tooltip>
-        <b-button type="is-dark" size="is-small" icon-right="remove" @click="onClose" />
+        <b-button
+          data-test="remove_note_button"
+          type="is-dark"
+          size="is-small"
+          icon-right="remove"
+          @click="onClose"
+        />
       </div>
     </div>
   </div>

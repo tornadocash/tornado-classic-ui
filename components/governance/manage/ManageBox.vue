@@ -1,7 +1,7 @@
 <template>
   <div class="modal-card box box-modal has-delete">
     <button type="button" class="delete" @click="$emit('close')" />
-    <b-tabs v-model="activeTab" :animated="false" class="is-modal">
+    <b-tabs v-model="activeTab" :data-test="`tab_${activeTab}`" :animated="false" class="is-modal">
       <LockTab />
       <UnlockTab />
       <DelegateTab />

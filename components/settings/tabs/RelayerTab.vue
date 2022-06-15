@@ -1,7 +1,7 @@
 <template>
-  <b-tab-item :label="$t('relayer')" value="relayer">
+  <b-tab-item :label="$t('relayer')" value="relayer" header-class="withdrawal_settings_relayer_tab">
     <div class="field">
-      <b-field :label="$t('relayer')">
+      <b-field :label="$t('relayer')" data-test="withdrawal_settings_relayer_dropdown">
         <b-dropdown v-model="selectedRelayer" expanded aria-role="list" @change="onChangeRelayer">
           <div slot="trigger" class="control" :class="{ 'is-loading': checkingRelayer || isLoadingRelayers }">
             <div class="input">
@@ -27,6 +27,7 @@
           ref="customInput"
           v-model="customRelayerUrl"
           type="url"
+          data-test="enter_relayer_url_field"
           :placeholder="$t('pasteYourRelayerUrlorEnsRecord')"
           :custom-class="hasErrorRelayer.type"
           :use-html5-validation="false"
@@ -56,13 +57,20 @@
       :service-fee="relayer.tornadoServiceFee"
     />
     <div class="buttons buttons__halfwidth mt-5">
-      <b-button type="is-primary" outlined @mousedown.prevent @click="onReset">
+      <b-button
+        type="is-primary"
+        outlined
+        data-test="withdrawal_settings_reset_button"
+        @mousedown.prevent
+        @click="onReset"
+      >
         {{ $t('reset') }}
       </b-button>
       <b-button
         type="is-primary"
         :disabled="isDisabledSave"
         :loading="checkingRelayer || isLoadingRelayers"
+        data-test="withdrawal_settings_save_button"
         @click="onSave"
       >
         {{ $t('save') }}

@@ -26,7 +26,13 @@
       >
         Tornado Cash Nova
       </a>
-      <a v-if="notice.txHash" :href="txExplorerUrl(notice.txHash)" target="_blank" rel="noopener noreferrer">
+      <a
+        v-if="notice.txHash"
+        :href="txExplorerUrl(notice.txHash)"
+        target="_blank"
+        data-test="popup_message"
+        rel="noopener noreferrer"
+      >
         {{ $t('viewOnEtherscan') }}
       </a>
       <n-link v-else-if="notice.routerLink" v-bind="notice.routerLink.params" @onClick="$forceUpdate()">

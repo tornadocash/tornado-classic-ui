@@ -6,9 +6,15 @@
         {{ $t('account.setup.desc') }}
       </div>
       <b-tooltip :active="isAccountDisabled" :label="$t(setupAccountTooltip)" multilined size="is-large">
-        <b-button :disabled="isAccountDisabled" outlined type="is-primary" @click="showSetupModal">{{
-          $t('account.setup.account')
-        }}</b-button>
+        <b-button
+          :disabled="isAccountDisabled"
+          outlined
+          type="is-primary"
+          data-test="button_setup_account"
+          @click="showSetupModal"
+        >
+          {{ $t('account.setup.account') }}
+        </b-button>
       </b-tooltip>
     </div>
     <div class="action-item">
@@ -17,7 +23,13 @@
         {{ $t('account.setup.recoverDesc') }}
       </div>
       <b-tooltip :active="isRecoverDisabled" :label="$t(recoverAccountTooltip)" multilined size="is-large">
-        <b-button type="is-primary" outlined :disabled="isRecoverDisabled" @click="handleRecoverAccount">
+        <b-button
+          type="is-primary"
+          outlined
+          :disabled="isRecoverDisabled"
+          data-test="button_recover_account"
+          @click="handleRecoverAccount"
+        >
           {{ $t('account.setup.recover') }}
         </b-button>
       </b-tooltip>
@@ -27,9 +39,13 @@
       <div class="desc">
         {{ $t('account.setup.enterRawDesc') }}
       </div>
-      <b-button type="is-primary" outlined @click="showRecoverKeyModal">{{
-        $t('account.setup.enterRaw')
-      }}</b-button>
+      <b-button
+        type="is-primary"
+        outlined
+        data-test="button_enter_account_key"
+        @click="showRecoverKeyModal"
+        >{{ $t('account.setup.enterRaw') }}</b-button
+      >
     </div>
   </div>
 </template>

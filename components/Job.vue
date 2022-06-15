@@ -15,6 +15,7 @@
         <div v-else class="details">
           <p class="detail">
             <a
+              data-test="txhash_text"
               class="detail-description"
               :href="txExplorerUrl(job.txHash)"
               target="_blank"

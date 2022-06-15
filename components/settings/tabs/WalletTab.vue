@@ -1,5 +1,5 @@
 <template>
-  <b-tab-item :label="$t('wallet')" value="wallet">
+  <b-tab-item :label="$t('wallet')" value="wallet" header-class="withdrawal_settings_wallet_tab">
     <fieldset :disabled="isNotLoggedIn">
       <div class="notice is-warning">
         <div class="notice__p">{{ $t('withdrawWalletWarning', { currency: networkCurrency }) }}</div>

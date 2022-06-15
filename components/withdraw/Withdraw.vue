@@ -1,10 +1,16 @@
 <template>
-  <b-tab-item :label="$t('withdraw')">
+  <b-tab-item :label="$t('withdraw')" header-class="button_tab_withdraw">
     <div class="field">
       <div class="label-with-buttons">
         <div class="label">
           {{ $t('note') }}
-          <b-tooltip :label="$t('noteTooltip')" size="is-small" position="is-right" multilined>
+          <b-tooltip
+            :label="$t('noteTooltip')"
+            size="is-small"
+            position="is-right"
+            multilined
+            data-test="enter_note_info"
+          >
             <button class="button is-primary has-icon">
               <span class="icon icon-info"></span>
             </button>
@@ -26,7 +32,12 @@
             <LinkIcon />
           </b-tooltip>
         </a>
-        <button v-show="shouldSettingsShow" class="button is-icon" @click="onSettings">
+        <button
+          v-show="shouldSettingsShow"
+          class="button is-icon"
+          data-test="withdrawal_settings_button"
+          @click="onSettings"
+        >
           <b-tooltip :label="$t('withdrawalSettings')" size="is-small" position="is-right" multilined>
             <SettingsIcon />
           </b-tooltip>
@@ -37,6 +48,7 @@
         v-model="withdrawNote"
         :placeholder="$t('pleaseEnterYourNote')"
         :custom-class="hasErrorNote ? hasErrorNote.type : 'is-primary'"
+        data-test="enter_note_field"
       ></b-input>
       <div v-if="hasErrorNote" class="help" :class="hasErrorNote.type">
         <!-- eslint-disable vue/no-v-html -->
@@ -46,7 +58,8 @@
     <div v-if="!hasErrorNote && depositTxHash" class="field field-withdraw">
       <div class="withdraw-data">
         <div class="withdraw-data-item">
-          {{ $t('amount') }} <span>{{ selectedAmount }} {{ selectedStatisticCurrency }}</span>
+          {{ $t('amount') }}
+          <span data-test="note_tokens_amount">{{ selectedAmount }} {{ selectedStatisticCurrency }}</span>
         </div>
         <div class="withdraw-data-item">
           {{ $t('timePassed') }}
@@ -92,6 +105,7 @@
           v-model="withdrawAddress"
           :placeholder="$t('pleasePasteAddressHere')"
           :size="!withdrawAddress ? '' : isValidAddress ? 'is-primary' : 'is-warning'"
+          data-test="recipient_address_field"
         ></b-input>
         <p class="help">
           <span class="has-text-warning">{{ error.type }}</span> {{ error.message }}
@@ -120,6 +134,7 @@
           :disabled="isWithdrawalButtonDisable"
           :loading="isLoadingRelayers || isLoading"
           @click="onWithdraw"
+          data-test="button_start_withdraw"
         >
           {{ $t('withdrawButton') }}
         </b-button>

@@ -1,7 +1,7 @@
 <template>
   <b-navbar wrapper-class="container" class="header">
     <template slot="brand">
-      <b-navbar-item tag="router-link" to="/" active-class="">
+      <b-navbar-item tag="router-link" to="/" data-test="tornado_main_page" active-class="">
         <Logo />
       </b-navbar-item>
     </template>
@@ -10,17 +10,19 @@
         v-if="isEnabledGovernance"
         tag="router-link"
         to="/governance"
+        data-test="voting_link"
         :active="$route.path.includes('governance')"
         class="has-tag"
       >
         {{ $t('governance') }} <span v-if="hasActiveProposals" class="navbar-item--tag"></span>
       </b-navbar-item>
-      <b-navbar-item tag="router-link" to="/compliance">
+      <b-navbar-item tag="router-link" to="/compliance" data-test="compliance_link">
         {{ $t('compliance') }}
       </b-navbar-item>
       <b-navbar-item
         href="https://docs.tornado.cash"
         target="_blank"
+        data-test="docs_link"
         rel="noopener noreferrer"
         class="has-tag"
       >
@@ -32,9 +34,16 @@
       <b-navbar-item tag="div">
         <div class="buttons">
           <network-navbar-icon />
-          <metamask-navbar-icon />
-          <indicator />
-          <b-button icon-left="settings" type="is-primary" outlined @mousedown.prevent @click="onAccount">
+          <metamask-navbar-icon data-test="metamask_connection_state" />
+          <indicator data-test="note_account_connection_state" />
+          <b-button
+            icon-left="settings"
+            type="is-primary"
+            outlined
+            data-test="button_settings"
+            @mousedown.prevent
+            @click="onAccount"
+          >
             {{ $t('settings') }}
           </b-button>
         </div>

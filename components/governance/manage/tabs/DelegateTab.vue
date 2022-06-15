@@ -1,5 +1,5 @@
 <template>
-  <b-tab-item :label="$t('delegate')">
+  <b-tab-item :label="$t('delegate')" header-class="delegate_tab">
     <div class="p">
       {{ $t('delegateTabDesc') }}
     </div>

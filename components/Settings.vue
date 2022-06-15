@@ -5,7 +5,7 @@
       <button type="button" class="delete" @click="$parent.cancel('escape')" />
     </header>
     <div class="field">
-      <b-field :label="$t('rpc')" class="has-custom-field">
+      <b-field :label="$t('rpc')" class="has-custom-field" data-test="rpc_endpoint_dropdown">
         <b-dropdown v-model="selectedRpc" expanded aria-role="list">
           <div slot="trigger" class="control" :class="{ 'is-loading': checkingRpc && !isCustomRpc }">
             <div class="input">
@@ -17,11 +17,17 @@
             :key="name"
             :value="name"
             aria-role="listitem"
+            :data-test="`rpc_endpoint_${name}`"
             @click="checkRpc({ name, url })"
           >
             {{ name }}
           </b-dropdown-item>
-          <b-dropdown-item value="custom" aria-role="listitem" @click="checkRpc({ name: 'custom' })">
+          <b-dropdown-item
+            value="custom"
+            aria-role="listitem"
+            data-test="rpc_endpoint_custom"
+            @click="checkRpc({ name: 'custom' })"
+          >
             {{ $t('customRpc') }}
           </b-dropdown-item>
         </b-dropdown>
@@ -42,10 +48,10 @@
       </p>
     </div>
     <div class="buttons buttons__halfwidth">
-      <b-button type="is-primary" outlined @mousedown.prevent @click="onReset">
+      <b-button type="is-primary" outlined data-test="button_reset_rpc" @mousedown.prevent @click="onReset">
         {{ $t('reset') }}
       </b-button>
-      <b-button type="is-primary" :disabled="isDisabledSave" @click="onSave">
+      <b-button type="is-primary" :disabled="isDisabledSave" data-test="save_rpc_button" @click="onSave">
         {{ $t('save') }}
       </b-button>
     </div>
