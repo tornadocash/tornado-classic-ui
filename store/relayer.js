@@ -337,13 +337,15 @@ export const actions = {
   async getCustomRelayerData({ rootState, state, getters, rootGetters, dispatch }, { url, name }) {
     const provider = getters.ethProvider.eth
 
-    if (!url.startsWith('https:') && !url.startsWith('http:')) {
-      if (url.includes('.onion')) {
+    const PROTOCOL_REGEXP = /^(http(s?))/
+    if (!PROTOCOL_REGEXP.test(url)) {
+      if (url.endsWith('.onion')) {
         url = `http://${url}`
       } else {
         url = `https://${url}`
       }
     }
+
     const urlParser = new URL(url)
     urlParser.href = url
     let ensName = name

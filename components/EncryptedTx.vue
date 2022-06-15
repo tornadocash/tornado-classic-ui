@@ -35,6 +35,7 @@
               class="detail-description"
               :href="txExplorerUrl(tx.txHash)"
               target="_blank"
+              rel="noopener noreferrer"
             >
               {{ tx.txHash }}
             </a>

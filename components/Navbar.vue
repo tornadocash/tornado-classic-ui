@@ -20,10 +20,10 @@
         {{ $t('compliance') }}
       </b-navbar-item>
       <b-navbar-item
-        href="http://docs.tornado.cash"
+        href="https://docs.tornado.cash"
         target="_blank"
         data-test="docs_link"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         class="has-tag"
       >
         <b-icon icon="open-book" size="is-small" class="mr-1" />

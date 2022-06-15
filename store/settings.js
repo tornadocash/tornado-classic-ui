@@ -20,7 +20,8 @@ export const state = () => {
     ...rpcData,
     isActiveNotification: {
       first: true,
-      second: true
+      second: true,
+      third: true
     }
   }
 }

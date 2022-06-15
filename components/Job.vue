@@ -19,6 +19,7 @@
               class="detail-description"
               :href="txExplorerUrl(job.txHash)"
               target="_blank"
+              rel="noopener noreferrer"
             >
               {{ job.txHash }}
             </a>

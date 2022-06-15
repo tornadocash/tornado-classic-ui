@@ -48,6 +48,15 @@ export default {
     meta: [
       { charset: 'utf-8' },
       {
+        'http-equiv': 'Content-Security-Policy',
+        content:
+          "img-src 'self' data:;font-src data:;style-src 'self' 'unsafe-inline';connect-src *;script-src 'self' 'unsafe-eval' 'unsafe-inline';default-src 'self';object-src 'none';base-uri 'none';upgrade-insecure-requests;child-src blob:;worker-src blob:;"
+      },
+      {
+        name: 'Referer-Policy',
+        content: 'no-referrer'
+      },
+      {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
       },

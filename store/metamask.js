@@ -82,6 +82,8 @@ const mutations = {
   },
   SET_NET_ID(state, netId) {
     netId = parseInt(netId, 10)
+    window.localStorage.setItem('netId', netId)
+
     state.netId = netId
   },
   SET_RECONNECTING(state, bool) {

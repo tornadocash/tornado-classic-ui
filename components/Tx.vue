@@ -27,6 +27,7 @@
               data-test="txhash_text"
               :href="txExplorerUrl(tx.txHash)"
               target="_blank"
+              rel="noopener noreferrer"
             >
               {{ tx.txHash }}
             </a>

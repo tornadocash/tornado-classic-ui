@@ -5,7 +5,9 @@
     </div>
     <div class="label-with-value">
       {{ $t('currentDelegate') }}:
-      <a target="_blank" :href="addressExplorerUrl(currentDelegate)">{{ delegateMsg }}</a>
+      <a target="_blank" :href="addressExplorerUrl(currentDelegate)" rel="noopener noreferrer">{{
+        delegateMsg
+      }}</a>
     </div>
     <b-tooltip
       class="is-block"

@@ -20,6 +20,7 @@
           v-show="!hasErrorNote && depositTxHash"
           :href="txExplorerUrl(depositTxHash)"
           target="_blank"
+          rel="noopener noreferrer"
           class="button is-icon"
         >
           <b-tooltip
@@ -392,9 +393,6 @@ export default {
     this.$emit('get-key', this.getKeys)
   },
   mounted() {
-    if (this.$route.query.note) {
-      this.withdrawNote = this.$route.query.note
-    }
     this.$root.$on('resetWithdraw', () => {
       this.withdrawAddress = ''
       this.withdrawNote = ''

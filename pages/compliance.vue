@@ -71,6 +71,7 @@
                 v-if="txDepositInfo.txHash"
                 :href="txExplorerUrl(txDepositInfo.txHash)"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="value"
                 :data-value="txDepositInfo.txHash"
               >
@@ -84,6 +85,7 @@
                 v-if="txDepositInfo.txHash"
                 :href="addressExplorerUrl(txDepositInfo.from)"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="value"
               >
                 {{ txDepositInfo.from }}
@@ -158,6 +160,7 @@
                 v-if="txWithdrawalInfo.txHash"
                 :href="txExplorerUrl(txWithdrawalInfo.txHash)"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="value"
                 :data-value="txWithdrawalInfo.txHash"
               >
@@ -171,6 +174,7 @@
                 v-if="txWithdrawalInfo.to"
                 :href="addressExplorerUrl(txWithdrawalInfo.to)"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="value"
               >
                 {{ txWithdrawalInfo.to }}

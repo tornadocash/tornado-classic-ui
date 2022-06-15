@@ -39,6 +39,12 @@ const providerMiddleware = async ({ store }) => {
       const chainId = hexToNumber(await provider.request({ method: 'eth_chainId' }))
 
       await checkProvider({ store, accounts, chainId, providerName })
+    } else {
+      const storedNetId = window.localStorage.getItem('netId')
+
+      if (networkConfig[`netId${storedNetId}`]) {
+        await store.dispatch('metamask/onNetworkChanged', { netId: Number(storedNetId) })
+      }
     }
   } catch (err) {
     console.error(`Provider container has error: ${err.message}`)
