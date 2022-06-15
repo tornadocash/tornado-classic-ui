@@ -486,7 +486,7 @@ const actions = {
         fromBlock: deployedBlock
       })
 
-      if (!isEmptyArray(graphEvents)) {
+      if (lastSyncBlock) {
         deployedBlock = lastSyncBlock
       }
 
