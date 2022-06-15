@@ -17,7 +17,7 @@
       </div>
       <div v-if="withdrawType === 'relayer'" class="withdraw-data-item">
         {{ $t('networkFee') }}
-        <span data-test="label_network_fee">{{ toDecimals(networkFee, null, 6) }} {{ networkCurrency }}</span>
+        <span data-test="label_network_fee">{{ toDecimals(networkFee, 18, 6) }} {{ networkCurrency }}</span>
       </div>
       <div v-if="withdrawType === 'relayer'" class="withdraw-data-item">
         {{ $t('relayerFee') }}
