@@ -5,11 +5,11 @@
 ## Building locally
 
 - Install [Node.js](https://nodejs.org) version 14
-    - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
+  - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
 - Install [Yarn](https://yarnpkg.com/en/docs/install)
 - Install dependencies: `yarn`
 - Copy the `.env.example` file to `.env`
-    - Replace environment variables with your own personal.
+  - Replace environment variables with your own personal.
 - Build the project to the `./dist/` folder with `yarn generate`.
 
 ## Development builds
@@ -24,3 +24,7 @@ To start a development build (e.g. with logging and file watching) run `yarn dev
 ## Architecture
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+## Audit
+
+[TornadoCash_Сlassic_dApp_audit_Decurity.pdf](https://tornado.cash/audits/TornadoCash_Сlassic_dApp_audit_Decurity.pdf)
