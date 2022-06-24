@@ -222,7 +222,7 @@ class IndexedDB {
   }
 }
 
-export default (ctx, inject) => {
+export default async (ctx, inject) => {
   const instances = new Map()
 
   const DEPOSIT_INDEXES = [
@@ -246,7 +246,7 @@ export default (ctx, inject) => {
     }
   ]
 
-  Object.keys(networkConfig).forEach(async (key) => {
+  for (const key of Object.keys(networkConfig)) {
     const { tokens, nativeCurrency } = networkConfig[key]
 
     const netId = Number(key.replace('netId', ''))
@@ -295,10 +295,10 @@ export default (ctx, inject) => {
 
     const instance = new IndexedDB(options)
 
-    await instance.initDB()
-
     instances.set(options.dbName, instance)
-  })
+
+    await instance.initDB()
+  }
 
   const getInstance = (netId) => instances.get(`tornado_cash_${netId}`)
 
