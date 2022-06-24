@@ -166,7 +166,7 @@ const getters = {
     return ACTION_GAS[action]
   },
   networkFee: (state, getters, rootState, rootGetters) => {
-    const gasPrice = rootGetters['gasPrices/fastGasPrice']
+    const gasPrice = rootGetters['gasPrices/gasPrice']
 
     const networkFee = toBN(gasPrice).mul(toBN(getters.withdrawGas))
 
@@ -554,7 +554,7 @@ const actions = {
       storeName: `encrypted_events`
     })
   },
-  async sendDeposit({ state, rootState, getters, rootGetters, dispatch, commit }, { isEncrypted, gasPrice }) {
+  async sendDeposit({ state, rootState, getters, rootGetters, dispatch, commit }, { isEncrypted }) {
     try {
       const { commitment, note, prefix } = state
       // eslint-disable-next-line prefer-const
@@ -593,7 +593,6 @@ const actions = {
       const callParams = {
         method: 'eth_sendTransaction',
         params: {
-          gasPrice,
           to: contractInstance._address,
           gas: numberToHex(gas + 50000),
           value: numberToHex(value),
@@ -961,7 +960,7 @@ const actions = {
   },
   calculateEthToReceive({ commit, state, rootGetters }, { currency }) {
     const gasLimit = rootGetters['metamask/networkConfig'].tokens[currency].gasLimit
-    const gasPrice = toBN(rootGetters['gasPrices/fastGasPrice'])
+    const gasPrice = toBN(rootGetters['gasPrices/gasPrice'])
 
     const ethToReceive = gasPrice
       .mul(toBN(gasLimit))

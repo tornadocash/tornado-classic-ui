@@ -28,7 +28,6 @@
     <div v-show="isEnabledSaveFile" class="note">
       {{ $t('saveAsFile') }} <span class="has-text-primary">{{ filename }}</span>
     </div>
-    <gas-price-slider v-if="!eipSupported" v-model="gasPrice" @validate="onGasPriceValidate" />
     <template v-if="!isSetupAccount">
       <i18n tag="div" path="yourDontHaveAccount" class="notice">
         <template v-slot:account>
@@ -57,7 +56,7 @@
     <b-button
       v-else
       type="is-primary is-fullwidth"
-      :disabled="disableButton || (!isValidGasPrice && !eipSupported)"
+      :disabled="disableButton"
       data-test="send_deposit_button"
       @click="_sendDeposit"
     >
@@ -70,27 +69,22 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 
 import { sliceAddress } from '@/utils'
-import GasPriceSlider from '@/components/GasPriceSlider'
 import { ConnectButton } from '@/components/web3Connect'
 
 export default {
   components: {
-    ConnectButton,
-    GasPriceSlider
+    ConnectButton
   },
   data() {
     return {
       isBackuped: false,
       tooltipCopy: this.$t('clickToCopy'),
-      gasPrice: undefined,
-      isValidGasPrice: false,
       isEncrypted: false,
       copyTimer: null
     }
   },
   computed: {
     ...mapGetters('metamask', ['isLoggedIn']),
-    ...mapGetters('gasPrices', ['eipSupported']),
     ...mapGetters('txHashKeeper', ['addressExplorerUrl']),
     ...mapGetters('encryptedNote', ['isSetupAccount', 'accounts', 'isEnabledSaveFile']),
     ...mapState('application', ['note', 'prefix']),
@@ -135,12 +129,9 @@ export default {
     },
     async _sendDeposit() {
       this.$store.dispatch('loading/enable', { message: this.$t('preparingTransactionData') })
-      await this.sendDeposit({ gasPrice: this.gasPrice, isEncrypted: this.isEncrypted })
+      await this.sendDeposit({ isEncrypted: this.isEncrypted })
       this.$store.dispatch('loading/disable')
       this.$parent.close()
-    },
-    onGasPriceValidate(value) {
-      this.isValidGasPrice = value
     },
     async copyNoteAccount() {
       await this.$copyText(this.accounts.encrypt)

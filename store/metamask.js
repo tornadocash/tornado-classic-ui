@@ -155,11 +155,7 @@ const actions = {
   ) {
     try {
       const { ethAccount, netId } = state
-      const gasParams = rootGetters['gasPrices/getGasParams']('fast', eipDisable)
-
-      if (params.gasPrice && 'gasPrice' in gasParams) {
-        gasParams.gasPrice = params.gasPrice.value
-      }
+      const gasParams = rootGetters['gasPrices/getGasParams']
 
       const callParams = {
         method,
