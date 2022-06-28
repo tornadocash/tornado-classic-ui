@@ -162,6 +162,7 @@ jobs:
         run: |
           mkdir screenshots
           touch scripts/dir.txt
+          echo "127.0.0.1 api.thegraph.com" >> /etc/hosts
       - name: Test 1 - Note account on Mainnet
         run: |
           pytest -m note_account
@@ -206,7 +207,7 @@ jobs:
       - name: Test 4 - Deposit USDC on Mainnet and Withdraw with Relayer
         if: always()
         run: |
-          pytest -s -v -x -m mainnet_relayer_usdc --alluredir=./allure_results
+          pytest -s -v -x -m mainnet_relayer_usdc
         env:
           URL_TC_CLASSIC: ${{ needs.deploy-netlify.outputs.deploy-url }}
           METAMASK_PASSWORD: ${{ secrets.E2E_METAMASK_PASSWORD }}
