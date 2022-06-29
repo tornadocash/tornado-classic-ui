@@ -633,7 +633,6 @@ const actions = {
       ])
 
       const parseDescription = ({ id, text }) => {
-        console.log('text', text)
         if (netId === 1) {
           switch (id) {
             case 1:
