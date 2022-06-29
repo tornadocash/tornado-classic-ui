@@ -207,6 +207,7 @@
   .description {
     p {
       line-height: 1.7;
+      white-space: pre-wrap;
 
       &:not(:last-child) {
         margin-bottom: 2rem;

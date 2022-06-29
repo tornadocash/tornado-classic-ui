@@ -4,9 +4,7 @@
       <div class="column is-7-tablet is-8-desktop">
         <h1 class="title">{{ data.title }}</h1>
         <div class="description">
-          <p>
-            {{ data.description }}
-          </p>
+          <p>{{ data.description }}</p>
         </div>
       </div>
       <div class="column is-5-tablet is-4-desktop">

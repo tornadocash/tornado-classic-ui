@@ -612,7 +612,7 @@ const actions = {
     }
   },
   async fetchProposals({ rootGetters, getters, commit }, { requestId }) {
-    let proposals
+    let proposals = []
     try {
       commit('SAVE_FETCHING_PROPOSALS', true)
 
@@ -624,68 +624,70 @@ const actions = {
         return
       }
 
-      proposals = await govInstance.getPastEvents('ProposalCreated', {
-        fromBlock: 0,
-        toBlock: 'latest'
-      })
-      let title, description, rest
-      proposals = proposals.map((e) => {
+      const [events, statuses] = await Promise.all([
+        govInstance.getPastEvents('ProposalCreated', {
+          fromBlock: 0,
+          toBlock: 'latest'
+        }),
+        aggregatorContract.methods.getAllProposals(govInstance._address).call()
+      ])
+
+      const parseDescription = ({ id, text }) => {
+        console.log('text', text)
+        if (netId === 1) {
+          switch (id) {
+            case 1:
+              return {
+                title: text,
+                description: 'See: https://torn.community/t/proposal-1-enable-torn-transfers/38'
+              }
+            case 10:
+              text = text.replace('\n', '\\n\\n')
+              break
+            case 11:
+              text = text.replace('"description"', ',"description"')
+              break
+            case 13:
+              text = text.replace(/\\\\n\\\\n(\s)?(\\n)?/g, '\\n')
+          }
+        }
+
+        let title, description, rest
         try {
-          ;({ title, description } = JSON.parse(e.returnValues.description))
-        } catch (err) {
-          ;[title, ...rest] = e.returnValues.description.split('\n', 2)
+          ;({ title, description } = JSON.parse(text))
+        } catch {
+          ;[title, ...rest] = text.split('\n', 2)
           description = rest.join('\n')
         }
 
-        const netId = rootGetters['metamask/netId']
-        if (netId === 1) {
-          switch (Number(e.returnValues.id)) {
-            case 1:
-              description = 'See: https://torn.community/t/proposal-1-enable-torn-transfers/38'
-              break
-            case 10:
-              ;({ title, description } = JSON.parse(e.returnValues.description.replaceAll('\n', '')))
-              break
-            case 11:
-              ;({ title, description } = JSON.parse(
-                e.returnValues.description.replace('"description"', ',"description"')
-              ))
-          }
-        }
+        return { title, description }
+      }
 
-        return {
-          id: Number(e.returnValues.id),
-          title,
-          description,
-          endTime: Number(e.returnValues.endTime),
-          startTime: Number(e.returnValues.startTime),
-          proposer: e.returnValues.proposer,
-          target: e.returnValues.target,
-          results: {
-            for: '0',
-            against: '0'
-          }
-        }
-      })
-      const statuses = await aggregatorContract.methods.getAllProposals(govInstance._address).call()
-      proposals = proposals
-        .map((p) => {
-          const proposal = statuses[Number(p.id) - 1]
+      proposals = events
+        .map(({ returnValues }, index) => {
+          const id = Number(returnValues.id)
+          const { state, startTime, endTime, forVotes, againstVotes } = statuses[index]
+          const { title, description } = parseDescription({ id, text: returnValues.description })
 
-          if (proposal.extended) {
-            p.endTime = Number(proposal.endTime)
+          return {
+            id,
+            title,
+            description,
+            target: returnValues.target,
+            proposer: returnValues.proposer,
+            endTime: Number(endTime),
+            startTime: Number(startTime),
+            status: ProposalState[Number(state)],
+            results: {
+              for: fromWei(forVotes),
+              against: fromWei(againstVotes)
+            }
           }
-
-          p.status = ProposalState[Number(proposal.state)]
-          p.results = {
-            for: fromWei(proposal.forVotes),
-            against: fromWei(proposal.againstVotes)
-          }
-          return p
         })
         .sort((a, b) => {
           return a.id - b.id
         })
+
       if (requestId) {
         return proposals[requestId]
       }
