@@ -150,7 +150,7 @@ jobs:
         env:
           RPC_URL: ${{ secrets.E2E_TEST_RPC_URL }}
           WALLET_ADDRESS: ${{ secrets.E2E_RECIPIENT_ADDRESS }}
-          MAINNET_RELAYER_URL: ${{ secrE2E_ets.RUN_RELAYER_URL }}
+          MAINNET_RELAYER_URL: ${{ secrets.E2E_RUN_RELAYER_URL }}
       - name: Sleep for 5 sec
         run: sleep 5
       - name: run relayer
