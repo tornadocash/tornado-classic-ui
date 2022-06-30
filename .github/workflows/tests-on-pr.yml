@@ -156,7 +156,7 @@ jobs:
       - name: run relayer
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.RUN_RELAYERE2E__URL }}
+          host: ${{ secrets.E2E_RUN_RELAYER_URL }}
           username: ${{ secrets.E2E_FORK_USER }}
           key: ${{ secrets.ACCESS_KEY_E2E }}
           script: ./run.sh
