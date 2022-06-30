@@ -1,6 +1,8 @@
 name: pr tests
 
-on: pull_request
+on:
+  pull_request:
+    branches: [ master ]
 
 jobs:
   cleanup:
@@ -74,7 +76,7 @@ jobs:
       - name: Checkout e2e-test repo
         uses: actions/checkout@v3
         with:
-          repository: ${{ secrets.E2E_REPO }}
+          repository: ${{ secrets.E2E_REPOSITORY }}
           ssh-key: ${{ secrets.ACCESS_KEY_E2E }}
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -106,7 +108,7 @@ jobs:
       - name: Checkout e2e-test repo
         uses: actions/checkout@v3
         with:
-          repository: ${{ secrets.E2E_REPO }}
+          repository: ${{ secrets.E2E_REPOSITORY }}
           ssh-key: ${{ secrets.ACCESS_KEY_E2E }}
       - uses: actions/setup-node@v3
         with:
@@ -125,7 +127,7 @@ jobs:
       - name: Checkout registry ui
         uses: actions/checkout@v3
         with:
-          repository: peppersec/test-registry-ui
+          repository: ${{ secrets.E2E_TEST_REGISTRY_UI }}
           path: test-registry-ui
       - name: Install test registry ui
         working-directory: ./test-registry-ui/
