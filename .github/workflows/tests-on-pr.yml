@@ -42,7 +42,7 @@ jobs:
       - name: Upload artefact
         uses: actions/upload-artifact@v1.0.0
         with:
-          name: dist
+          name: dist-pr
           path: dist
 
   deploy-netlify:
@@ -52,10 +52,10 @@ jobs:
       deploy-url: ${{ steps.deploy-to-netlify.outputs.deploy-url }}
     steps:
       - uses: actions/checkout@v2
-      - name: Download artifact `dist`
+      - name: Download artifact `dist-pr`
         uses: actions/download-artifact@v1
         with:
-          name: dist
+          name: dist-pr
       - name: Deploy to Netlify
         id: deploy-to-netlify
         uses: nwtgck/actions-netlify@v1.2
