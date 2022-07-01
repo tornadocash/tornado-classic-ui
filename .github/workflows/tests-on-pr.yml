@@ -64,6 +64,7 @@ jobs:
         with:
           publish-dir: './dist'
           #production-branch: master
+          alias: deploy-preview-${{ github.event.number }}
           deploy-message: Deploy from GitHub Actions PR-${{ github.event.number }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
