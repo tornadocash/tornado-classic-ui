@@ -565,7 +565,7 @@ const actions = {
       137: {
         chainId: '0x89',
         chainName: 'Polygon Mainnet',
-        rpcUrls: ['https://polygon-rpc.com/'],
+        rpcUrls: ['https://rpc-mainnet.maticvigil.com'],
         nativeCurrency: {
           name: 'MATIC',
           symbol: 'MATIC',
