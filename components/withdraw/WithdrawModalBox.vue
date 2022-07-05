@@ -5,7 +5,7 @@
       <button type="button" class="delete" @click="$emit('close')" />
     </header>
     <div class="note" data-test="withdrawal_confirmation_text">
-      {{ message }}
+      {{ $t('yourZkSnarkProofHasBeenSuccesfullyGenerated') }}
     </div>
     <b-button type="is-primary is-fullwidth" data-test="withdrawal_confirm_button" @click="_sendWithdraw">
       {{ $t('confirm') }}
@@ -14,7 +14,6 @@
 </template>
 <script>
 /* eslint-disable no-console */
-import { mapState } from 'vuex'
 
 export default {
   props: {
@@ -27,13 +26,7 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      message: ''
-    }
-  },
   computed: {
-    ...mapState('application', ['notes', 'errors']),
     withdrawalMethod() {
       if (this.withdrawType === 'wallet') {
         return 'application/withdraw'
@@ -41,24 +34,6 @@ export default {
 
       return 'relayer/relayTornadoWithdraw'
     }
-  },
-  watch: {
-    notes(newNotes) {
-      if (newNotes[this.note]) {
-        this.$store.dispatch('loading/disable')
-        this.message = this.$t('yourZkSnarkProofHasBeenSuccesfullyGenerated')
-      }
-    },
-    errors: {
-      handler(type) {
-        this.$store.dispatch('loading/disable')
-        this.$parent.close()
-      },
-      deep: true
-    }
-  },
-  beforeCreate() {
-    this.$store.dispatch('loading/enable', { message: this.$t('generatingProof') })
   },
   methods: {
     async _sendWithdraw() {

@@ -189,7 +189,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('application', ['note', 'errors', 'withdrawType', 'ethToReceive']),
+    ...mapState('application', ['note', 'withdrawType', 'ethToReceive']),
     ...mapState('relayer', ['isLoadingRelayers']),
     ...mapGetters('txHashKeeper', ['txExplorerUrl']),
     ...mapGetters('application', ['isNotEnoughTokens', 'selectedStatisticCurrency']),
@@ -290,24 +290,6 @@ export default {
           }
         }
       }
-    },
-    errors: {
-      handler(errors) {
-        console.log('error', errors)
-        this.error = {
-          type: errors.length ? this.$t('error') : null,
-          message: errors[errors.length - 1]
-        }
-        if (this.error.message) {
-          this.$store.dispatch('notice/addNoticeWithInterval', {
-            notice: {
-              untranslatedTitle: this.error.message,
-              type: 'warning'
-            }
-          })
-        }
-      },
-      deep: true
     },
     withdrawNote: {
       async handler(withdrawNote) {
@@ -450,7 +432,7 @@ export default {
         console.log(`Get logs: ${err.message}`)
       }
     },
-    onWithdraw() {
+    async onWithdraw() {
       const note = this.withdrawNote.split('-')[4]
       if (note.length !== 126) {
         this.error = {
@@ -459,14 +441,26 @@ export default {
         }
         return
       }
+
       try {
         this.withdrawAddress = toChecksumAddress(this.withdrawAddress)
-        this.$store.dispatch('application/prepareWithdraw', {
+      } catch {
+        this.error = {
+          type: this.$t('validationError'),
+          message: this.$t('recipientAddressIsInvalid')
+        }
+        return
+      }
+
+      try {
+        this.$store.dispatch('loading/enable', { message: this.$t('generatingProof') })
+
+        await this.$store.dispatch('application/prepareWithdraw', {
           note: this.withdrawNote,
           recipient: this.withdrawAddress
         })
-        this.error.type = null
-        this.currentModal = this.$buefy.modal.open({
+
+        this.$buefy.modal.open({
           parent: this,
           component: WithdrawModalBox,
           hasModalCard: true,
@@ -476,12 +470,20 @@ export default {
             withdrawType: this.withdrawType
           }
         })
-      } catch (e) {
+      } catch (err) {
         this.error = {
-          type: this.$t('validationError'),
-          message: this.$t('recipientAddressIsInvalid')
+          type: this.$t('error'),
+          message: err.message
         }
-        console.error('error', e)
+
+        this.$store.dispatch('notice/addNoticeWithInterval', {
+          notice: {
+            untranslatedTitle: err.message,
+            type: 'warning'
+          }
+        })
+      } finally {
+        this.$store.dispatch('loading/disable')
       }
     },
     onSettings() {
