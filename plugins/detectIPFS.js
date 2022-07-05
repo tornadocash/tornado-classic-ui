@@ -5,7 +5,7 @@ export default ({ store, isHMR, app }, inject) => {
 function main() {
   const whiteListedDomains = ['localhost:3000', 'tornadocash.eth.link', 'tornadocash.eth.limo']
 
-  const NETLIFY_REGEXP = /https:\/\/deploy-preview-(\d+)--tornadocash\.netlify\.app/
+  const NETLIFY_REGEXP = /deploy-preview-(\d+)--tornadocash\.netlify\.app/
 
   if (NETLIFY_REGEXP.test(window.location.host)) {
     return false
