@@ -270,19 +270,15 @@ const actions = {
   async updateSelectEvents({ dispatch, commit, state, rootGetters, getters }) {
     const netId = rootGetters['metamask/netId']
     const { currency, amount } = state.selectedStatistic
-    const { deployedBlock } = networkConfig[`netId${netId}`]
 
     const eventService = getters.eventsInterface.getService({ netId, amount, currency })
 
-    const savedEvents = await eventService.getEvents(eventsType.DEPOSIT)
-    const fromBlock = savedEvents?.lastBlock || deployedBlock
-
-    const graphEvents = await eventService.getEventsFromGraph({ fromBlock, methodName: 'getStatistic' })
+    const graphEvents = await eventService.getEventsFromGraph({ methodName: 'getStatistic' })
 
     let statistic = graphEvents?.events
 
     if (!statistic || !statistic.length) {
-      const fresh = await eventService.getStatisticsRpc({ fromBlock, eventsCount: 10 })
+      const fresh = await eventService.getStatisticsRpc({ eventsCount: 10 })
 
       statistic = fresh || []
     }

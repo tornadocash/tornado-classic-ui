@@ -133,8 +133,8 @@
           :class="{ 'slide-animation-active': isLoading }"
           :disabled="isWithdrawalButtonDisable"
           :loading="isLoadingRelayers || isLoading"
-          @click="onWithdraw"
           data-test="button_start_withdraw"
+          @click="onWithdraw"
         >
           {{ $t('withdrawButton') }}
         </b-button>
@@ -382,6 +382,8 @@ export default {
     },
     activeTab(newTab, oldTab) {
       if (newTab !== oldTab && newTab === 1) {
+        this.withdrawAddress = ''
+        this.withdrawNote = ''
         this.error = {
           type: '',
           message: ''
