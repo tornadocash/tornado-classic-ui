@@ -55,7 +55,6 @@ const state = () => {
     note: null,
     commitment: null,
     prefix: null,
-    errors: [],
     notes: {},
     statistic: defaultStatistics,
     ip: {},
@@ -79,12 +78,6 @@ const mutations = {
   },
   REMOVE_PROOF(state, { note }) {
     this._vm.$delete(state.notes, note)
-  },
-  SAVE_ERROR(state, message) {
-    state.errors.push(message)
-  },
-  REMOVE_ERRORS(state) {
-    this._vm.$set(state, 'errors', [])
   },
   SAVE_LAST_INDEX(state, { nextDepositIndex, anonymitySet, currency, amount }) {
     const currentState = state.statistic[currency][amount]
@@ -766,7 +759,6 @@ const actions = {
     return { args, proof }
   },
   async prepareWithdraw({ dispatch, getters, commit }, { note, recipient }) {
-    commit('REMOVE_ERRORS')
     commit('REMOVE_PROOF', { note })
     try {
       const parsedNote = parseNote(note)
@@ -790,7 +782,7 @@ const actions = {
       commit('SAVE_PROOF', { proof, args, note })
     } catch (e) {
       console.error('prepareWithdraw', e)
-      commit('SAVE_ERROR', e.message)
+      throw new Error(e.message)
     }
   },
   async withdraw({ state, rootState, dispatch, getters }, { note }) {
@@ -952,7 +944,6 @@ const actions = {
       }
     } catch (e) {
       console.error(`Method loadWithdrawalData has error: ${e}`)
-      commit('SAVE_ERROR', e.message)
     }
   },
   calculateEthToReceive({ commit, state, rootGetters }, { currency }) {
