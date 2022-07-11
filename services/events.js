@@ -36,10 +36,10 @@ class EventService {
     }
     return cachedEvents
   }
-  async updateEvents(type) {
+  async updateEvents(type, cachedEvents) {
     const { deployedBlock } = networkConfig[`netId${this.netId}`]
 
-    const savedEvents = await this.getEvents(type)
+    const savedEvents = cachedEvents || (await this.getEvents(type))
 
     let fromBlock = deployedBlock
     if (savedEvents) {
@@ -157,8 +157,17 @@ class EventService {
     }
   }
 
-  async getStatisticsRpc({ fromBlock, eventsCount }) {
+  async getStatisticsRpc({ eventsCount }) {
+    const { deployedBlock } = networkConfig[`netId${this.netId}`]
+    const savedEvents = await this.getEvents(eventsType.DEPOSIT)
+
+    if (savedEvents.events.length) {
+      const { events } = await this.updateEvents(eventsType.DEPOSIT, savedEvents)
+      return events
+    }
+
     const blockRange = 4950
+    const fromBlock = deployedBlock
     const { blockDifference, currentBlockNumber } = await this.getBlocksDiff({ fromBlock })
 
     let numberParts = blockDifference === 0 ? 1 : Math.ceil(blockDifference / blockRange)
@@ -225,6 +234,15 @@ class EventService {
 
   async getEventsPartFromRpc({ fromBlock, toBlock, type }) {
     try {
+      const { currentBlockNumber } = await this.getBlocksDiff({ fromBlock })
+
+      if (fromBlock > currentBlockNumber) {
+        return {
+          events: [],
+          lastBlock: fromBlock
+        }
+      }
+
       const events = await this.contract.getPastEvents(capitalizeFirstLetter(type), {
         fromBlock,
         toBlock

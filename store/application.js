@@ -55,7 +55,6 @@ const state = () => {
     note: null,
     commitment: null,
     prefix: null,
-    errors: [],
     notes: {},
     statistic: defaultStatistics,
     ip: {},
@@ -79,12 +78,6 @@ const mutations = {
   },
   REMOVE_PROOF(state, { note }) {
     this._vm.$delete(state.notes, note)
-  },
-  SAVE_ERROR(state, message) {
-    state.errors.push(message)
-  },
-  REMOVE_ERRORS(state) {
-    this._vm.$set(state, 'errors', [])
   },
   SAVE_LAST_INDEX(state, { nextDepositIndex, anonymitySet, currency, amount }) {
     const currentState = state.statistic[currency][amount]
@@ -166,7 +159,7 @@ const getters = {
     return ACTION_GAS[action]
   },
   networkFee: (state, getters, rootState, rootGetters) => {
-    const gasPrice = rootGetters['gasPrices/fastGasPrice']
+    const gasPrice = rootGetters['gasPrices/gasPrice']
 
     const networkFee = toBN(gasPrice).mul(toBN(getters.withdrawGas))
 
@@ -270,19 +263,15 @@ const actions = {
   async updateSelectEvents({ dispatch, commit, state, rootGetters, getters }) {
     const netId = rootGetters['metamask/netId']
     const { currency, amount } = state.selectedStatistic
-    const { deployedBlock } = networkConfig[`netId${netId}`]
 
     const eventService = getters.eventsInterface.getService({ netId, amount, currency })
 
-    const savedEvents = await eventService.getEvents(eventsType.DEPOSIT)
-    const fromBlock = savedEvents?.lastBlock || deployedBlock
-
-    const graphEvents = await eventService.getEventsFromGraph({ fromBlock, methodName: 'getStatistic' })
+    const graphEvents = await eventService.getEventsFromGraph({ methodName: 'getStatistic' })
 
     let statistic = graphEvents?.events
 
     if (!statistic || !statistic.length) {
-      const fresh = await eventService.getStatisticsRpc({ fromBlock, eventsCount: 10 })
+      const fresh = await eventService.getStatisticsRpc({ eventsCount: 10 })
 
       statistic = fresh || []
     }
@@ -554,7 +543,7 @@ const actions = {
       storeName: `encrypted_events`
     })
   },
-  async sendDeposit({ state, rootState, getters, rootGetters, dispatch, commit }, { isEncrypted, gasPrice }) {
+  async sendDeposit({ state, rootState, getters, rootGetters, dispatch, commit }, { isEncrypted }) {
     try {
       const { commitment, note, prefix } = state
       // eslint-disable-next-line prefer-const
@@ -593,7 +582,6 @@ const actions = {
       const callParams = {
         method: 'eth_sendTransaction',
         params: {
-          gasPrice,
           to: contractInstance._address,
           gas: numberToHex(gas + 50000),
           value: numberToHex(value),
@@ -770,7 +758,6 @@ const actions = {
     return { args, proof }
   },
   async prepareWithdraw({ dispatch, getters, commit }, { note, recipient }) {
-    commit('REMOVE_ERRORS')
     commit('REMOVE_PROOF', { note })
     try {
       const parsedNote = parseNote(note)
@@ -794,7 +781,7 @@ const actions = {
       commit('SAVE_PROOF', { proof, args, note })
     } catch (e) {
       console.error('prepareWithdraw', e)
-      commit('SAVE_ERROR', e.message)
+      throw new Error(e.message)
     }
   },
   async withdraw({ state, rootState, dispatch, getters }, { note }) {
@@ -956,12 +943,11 @@ const actions = {
       }
     } catch (e) {
       console.error(`Method loadWithdrawalData has error: ${e}`)
-      commit('SAVE_ERROR', e.message)
     }
   },
   calculateEthToReceive({ commit, state, rootGetters }, { currency }) {
     const gasLimit = rootGetters['metamask/networkConfig'].tokens[currency].gasLimit
-    const gasPrice = toBN(rootGetters['gasPrices/fastGasPrice'])
+    const gasPrice = toBN(rootGetters['gasPrices/gasPrice'])
 
     const ethToReceive = gasPrice
       .mul(toBN(gasLimit))

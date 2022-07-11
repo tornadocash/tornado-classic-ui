@@ -38,7 +38,7 @@
     "file-saver": "^2.0.5",
     "fixed-merkle-tree": "^0.7.3",
     "form-data": "^3.0.0",
-    "gas-price-oracle": "^0.4.6",
+    "gas-price-oracle": "^0.5.0",
     "graphql": "^15.5.1",
     "idb": "^6.0.0",
     "jspdf": "^1.5.3",

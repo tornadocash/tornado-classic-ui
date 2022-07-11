@@ -80,7 +80,7 @@ export default {
             await this.selectRpc({ netId: 1, action: this.preselectRpc })
           }
 
-          this.$store.dispatch('gasPrices/fetchGasPrice', {})
+          this.$store.dispatch('gasPrices/fetchGasPrice')
           this.$store.dispatch('price/fetchTokenPrice', {}, { root: true })
           try {
             this.$store.dispatch('application/loadAllNotesData')

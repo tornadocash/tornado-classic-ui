@@ -236,8 +236,14 @@ export const actions = {
       const hasEnabledLightProxy = rootGetters['application/hasEnabledLightProxy']
 
       const getIsUpdated = () => {
+        const relayerVersion = response.data.version
+
+        if (relayerVersion === '5.0.0') {
+          return true
+        }
+
         const requiredMajor = hasEnabledLightProxy ? '5' : '4'
-        const { major, patch, prerelease } = parseSemanticVersion(response.data.version)
+        const { major, patch, prerelease } = parseSemanticVersion(relayerVersion)
 
         const isUpdatedMajor = major === requiredMajor
 
