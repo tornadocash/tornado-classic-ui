@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-for="(item, index) in emptyArray" :key="index" class="proposals-box">
+    <div v-for="index in size" :key="index" class="proposals-box">
       <div class="columns is-gapless">
         <div class="column is-8-tablet is-9-desktop">
-          <div class="title">
+          <div class="proposals-box--title">
             <b-skeleton height="28" width="210"></b-skeleton>
           </div>
           <div class="proposals-box--info">
@@ -39,16 +39,10 @@
 
 <script>
 export default {
-  components: {},
   props: {
     size: {
       type: Number,
       default: 5
-    }
-  },
-  data() {
-    return {
-      emptyArray: Array(this.size).fill('')
     }
   }
 }

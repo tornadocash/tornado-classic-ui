@@ -10,6 +10,7 @@
           <b-skeleton width="60%"></b-skeleton>
           <b-skeleton width="60%"></b-skeleton>
         </div>
+        <ProposalCommentsSkeleton />
       </div>
       <div class="column is-5-tablet is-4-desktop">
         <div class="proposal-block">
@@ -77,3 +78,13 @@
     </div>
   </div>
 </template>
+
+<script>
+import ProposalCommentsSkeleton from './ProposalCommentsSkeleton.vue'
+
+export default {
+  components: {
+    ProposalCommentsSkeleton
+  }
+}
+</script>

@@ -6,6 +6,14 @@
         <div class="description">
           <p>{{ data.description }}</p>
         </div>
+
+        <div>
+          <ProposalCommentsSkeleton
+            v-if="isFetchingProposalComments"
+            :size="proposalComments.length ? 1 : 3"
+          />
+          <ProposalComment v-for="item in proposalComments" :key="item.id" v-bind="item" />
+        </div>
       </div>
       <div class="column is-5-tablet is-4-desktop">
         <div v-if="data.status === 'active'" class="proposal-block">
@@ -21,18 +29,18 @@
               <b-button
                 :disabled="readyForAction"
                 type="is-primary"
-                :icon-left="isFetchingBalances ? '' : 'check'"
+                :icon-left="isFetchingBalances || isSaveProposal ? '' : 'check'"
                 outlined
-                :loading="isFetchingBalances"
+                :loading="isFetchingBalances || isSaveProposal"
                 @click="onCastVote(true)"
                 >{{ $t('for') }}</b-button
               >
               <b-button
                 :disabled="readyForAction"
                 type="is-danger"
-                :icon-left="isFetchingBalances ? '' : 'close'"
+                :icon-left="isFetchingBalances || isSaveProposal ? '' : 'close'"
                 outlined
-                :loading="isFetchingBalances"
+                :loading="isFetchingBalances || isSaveProposal"
                 @click="onCastVote(false)"
                 >{{ $t('against') }}</b-button
               >
@@ -160,11 +168,17 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import quorum from './mixins/quorum'
+import ProposalCommentsSkeleton from './ProposalCommentsSkeleton.vue'
+import ProposalComment from './ProposalComment.vue'
 import NumberFormat from '@/components/NumberFormat'
+import ProposalCommentFormModal from '@/components/ProposalCommentFormModal.vue'
+
 const { toBN, fromWei, toWei } = require('web3-utils')
 
 export default {
   components: {
+    ProposalCommentsSkeleton,
+    ProposalComment,
     NumberFormat
   },
   mixins: [quorum],
@@ -182,7 +196,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('governance/gov', ['proposals', 'voterReceipts']),
+    ...mapState('governance/gov', ['proposals', 'voterReceipts', 'proposalComments', 'isSaveProposal']),
     ...mapState('metamask', ['ethAccount', 'isInitialized']),
     ...mapGetters('txHashKeeper', ['addressExplorerUrl']),
     ...mapGetters('metamask', ['networkConfig']),
@@ -191,6 +205,7 @@ export default {
       'constants',
       'votingPeriod',
       'isFetchingBalances',
+      'isFetchingProposalComments',
       'isEnabledGovernance'
     ]),
     readyForAction() {
@@ -224,7 +239,9 @@ export default {
     isInitialized: {
       handler(isInitialized) {
         if (isInitialized && this.isEnabledGovernance) {
-          this.fetchReceipt({ id: this.data.id })
+          const { id } = this.data
+          this.fetchReceipt({ id })
+          this.fetchProposalComments(this.data)
         }
       },
       immediate: true
@@ -265,7 +282,13 @@ export default {
     clearTimeout(this.timeId)
   },
   methods: {
-    ...mapActions('governance/gov', ['castVote', 'executeProposal', 'fetchReceipt', 'fetchProposals']),
+    ...mapActions('governance/gov', [
+      'castVote',
+      'executeProposal',
+      'fetchReceipt',
+      'fetchProposals',
+      'fetchProposalComments'
+    ]),
     getStatusType(status) {
       let statusType = ''
       switch (status) {
@@ -299,7 +322,24 @@ export default {
             .toNumber()
     },
     onCastVote(support) {
-      this.castVote({ id: this.data.id, support })
+      const { id } = this.data
+
+      this.$buefy.modal.open({
+        parent: this,
+        component: ProposalCommentFormModal,
+        hasModalCard: true,
+        width: 440,
+        customClass: 'is-pinned',
+        props: {
+          support,
+          proposal: this.data
+        },
+        events: {
+          castVote: ({ contact, message }) => {
+            this.castVote({ id, support, contact, message })
+          }
+        }
+      })
     },
     onExecute() {
       this.executeProposal({ id: this.data.id })
