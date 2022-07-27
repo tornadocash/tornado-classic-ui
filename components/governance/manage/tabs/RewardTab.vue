@@ -1,5 +1,5 @@
 <template>
-  <b-tab-item :label="$t('stakingReward.label.tab')">
+  <b-tab-item :label="$t('stakingReward.label.tab')" header-class="claim_tab">
     <div class="p">
       {{ $t('stakingReward.description') }}
     </div>
@@ -7,7 +7,13 @@
       {{ $t('stakingReward.label.input') }}:
       <span><number-format :value="reward" /> TORN</span>
     </div>
-    <b-button :disabled="notAvailableClaim" type="is-primary is-fullwidth" outlined @click="onClaim">
+    <b-button
+      :disabled="notAvailableClaim"
+      data-test="button_claim"
+      type="is-primary is-fullwidth"
+      outlined
+      @click="onClaim"
+    >
       {{ $t('stakingReward.action') }}
     </b-button>
   </b-tab-item>

@@ -1,5 +1,5 @@
 <template>
-  <b-tab-item :label="$t('undelegate')">
+  <b-tab-item :label="$t('undelegate')" header-class="undelegate_tab">
     <div class="p">
       {{ $t('undelegateTabDesc') }}
     </div>
@@ -16,7 +16,13 @@
       :active="!canUndelegate"
       multilined
     >
-      <b-button :disabled="!canUndelegate" type="is-primary is-fullwidth" outlined @click="onUndelegate">
+      <b-button
+        :disabled="!canUndelegate"
+        data-test="button_undelegate"
+        type="is-primary is-fullwidth"
+        outlined
+        @click="onUndelegate"
+      >
         {{ $t('undelegate') }}
       </b-button>
     </b-tooltip>

@@ -1,5 +1,5 @@
 <template>
-  <div class="proposal">
+  <div class="proposal" data-test="proposal_page">
     <h1 class="title">{{ $t('createProposal') }}</h1>
 
     <div class="columns is-multiline">
@@ -9,7 +9,7 @@
           :message="isValidTitle ? '' : $t('proposal.error.title')"
           :type="{ 'is-warning': !isValidTitle }"
         >
-          <b-input v-model="validTitle" :placeholder="$t('title')"></b-input>
+          <b-input v-model="validTitle" :placeholder="$t('title')" data-test="input_proposal_title"></b-input>
         </b-field>
       </div>
       <div class="column is-6">
@@ -22,6 +22,7 @@
             v-model="address"
             :placeholder="$t('proposalAddress')"
             :size="!address ? '' : hasValidAddress ? '' : 'is-warning'"
+            data-test="input_proposal_address"
           ></b-input>
         </b-field>
       </div>
@@ -31,13 +32,19 @@
           :type="{ 'is-warning': !isValidDescription }"
           :label="$t('proposalDescription')"
         >
-          <b-input v-model="validDescription" maxlength="2000" type="textarea"></b-input>
+          <b-input
+            v-model="validDescription"
+            maxlength="2000"
+            type="textarea"
+            data-test="input_proposal_description"
+          ></b-input>
         </b-field>
       </div>
     </div>
     <b-tooltip :label="`${$t('onlyOneProposalErr')}`" position="is-top" :active="cannotCreate" multilined>
       <b-button
         :disabled="cannotCreate"
+        data-test="button_create_proposal"
         type="is-primary"
         :icon-left="isFetchingBalances ? '' : 'plus'"
         outlined

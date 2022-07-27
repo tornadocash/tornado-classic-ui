@@ -6,6 +6,7 @@
     <b-field :label="$t('recipient')">
       <b-input
         v-model="delegatee"
+        data-test="input_recipient_address"
         :placeholder="$t('address')"
         :size="!delegatee ? '' : isValidAddress ? 'is-primary' : 'is-warning'"
       ></b-input>
@@ -27,6 +28,7 @@
         <b-button
           :disabled="!canDelegate || !isValidAddress"
           type="is-primary is-fullwidth"
+          data-test="button_delegate"
           outlined
           @click="onDelegate"
         >
