@@ -1,7 +1,7 @@
 <template>
   <div class="compliance">
     <h1 class="title is-size-1 is-size-2-mobile is-spaced">
-      Tornado.cash <span class="not-print">{{ $t('complianceTool') }}</span>
+      Tornado Cash <span class="not-print">{{ $t('complianceTool') }}</span>
       <span class="print">{{ $t('complianceReport') }}</span>
     </h1>
     <p class="p is-size-6">
@@ -485,7 +485,7 @@ export default {
       doc.text(commitment, padding, 147)
       doc.text(nullifier, startSecondColumnX, 147)
 
-      doc.setFontSize(20).text('Tornado.cash', padding, 40)
+      doc.setFontSize(20).text('Tornado Cash', padding, 40)
       doc.setFontStyle('normal').text(this.$t('complianceReport', 'en'), 65, 40)
 
       doc.setFontSize(8).text(this.$t('verified', 'en'), padding, 81)
