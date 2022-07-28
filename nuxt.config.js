@@ -44,7 +44,7 @@ export default {
     fallback: true
   },
   head: {
-    title: 'Tornado.cash',
+    title: 'Tornado Cash',
     meta: [
       { charset: 'utf-8' },
       {
@@ -69,7 +69,7 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'Tornado.Cash'
+        content: 'Tornado Cash'
       },
       {
         hid: 'og:description',

@@ -1,8 +1,8 @@
 {
   "closeNotification": "Bildirimi Kapat",
-  "indexNotification": "Tornado.cash {link} deneysel bir yazılımdır. Lütfen riskin farkında olarak kullanın.",
+  "indexNotification": "Tornado Cash {link} deneysel bir yazılımdır. Lütfen riskin farkında olarak kullanın.",
   "indexNotificationLinkText": "denetimden geçmiştir ve",
-  "binanceInternalTxsNotification": "Lütfen para çekme işlemleri için Binance cüzdanına ait adresleri kullanmayın. Dahili işlemler (Tornado.cash çekimleri dahil) şu anda Binance Exchange’de desteklenmemektedir. Paranızın hesabınıza yansıması ile ilgili sorunlarınız varsa Binance destek ile iletişime geçmelisiniz.",
+  "binanceInternalTxsNotification": "Lütfen para çekme işlemleri için Binance cüzdanına ait adresleri kullanmayın. Dahili işlemler (Tornado Cash çekimleri dahil) şu anda Binance Exchange’de desteklenmemektedir. Paranızın hesabınıza yansıması ile ilgili sorunlarınız varsa Binance destek ile iletişime geçmelisiniz.",
   "deposit": "Yatırma",
   "depositButton": "Yatırma",
   "withdraw": "Çekme",
@@ -22,7 +22,7 @@
   "amount": "Miktar",
   "amountTooltip": "Her değer, ayrı bir anonimlik kümesine sahip bağımsız bir Tornado Cash yansımasıdır. Daha fazla bilgi için istatistikler sekmesini kontrol edin.",
   "approvalIsRequired": "Onay gerekmekte",
-  "inOrderToUse": "{currency} kullanmak için Tornado.cash’i etkinleştirmeniz gerekir. Onaylamak istediğiniz tutarı seçin:",
+  "inOrderToUse": "{currency} kullanmak için Tornado Cash’i etkinleştirmeniz gerekir. Onaylamak istediğiniz tutarı seçin:",
   "unlimited": "Limitsiz",
   "unlimitedTooltip": "Birden fazla para yatırma işlemi yapacaksanız sınırsız onay daha uygundur.",
   "enable": "Etkinleştir",
@@ -32,7 +32,7 @@
   "close": "Kapat",
   "yourNote": "Özel notunuz",
   "pleaseBackupYourNote": "Lütfen notunuzu yedekleyin. Yüklediğiniz tokenları geri çekmek için daha sonra ihtiyacınız olacak.",
-  "treatYourNote": "Notunuza özel bir anahtar gibi davranın. tornado.cash geliştiricileri dahil hiç kimseyle paylaşmayın.",
+  "treatYourNote": "Notunuza özel bir anahtar gibi davranın. Tornado Cash geliştiricileri dahil hiç kimseyle paylaşmayın.",
   "saveAsFile": "Tarayıcınız notunuzu bir dosya olarak kaydetmenizi isteyecektir:",
   "iBackedUpTheNote": "Notumu yedekledim.",
   "iEncryptedTheNote": "Hesabınıza ait notun zincir üzerinde yedeğini oluşturun {address}",
@@ -56,7 +56,7 @@
   "pleaseEnterYourNote": "Lütfen notunuzu girin",
   "turnOnWasm": "Hata: Lütfen tarayıcı ayarlarınızda WebAssembly’ı açın. Tor tarayıcı kullanıyorsanız, about:config içinde javascript.options.wasm’ı etkinleştirin.",
   "timePassed": "Zaman aşımı",
-  "timePassedTooltip": "Sizin işleminizden sonra birden fazla para yatırma işlemi olsa bile, bunlar aynı kullanıcı tarafından yapılmış olabilir. Bu nedenle, bu süre içinde Tornado.cash kullanan birden fazla kullanıcı olduğundan emin olmak için para çekmeden önce en az 24 saat beklemenizi öneririz.",
+  "timePassedTooltip": "Sizin işleminizden sonra birden fazla para yatırma işlemi olsa bile, bunlar aynı kullanıcı tarafından yapılmış olabilir. Bu nedenle, bu süre içinde Tornado Cash kullanan birden fazla kullanıcı olduğundan emin olmak için para çekmeden önce en az 24 saat beklemenizi öneririz.",
   "subsequentDeposits": "Bir sonraki yükleme",
   "subsequentDepositsTooltip": "En olası para çekme kaynağı, son yüklemelerdir. Bu nedenle, daha iyi anonimlik sağlamak için sizinkinden sonra en az 5 para yatırmaya izin vermenizi öneririz.",
   "recipientAddress": "Alıcı adresi",
@@ -137,7 +137,7 @@
   "compliance": "Uyumluluk",
   "complianceTool": "uyumluluk aracı",
   "complianceReport": "Uyumluluk Raporu",
-  "complianceSubtitle": "Finansal gizliliği korumak, özgürlüğümüzü korumak için çok önemlidir.{newline}Ancak, uyumsuzluk pahasına olmamalıdır. Tornado.cash ile,para yatırmak veya para çekmek için kullandığınız Ethereum adresini kullanarak her zaman kriptografik olarak doğrulanmış işlem geçmişi kanıtını sağlayabilirsiniz. Çekim adresinizde tutulan varlıkların kaynağını göstermek için gerekli olabilir.{newline}Bir uygunluk raporu oluşturmak için lütfen aşağıya Tornado.сash Notunuzu girin.",
+  "complianceSubtitle": "Finansal gizliliği korumak, özgürlüğümüzü korumak için çok önemlidir.{newline}Ancak, uyumsuzluk pahasına olmamalıdır. Tornado Cash ile,para yatırmak veya para çekmek için kullandığınız Ethereum adresini kullanarak her zaman kriptografik olarak doğrulanmış işlem geçmişi kanıtını sağlayabilirsiniz. Çekim adresinizde tutulan varlıkların kaynağını göstermek için gerekli olabilir.{newline}Bir uygunluk raporu oluşturmak için lütfen aşağıya Tornado.сash Notunuzu girin.",
   "from": "Kimden",
   "to": "Kime",
   "withdrawal": "Çekim",
@@ -315,7 +315,7 @@
       "setupAccount": {
         "title": "Hesap kurulumu",
         "label": "Not hesabı anahtarı",
-        "description": "Bu anahtar, Tornado.cash özel notlarınızı Ethereum blok zincirinde şifrelemek ve saklamak için kullanılır. Lütfen yedekleyin ve asla kimseyle paylaşmayın.",
+        "description": "Bu anahtar, Tornado Cash özel notlarınızı Ethereum blok zincirinde şifrelemek ve saklamak için kullanılır. Lütfen yedekleyin ve asla kimseyle paylaşmayın.",
         "setupAccount": "Hesap kurulumu",
         "setAccount": "Tamamla",
         "backedUp": "Not hesabı anahtarımı yedekledim",
@@ -372,7 +372,7 @@
       "recover": "Hesabı kurtar",
       "enterRawDesc": "Önceden ayarlanmış Not Hesabı anahtarını kullan",
       "enterRaw": "Hesap anahtarını girin",
-      "accSetupDescription": "Bu anahtar, Tornado.cash özel notlarınızı Ethereum blok zincirinde şifrelemek ve saklamak için kullanılır. Lütfen yedekleyin ve asla kimseyle paylaşmayın."
+      "accSetupDescription": "Bu anahtar, Tornado Cash özel notlarınızı Ethereum blok zincirinde şifrelemek ve saklamak için kullanılır. Lütfen yedekleyin ve asla kimseyle paylaşmayın."
     },
     "control": {
       "balance": "Not hesabı bakiyesi: {value}",
@@ -385,7 +385,7 @@
       "fileDesc": "Para yatırırken ham özel notları varsayılan olarak indirin"
     },
     "notification": {
-      "text": "Tornado.cash, zincir üstü not yedeklemeleri ekledi. {note} veya {medium} bilgilerinizi şimdi ayarlayın.",
+      "text": "Tornado Cash, zincir üstü not yedeklemeleri ekledi. {note} veya {medium} bilgilerinizi şimdi ayarlayın.",
       "link": {
         "note": "Not hesabı",
         "medium": "Daha fazla bilgi"

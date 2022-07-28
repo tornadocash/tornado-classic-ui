@@ -1,8 +1,8 @@
 {
   "closeNotification": "关闭通知",
-  "indexNotification": "Tornado.cash {link}。 但它仍处在实验阶段，请注意并自行承担使用风险。",
+  "indexNotification": "Tornado Cash {link}。 但它仍处在实验阶段，请注意并自行承担使用风险。",
   "indexNotificationLinkText": "已通过安全审计",
-  "binanceInternalTxsNotification": "请不要使用Binance钱包地址进行提款。Binance交易所目前不支持内部交易（包括Tornado.cash提款）。如果您有资金未收到的问题，您应该联系Binance支持。",
+  "binanceInternalTxsNotification": "请不要使用Binance钱包地址进行提款。Binance交易所目前不支持内部交易（包括Tornado Cash提款）。如果您有资金未收到的问题，您应该联系Binance支持。",
   "deposit": "存款",
   "depositButton": "存款",
   "withdraw": "提款",
@@ -32,7 +32,7 @@
   "close": "关闭",
   "yourNote": "你的凭证",
   "pleaseBackupYourNote": "请备份凭证，这很重要！如果你丢失了该凭证，你将无法找回存款！",
-  "treatYourNote": "将您的笔记当作私钥-切勿与任何人共享，包括 Tornado.cash 开发人员。",
+  "treatYourNote": "将您的笔记当作私钥-切勿与任何人共享，包括 Tornado Cash 开发人员。",
   "saveAsFile": "浏览器将要求将您的笔记另存为文件：",
   "iBackedUpTheNote": "我已备份了凭证",
   "iEncryptedTheNote": "用您的账户{address}创建此凭证的链上备份",
@@ -137,7 +137,7 @@
   "compliance": "来源证明",
   "complianceTool": "来源证明工具",
   "complianceReport": "来源证明报告",
-  "complianceSubtitle": "维护财务隐私对于保全我们的自由至关重要。{newline}但是，它不应该以违规为代价。 借助Tornado.cash，您始终可以使用您存/取款的地址提供经过加密验证的交易历史证明。 这将会显示您的提款地址的资产来源。{newline}要生成资产来源报告，请在下面输入您的 Tornado.сash存款凭证。",
+  "complianceSubtitle": "维护财务隐私对于保全我们的自由至关重要。{newline}但是，它不应该以违规为代价。 借助Tornado Cash，您始终可以使用您存/取款的地址提供经过加密验证的交易历史证明。 这将会显示您的提款地址的资产来源。{newline}要生成资产来源报告，请在下面输入您的 Tornado.сash存款凭证。",
   "from": "从",
   "to": "到",
   "withdrawal": "提款",
@@ -151,7 +151,7 @@
   "nullifierHash": "无效符",
   "verified": "已验证",
   "generatePdfReport": "生成 PDF 报告",
-  "compliancePrintWarning": "这本来源证明报告仅供参考的。 你应该使用Tornado的来源证明工具来确认报告 (https://tornadocash.eth.link/compliance) 的有效性，或者与可以算出和验证此处包含信息的任何其他密码学软件 (\"Tornado来源证明工具\") 一起使用。 报告中发现的信息与上述工具提供的信息之间存在任何差异，表明报告中的信息是不正确的{newline} 来源证明报告按 \"原样,\" 提供，不提供任何明示或暗示担保，包括但不限于对适销性，用途的适用性和非侵权专利的担保。 无论是出于合同要求、侵权或其他原因，由本来源证明报告引起与相关的任何索赔，损害或其他责任，Tornado.cash的作者概不负责。",
+  "compliancePrintWarning": "这本来源证明报告仅供参考的。 你应该使用Tornado的来源证明工具来确认报告 (https://tornadocash.eth.link/compliance) 的有效性，或者与可以算出和验证此处包含信息的任何其他密码学软件 (\"Tornado来源证明工具\") 一起使用。 报告中发现的信息与上述工具提供的信息之间存在任何差异，表明报告中的信息是不正确的{newline} 来源证明报告按 \"原样,\" 提供，不提供任何明示或暗示担保，包括但不限于对适销性，用途的适用性和非侵权专利的担保。 无论是出于合同要求、侵权或其他原因，由本来源证明报告引起与相关的任何索赔，损害或其他责任，Tornado Cash的作者概不负责。",
   "relayRequestFailed": "中继者 {relayerName} 无法使用，请选择其他中继者。",
   "selectProvider": "请选择钱包",
   "walletDoesNotSupported": "此钱包不受支持",
@@ -315,7 +315,7 @@
       "setupAccount": {
         "title": "账户设置",
         "label": "凭证账户密钥",
-        "description": "此密钥用于在以太坊区块链上加密和存储您的 Tornado.cash 私人凭证。 请备份它，永远不要与任何人分享。",
+        "description": "此密钥用于在以太坊区块链上加密和存储您的 Tornado Cash 私人凭证。 请备份它，永远不要与任何人分享。",
         "setupAccount": "设置账户",
         "setAccount": "完成",
         "backedUp": "我已备份了凭证账户密钥",
@@ -372,7 +372,7 @@
       "recover": "恢复账户",
       "enterRawDesc": "使用之前设置的凭证账户密钥",
       "enterRaw": "输入账户密钥",
-      "accSetupDescription": "此密钥用于在以太坊区块链上加密和存储您的 Tornado.cash 私人凭证。 请备份它，永远不要与任何人分享。"
+      "accSetupDescription": "此密钥用于在以太坊区块链上加密和存储您的 Tornado Cash 私人凭证。 请备份它，永远不要与任何人分享。"
     },
     "control": {
       "balance": "凭证账户余额：{value}",
@@ -385,7 +385,7 @@
       "fileDesc": "存款时默认下载原始私人凭证"
     },
     "notification": {
-      "text": "Tornado.cash 添加了链上凭证备份。 立即设置您的 {note} 或 查看{medium}信息。",
+      "text": "Tornado Cash 添加了链上凭证备份。 立即设置您的 {note} 或 查看{medium}信息。",
       "link": {
         "note": "凭证账户",
         "medium": "阅读更多"

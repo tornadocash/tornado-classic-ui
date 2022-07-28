@@ -1,8 +1,8 @@
 {
   "closeNotification": "Fermer notification",
-  "indexNotification": "Tornado.cash {link}. Cependant, il s'agit d'un logiciel en phase d'expérimentation. Veuillez l'utiliser à vos propres risques.",
+  "indexNotification": "Tornado Cash {link}. Cependant, il s'agit d'un logiciel en phase d'expérimentation. Veuillez l'utiliser à vos propres risques.",
   "indexNotificationLinkText": "a été audité",
-  "binanceInternalTxsNotification": "Veuillez ne pas utiliser votre adresse de portefeuille Binance pour retirer vos fonds. Les transactions internes (tout comme celles effectuées par Tornado.Cash) ne sont pas supportées sur la plateforme d'échange Binance. Si vous n'avez pas reçu vos fonds sur Binance, veuillez prendre contact avec le support Binance.",
+  "binanceInternalTxsNotification": "Veuillez ne pas utiliser votre adresse de portefeuille Binance pour retirer vos fonds. Les transactions internes (tout comme celles effectuées par Tornado Cash) ne sont pas supportées sur la plateforme d'échange Binance. Si vous n'avez pas reçu vos fonds sur Binance, veuillez prendre contact avec le support Binance.",
   "deposit": "Déposer",
   "depositButton": "Déposer",
   "withdraw": "Retirer",
@@ -22,7 +22,7 @@
   "amount": "Montant",
   "amountTooltip": "Chaque montant dispose d'une instance autonome de Tornado Cash avec un seuil d'anonymat distinct. Consultez l'onglet statistiques pour plus d'informations.",
   "approvalIsRequired": "Une approbation est requise",
-  "inOrderToUse": "Afin d'utiliser cette devise: {currency} vous devez l'activer pour Tornado.cash. Sélectionnez le montant que vous souhaitez approuver:",
+  "inOrderToUse": "Afin d'utiliser cette devise: {currency} vous devez l'activer pour Tornado Cash. Sélectionnez le montant que vous souhaitez approuver:",
   "unlimited": "Illimité",
   "unlimitedTooltip": "L'approbation illimitée est plus pratique dans le cas où vous devez effectuer plusieurs dépôts.",
   "enable": "Activer",
@@ -32,7 +32,7 @@
   "close": "Fermer",
   "yourNote": "Votre note d'enregistrement privée",
   "pleaseBackupYourNote": "Veuillez sauvegarder votre note d'enregistrement. Vous allez en avoir besoin plus tard pour retirer votre dépôt.",
-  "treatYourNote": "Traitez votre note d'enregistrement comme une clé privée - ne la partagez jamais avec quiconque, y compris les développeurs de tornado.cash.",
+  "treatYourNote": "Traitez votre note d'enregistrement comme une clé privée - ne la partagez jamais avec quiconque, y compris les développeurs de Tornado Cash.",
   "saveAsFile": "Le navigateur va vous demander de sauvegarder votre note d'enregistrement sous forme de fichier:",
   "iBackedUpTheNote": "J'ai sauvegardé ma note d'enregistrement",
   "iEncryptedTheNote": "Créer une sauvegarde de cette note d'enregistrement dans la Blockchain avec votre Compte : {address}",
@@ -56,7 +56,7 @@
   "pleaseEnterYourNote": "Veuillez entrer votre note d'enregistrement",
   "turnOnWasm": "Erreur: Veuillez activer WebAssembly dans vos réglages de navigateur.<br /> Si vous utilisez le navigateur Tor, activez javascript.options.wasm dans about:config",
   "timePassed": "Temps passé",
-  "timePassedTooltip": "Même s'il y a plusieurs dépôts après le vôtre, ils pourraient avoir été effectués par le même utilisateur. Par conséquent, nous vous recommandons d'attendre au moins 24 heures avant de retirer des fonds pour vous assurer que plusieurs utilisateurs ont utilisé Tornado.cash pendant cette période.",
+  "timePassedTooltip": "Même s'il y a plusieurs dépôts après le vôtre, ils pourraient avoir été effectués par le même utilisateur. Par conséquent, nous vous recommandons d'attendre au moins 24 heures avant de retirer des fonds pour vous assurer que plusieurs utilisateurs ont utilisé Tornado Cash pendant cette période.",
   "subsequentDeposits": "Dépôts postérieurs",
   "subsequentDepositsTooltip": "La preuve la plus probable d'un retrait est celle d'un dépôt récent. De ce fait, nous vous recommandons d'attendre au moins 5 dépôts suivants le vôtre afin d'obtenir un meilleur anonymat.",
   "recipientAddress": "Adresse de réception",
@@ -137,7 +137,7 @@
   "compliance": "Conformité",
   "complianceTool": "outil de conformité",
   "complianceReport": "Rapport de Conformité",
-  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado.cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
+  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado Cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
   "from": "De",
   "to": "À",
   "withdrawal": "Retrait",
@@ -315,7 +315,7 @@
       "setupAccount": {
         "title": "Configuration de compte",
         "label": "Clé de Compte de Notes",
-        "description": "Cette clé est utilisée pour encrypter et stocker vos notes privées Tornado.cash sur la blockchain Ethereum. Veuillez la sauvegarder et ne jamais la partager avec qui que ce soit.",
+        "description": "Cette clé est utilisée pour encrypter et stocker vos notes privées Tornado Cash sur la blockchain Ethereum. Veuillez la sauvegarder et ne jamais la partager avec qui que ce soit.",
         "setupAccount": "Configurer compte",
         "setAccount": "Terminé",
         "backedUp": "J'ai sauvegardé la clé du compte de notes",
@@ -372,7 +372,7 @@
       "recover": "Récupérer le compte",
       "enterRawDesc": "Utiliser la clé de compte de notes précédemment définie",
       "enterRaw": "Entrez la clé du compte",
-      "accSetupDescription": "Cette clé est utilisée pour encrypter et stocker vos notes privées Tornado.cash sur la blockchain Ethereum. Veuillez la sauvegarder et ne jamais la partager avec qui que ce soit."
+      "accSetupDescription": "Cette clé est utilisée pour encrypter et stocker vos notes privées Tornado Cash sur la blockchain Ethereum. Veuillez la sauvegarder et ne jamais la partager avec qui que ce soit."
     },
     "control": {
       "balance": "Solde du compte de notes: {value}",
@@ -385,7 +385,7 @@
       "fileDesc": "Télécharger des notes privées brutes par défaut lorsque vous effectuez un dépôt"
     },
     "notification": {
-      "text": "Tornado.cash a ajouté la possibilité d'effectuer des sauvegardes de notes sur la blockchaîn. Configurez votre {note} maintenant et pour plus d'informations : {medium}.",
+      "text": "Tornado Cash a ajouté la possibilité d'effectuer des sauvegardes de notes sur la blockchaîn. Configurez votre {note} maintenant et pour plus d'informations : {medium}.",
       "link": {
         "note": "compte de notes",
         "medium": "lire plus"
