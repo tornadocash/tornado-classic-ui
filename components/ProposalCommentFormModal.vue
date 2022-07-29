@@ -52,11 +52,25 @@
       </div>
     </div>
 
-    <b-button v-if="support" type="is-primary" icon-left="check" outlined @click="onCastVote(true)">
+    <b-button
+      v-if="support"
+      :disabled="!isValid"
+      type="is-primary"
+      icon-left="check"
+      outlined
+      @click="onCastVote(true)"
+    >
       {{ $t('for') }}
     </b-button>
 
-    <b-button v-else type="is-danger" icon-left="close" outlined @click="onCastVote(false)">
+    <b-button
+      v-else
+      :disabled="!isValid"
+      type="is-danger"
+      icon-left="close"
+      outlined
+      @click="onCastVote(false)"
+    >
       {{ $t('against') }}
     </b-button>
   </div>
@@ -88,6 +102,11 @@ export default {
       message: ''
     }
   }),
+  computed: {
+    isValid() {
+      return this.validate()
+    }
+  },
   methods: {
     validate() {
       const { form, fields, support } = this
@@ -100,9 +119,7 @@ export default {
       return fields.contact && fields.message
     },
     onCastVote() {
-      const isValid = this.validate()
-
-      if (isValid) {
+      if (this.isValid) {
         this.$emit('castVote', this.form)
         this.$emit('close')
       }

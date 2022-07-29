@@ -2,12 +2,26 @@
   <div>
     <div v-for="index in size" :key="index" class="proposals-box">
       <div class="columns is-gapless">
-        <div class="column is-8-tablet is-9-desktop">
+        <div class="column">
           <div class="proposals-box--title">
-            <b-skeleton height="21" width="210" />
+            <div class="proposals-box--skeleton">
+              <b-skeleton height="30" width="110" />
+            </div>
+            <div class="proposals-box--skeleton">
+              <b-skeleton height="30" width="110" />
+            </div>
+
+            <div class="proposals-box--skeleton is-percentage">
+              <b-skeleton height="30" width="36" />
+            </div>
           </div>
-          <div class="proposals-box--info">
-            <b-skeleton height="21" width="260" />
+          <div class="proposals-box--comment">
+            <div class="proposals-box--skeleton">
+              <b-skeleton height="21" width="21" />
+            </div>
+            <div class="proposals-box--skeleton">
+              <b-skeleton height="21" width="260" />
+            </div>
           </div>
         </div>
       </div>
@@ -25,3 +39,27 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+$margin: 0.714rem;
+
+.proposals-box {
+  &--title {
+    width: 100%;
+    margin: 0;
+    display: inline-block;
+  }
+
+  &--skeleton {
+    display: inline-block;
+
+    &.is-percentage {
+      float: right;
+    }
+  }
+
+  &--comment {
+    margin-top: 1.5rem;
+  }
+}
+</style>

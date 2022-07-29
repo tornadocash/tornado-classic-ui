@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable import/order */
+
 import Web3 from 'web3'
 import { utils } from 'ethers'
 import { ToastProgrammatic as Toast } from 'buefy'
@@ -16,19 +17,17 @@ const state = () => {
     approvalAmount: 'unlimited',
     lockedBalance: '0',
     isFetchingLockedBalance: false,
-    isFetchingProposalComments: false,
     currentDelegate: '0x0000000000000000000000000000000000000000',
     timestamp: 0,
     delegatedBalance: '0',
     isFetchingDelegatedBalance: false,
     delegators: [],
-    proposalComments: [],
     latestProposalId: {
       value: null,
       status: null
     },
     isFetchingProposals: true,
-    isSaveProposal: false,
+    isCastingVote: false,
     proposals: [],
     voterReceipts: [],
     hasActiveProposals: false,
@@ -74,9 +73,6 @@ const getters = {
 
     return isFetchingProposals
   },
-  isFetchingProposalComments: (state) => {
-    return state.isFetchingProposalComments
-  },
   votingPower: (state) => {
     return toBN(state.lockedBalance)
       .add(toBN(state.delegatedBalance))
@@ -108,11 +104,8 @@ const mutations = {
   SAVE_FETCHING_PROPOSALS(state, status) {
     this._vm.$set(state, 'isFetchingProposals', status)
   },
-  SAVE_SAVE_PROPOSAL(state, status) {
-    this._vm.$set(state, 'isSaveProposal', status)
-  },
-  SAVE_FETCHING_PROPOSAL_COMMENTS(state, status) {
-    this._vm.$set(state, 'isFetchingProposalComments', status)
+  SAVE_CASTING_VOTE(state, status) {
+    this._vm.$set(state, 'isCastingVote', status)
   },
   SAVE_LOCKED_BALANCE(state, { balance }) {
     this._vm.$set(state, 'lockedBalance', balance)
@@ -128,9 +121,6 @@ const mutations = {
   },
   SAVE_DELEGATEE(state, { currentDelegate }) {
     this._vm.$set(state, 'currentDelegate', currentDelegate)
-  },
-  SAVE_PROPOSAL_COMMENTS(state, proposalComments) {
-    state.proposalComments = proposalComments
   },
   SAVE_PROPOSALS(state, proposals) {
     this._vm.$set(state, 'proposals', proposals)
@@ -359,7 +349,7 @@ const actions = {
     const { getters, rootGetters, commit, rootState, dispatch, state } = context
     const { id, support, contact = '', message = '' } = payload
 
-    commit('SAVE_SAVE_PROPOSAL', true)
+    commit('SAVE_CASTING_VOTE', true)
 
     try {
       const { ethAccount } = rootState.metamask
@@ -433,7 +423,7 @@ const actions = {
       )
     } finally {
       dispatch('loading/disable', {}, { root: true })
-      commit('SAVE_SAVE_PROPOSAL', false)
+      commit('SAVE_CASTING_VOTE', false)
     }
   },
   async executeProposal({ getters, rootGetters, commit, rootState, dispatch }, { id }) {
@@ -669,7 +659,7 @@ const actions = {
 
       const [events, statuses] = await Promise.all([
         govInstance.getPastEvents('ProposalCreated', {
-          fromBlock: config.constants.GOVERNANCE_TORNADOCASH_BLOCK,
+          fromBlock: config.constants.GOVERNANCE_BLOCK,
           toBlock: 'latest'
         }),
         aggregatorContract.methods.getAllProposals(govInstance._address).call()
@@ -819,14 +809,14 @@ const actions = {
         filter: {
           to: ethAccount
         },
-        fromBlock: config.constants.GOVERNANCE_TORNADOCASH_BLOCK,
+        fromBlock: config.constants.GOVERNANCE_BLOCK,
         toBlock: 'latest'
       })
       let undelegatedAccs = await govInstance.getPastEvents('Undelegated', {
         filter: {
           from: ethAccount
         },
-        fromBlock: config.constants.GOVERNANCE_TORNADOCASH_BLOCK,
+        fromBlock: config.constants.GOVERNANCE_BLOCK,
         toBlock: 'latest'
       })
       delegatedAccs = delegatedAccs.map((acc) => acc.returnValues.account)
@@ -882,109 +872,6 @@ const actions = {
     } catch (e) {
       console.error('fetchReceipt', e.message)
     }
-  },
-  async fetchProposalComments(context, payload) {
-    const { getters, rootGetters, commit, state } = context
-    const { id: proposalId } = payload
-    let { blockNumber: fromBlock } = payload
-
-    commit('SAVE_FETCHING_PROPOSAL_COMMENTS', true)
-
-    let { proposalComments } = state
-    if (proposalComments[0]?.id === proposalId) {
-      fromBlock = proposalComments[0].blockNumber + 1
-    } else {
-      commit('SAVE_PROPOSAL_COMMENTS', [])
-      proposalComments = []
-    }
-
-    try {
-      const netId = rootGetters['metamask/netId']
-      console.log('fetchProposalComments', proposalId)
-      const govInstance = getters.govContract({ netId })
-      const web3 = getters.getWeb3({ netId })
-      const CACHE_TX = {}
-      const CACHE_BLOCK = {}
-
-      const getComment = (calldata) => {
-        const empty = { contact: '', message: '' }
-        if (!calldata) return empty
-
-        const methodLength = 4 // length of castDelegatedVote method
-        const result = utils.defaultAbiCoder.decode(
-          ['address[]', 'uint256', 'bool'],
-          utils.hexDataSlice(calldata, methodLength)
-        )
-        const data = govInstance.methods.castDelegatedVote(...result).encodeABI()
-        const dataLength = utils.hexDataLength(data)
-
-        try {
-          const str = utils.defaultAbiCoder.decode(['string'], utils.hexDataSlice(calldata, dataLength))
-          const [contact, message] = JSON.parse(str)
-          return { contact, message }
-        } catch {
-          return empty
-        }
-      }
-
-      let votedEvents = await govInstance.getPastEvents('Voted', {
-        filter: {
-          // support: [false],
-          proposalId
-        },
-        fromBlock,
-        toBlock: 'latest'
-      })
-
-      votedEvents = votedEvents.filter((event) => event.blockNumber >= fromBlock)
-
-      const promises = votedEvents.map(async (votedEvent) => {
-        const { transactionHash, returnValues, blockNumber } = votedEvent
-        const { voter, support } = returnValues
-
-        CACHE_TX[transactionHash] = CACHE_TX[transactionHash] || web3.eth.getTransaction(transactionHash)
-        CACHE_BLOCK[blockNumber] = CACHE_BLOCK[blockNumber] || web3.eth.getBlock(blockNumber)
-
-        const [tx, blockInfo] = await Promise.all([CACHE_TX[transactionHash], CACHE_BLOCK[blockNumber]])
-
-        const isMaybeHasComment = support === false && voter === tx.from
-        const comment = isMaybeHasComment ? getComment(tx.input) : getComment()
-
-        return {
-          id: `${transactionHash}-${voter}`,
-          proposalId,
-          ...returnValues,
-          ...comment,
-
-          revote: false,
-          votes: fromWei(returnValues.votes),
-          transactionHash,
-          from: tx.from,
-          delegator: voter === tx.from ? null : tx.from,
-          timestamp: blockInfo.timestamp,
-          blockNumber
-        }
-      })
-
-      let newProposalComments = await Promise.all(promises)
-      newProposalComments = newProposalComments
-        .filter(Boolean)
-        .concat(proposalComments)
-        .sort((a, b) => (b.timestamp - a.timestamp || b.delegator ? -1 : 0))
-
-      const voters = {}
-      newProposalComments = newProposalComments.map((comment) => {
-        const revote = voters[comment.voter] ?? false
-        voters[comment.voter] = true
-        return { ...comment, revote }
-      })
-
-      commit('SAVE_PROPOSAL_COMMENTS', newProposalComments)
-    } catch (e) {
-      console.error('fetchProposalComments', e.message)
-    }
-
-    commit('SAVE_FETCHING_PROPOSAL_COMMENTS', false)
   },
   async fetchUserData({ getters, rootGetters, commit, rootState, dispatch }) {
     try {

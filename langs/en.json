@@ -285,10 +285,10 @@
   },
   "proposalComment": {
     "modal-title": "Title: Proposal #{id}",
-    "modal-subtitle": "Please provide feedback about your decision. Why are you against of this proposal?",
+    "modal-subtitle": "Please explain: Why are you for or against this proposal?",
     "form-contact": "Contact",
     "form-contact-placeholder": "Enter contact (optional)",
-    "form-contact-tooltip": "Contact (optional) may be nickname in forum, email, telegram, twitter or others",
+    "form-contact-tooltip": "Contact (optional) may be a nickname in forum, email, telegram, twitter or other",
     "form-message": "Message",
     "form-message-placeholder": "Enter message",
     "form-message-opt-placeholder": "Enter message (optional)",

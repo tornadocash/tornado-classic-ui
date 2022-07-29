@@ -4,158 +4,159 @@
       <div class="column is-7-tablet is-8-desktop">
         <h1 class="title">{{ data.title }}</h1>
         <div class="description">
-          <p>{{ data.description }}</p>
+          <p class="proposal--description">{{ data.description }}</p>
         </div>
-
-        <div>
-          <ProposalCommentsSkeleton
-            v-if="isFetchingProposalComments"
-            :size="proposalComments.length ? 1 : 3"
-          />
-          <ProposalComment v-for="item in proposalComments" :key="item.id" v-bind="item" />
-        </div>
+        <ProposalComments
+          v-if="isEnabledGovernance && quorumPercent"
+          :proposal="data"
+          :is-initialized="isInitialized"
+          class="proposal--comments"
+        />
       </div>
       <div class="column is-5-tablet is-4-desktop">
-        <div v-if="data.status === 'active'" class="proposal-block">
-          <div class="title">{{ $t('castYourVote') }}</div>
-          <b-tooltip
-            class="fit-content"
-            :label="tooltipMessage"
-            position="is-top"
-            :active="readyForAction"
-            multilined
-          >
-            <div class="buttons buttons__halfwidth">
-              <b-button
-                :disabled="readyForAction"
-                type="is-primary"
-                :icon-left="isFetchingBalances || isSaveProposal ? '' : 'check'"
-                outlined
-                :loading="isFetchingBalances || isSaveProposal"
-                @click="onCastVote(true)"
-                >{{ $t('for') }}</b-button
-              >
-              <b-button
-                :disabled="readyForAction"
-                type="is-danger"
-                :icon-left="isFetchingBalances || isSaveProposal ? '' : 'close'"
-                outlined
-                :loading="isFetchingBalances || isSaveProposal"
-                @click="onCastVote(false)"
-                >{{ $t('against') }}</b-button
-              >
-            </div>
-          </b-tooltip>
-          <i18n
-            v-if="voterReceipts[data.id] && voterReceipts[data.id].hasVoted"
-            tag="div"
-            path="yourCurrentVote"
-          >
-            <template v-slot:vote>
-              <span
-                :class="{
-                  'has-text-primary': voterReceipts[data.id].support,
-                  'has-text-danger': !voterReceipts[data.id].support
-                }"
-                >{{ $n(fromWeiToTorn(voterReceipts[data.id].balance)) }} TORN</span
-              >
-            </template>
-          </i18n>
-        </div>
-        <div v-else-if="data.status === 'awaitingExecution'" class="proposal-block">
-          <div class="title">{{ $t('executeProposal') }}</div>
-          <b-tooltip
-            class="fit-content"
-            :label="$t('connectYourWalletFirst')"
-            position="is-top"
-            :active="!ethAccount"
-            multilined
-          >
-            <b-button
-              type="is-primary"
-              icon-left="check"
-              outlined
-              :disabled="!ethAccount"
-              expanded
-              @click="onExecute"
-              >{{ $t('execute') }}</b-button
-            >
-          </b-tooltip>
-        </div>
-        <div class="proposal-block">
-          <div class="title">{{ $t('currentResults') }}</div>
-          <div class="label">
-            {{ $t('for') }}
-            <span class="percent"
-              ><number-format :value="data.results.for" /> TORN / {{ calculatePercent('for') }}%</span
-            >
-          </div>
-          <b-progress :value="calculatePercent('for')" type="is-primary"></b-progress>
-          <div class="label">
-            {{ $t('against') }}
-            <span class="percent"
-              ><number-format :value="data.results.against" class="value" /> TORN /
-              {{ calculatePercent('against') }}%</span
-            >
-          </div>
-          <b-progress :value="calculatePercent('against')" type="is-danger"></b-progress>
-          <div class="label">
-            {{ $t('quorum') }}
+        <div class="proposal--blocks">
+          <div v-if="data.status === 'active'" class="proposal-block">
+            <div class="title">{{ $t('castYourVote') }}</div>
             <b-tooltip
-              :label="
-                $t('quorumTooltip', {
-                  days: $tc('dayPlural', votingPeriod),
-                  votes: $n(quorumVotes, 'compact')
-                })
-              "
-              size="is-medium"
+              class="fit-content"
+              :label="tooltipMessage"
               position="is-top"
+              :active="readyForAction"
               multilined
             >
-              <button class="button is-primary has-icon">
-                <span class="icon icon-info"></span>
-              </button>
+              <div class="buttons buttons__halfwidth">
+                <b-button
+                  :disabled="readyForAction"
+                  type="is-primary"
+                  :icon-left="isFetchingBalances || isCastingVote ? '' : 'check'"
+                  outlined
+                  :loading="isFetchingBalances || isCastingVote"
+                  @click="onCastVote(true)"
+                  >{{ $t('for') }}</b-button
+                >
+                <b-button
+                  :disabled="readyForAction"
+                  type="is-danger"
+                  :icon-left="isFetchingBalances || isCastingVote ? '' : 'close'"
+                  outlined
+                  :loading="isFetchingBalances || isCastingVote"
+                  @click="onCastVote(false)"
+                  >{{ $t('against') }}</b-button
+                >
+              </div>
             </b-tooltip>
-            <span class="percent"
-              ><number-format :value="isQuorumCompleted ? quorumVotes : quorumResult" class="value" /> TORN /
-              {{ quorumPercent }}%</span
+            <i18n
+              v-if="voterReceipts[data.id] && voterReceipts[data.id].hasVoted"
+              tag="div"
+              path="yourCurrentVote"
             >
+              <template v-slot:vote>
+                <span
+                  :class="{
+                    'has-text-primary': voterReceipts[data.id].support,
+                    'has-text-danger': !voterReceipts[data.id].support
+                  }"
+                  >{{ $n(fromWeiToTorn(voterReceipts[data.id].balance)) }} TORN</span
+                >
+              </template>
+            </i18n>
           </div>
-          <b-progress :value="quorumPercent" type="is-violet"></b-progress>
-        </div>
-        <div class="proposal-block">
-          <div class="title">{{ $t('information') }}</div>
-          <div class="columns is-multiline is-small" :class="{ 'has-countdown': countdown }">
-            <div class="column is-full-small">
-              <strong>{{ $t('proposalAddress') }}</strong>
-              <div class="value">
-                <a :href="contractUrl" class="address" target="_blank" rel="noopener noreferrer">
-                  {{ data.target }}
-                </a>
+          <div v-else-if="data.status === 'awaitingExecution'" class="proposal-block">
+            <div class="title">{{ $t('executeProposal') }}</div>
+            <b-tooltip
+              class="fit-content"
+              :label="$t('connectYourWalletFirst')"
+              position="is-top"
+              :active="!ethAccount"
+              multilined
+            >
+              <b-button
+                type="is-primary"
+                icon-left="check"
+                outlined
+                :disabled="!ethAccount"
+                expanded
+                @click="onExecute"
+                >{{ $t('execute') }}</b-button
+              >
+            </b-tooltip>
+          </div>
+
+          <div class="proposal-block">
+            <div class="title">{{ $t('currentResults') }}</div>
+            <div class="label">
+              {{ $t('for') }}
+              <span class="percent"
+                ><number-format :value="data.results.for" /> TORN / {{ calculatePercent('for') }}%</span
+              >
+            </div>
+            <b-progress :value="calculatePercent('for')" type="is-primary"></b-progress>
+            <div class="label">
+              {{ $t('against') }}
+              <span class="percent"
+                ><number-format :value="data.results.against" class="value" /> TORN /
+                {{ calculatePercent('against') }}%</span
+              >
+            </div>
+            <b-progress :value="calculatePercent('against')" type="is-danger"></b-progress>
+            <div class="label">
+              {{ $t('quorum') }}
+              <b-tooltip
+                :label="
+                  $t('quorumTooltip', {
+                    days: $tc('dayPlural', votingPeriod),
+                    votes: $n(quorumVotes, 'compact')
+                  })
+                "
+                size="is-medium"
+                position="is-top"
+                multilined
+              >
+                <button class="button is-primary has-icon">
+                  <span class="icon icon-info"></span>
+                </button>
+              </b-tooltip>
+              <span class="percent"
+                ><number-format :value="isQuorumCompleted ? quorumVotes : quorumResult" class="value" /> TORN
+                / {{ quorumPercent }}%</span
+              >
+            </div>
+            <b-progress :value="quorumPercent" type="is-violet"></b-progress>
+          </div>
+          <div class="proposal-block">
+            <div class="title">{{ $t('information') }}</div>
+            <div class="columns is-multiline is-small" :class="{ 'has-countdown': countdown }">
+              <div class="column is-full-small">
+                <strong>{{ $t('proposalAddress') }}</strong>
+                <div class="value">
+                  <a :href="contractUrl" class="address" target="_blank" rel="noopener noreferrer">
+                    {{ data.target }}
+                  </a>
+                </div>
               </div>
-            </div>
-            <div class="column is-half-small">
-              <strong>{{ $t('id') }}</strong>
-              <div class="value">{{ data.id }}</div>
-            </div>
-            <div class="column is-half-small">
-              <strong>{{ $t('status') }}</strong>
-              <div class="value">
-                <b-tag :type="getStatusType(data.status)">{{ $t(data.status) }}</b-tag>
+              <div class="column is-half-small">
+                <strong>{{ $t('id') }}</strong>
+                <div class="value">{{ data.id }}</div>
               </div>
-            </div>
-            <div class="column is-half-small">
-              <strong>{{ $t('startDate') }}</strong>
-              <div class="value">{{ $moment.unix(data.startTime).format('llll') }}</div>
-            </div>
-            <div class="column is-half-small">
-              <strong>{{ $t('endDate') }}</strong>
-              <div class="value">{{ $moment.unix(data.endTime).format('llll') }}</div>
-            </div>
-            <div v-if="countdown" class="column is-full-small">
-              <strong>{{ $t(timerLabel) }}</strong>
-              <div class="value">
-                {{ countdown }}
+              <div class="column is-half-small">
+                <strong>{{ $t('status') }}</strong>
+                <div class="value">
+                  <b-tag :type="getStatusType(data.status)">{{ $t(data.status) }}</b-tag>
+                </div>
+              </div>
+              <div class="column is-half-small">
+                <strong>{{ $t('startDate') }}</strong>
+                <div class="value">{{ $moment.unix(data.startTime).format('llll') }}</div>
+              </div>
+              <div class="column is-half-small">
+                <strong>{{ $t('endDate') }}</strong>
+                <div class="value">{{ $moment.unix(data.endTime).format('llll') }}</div>
+              </div>
+              <div v-if="countdown" class="column is-full-small">
+                <strong>{{ $t(timerLabel) }}</strong>
+                <div class="value">
+                  {{ countdown }}
+                </div>
               </div>
             </div>
           </div>
@@ -168,8 +169,7 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import quorum from './mixins/quorum'
-import ProposalCommentsSkeleton from './ProposalCommentsSkeleton.vue'
-import ProposalComment from './ProposalComment.vue'
+import ProposalComments from './ProposalComments.vue'
 import NumberFormat from '@/components/NumberFormat'
 import ProposalCommentFormModal from '@/components/ProposalCommentFormModal.vue'
 
@@ -177,8 +177,7 @@ const { toBN, fromWei, toWei } = require('web3-utils')
 
 export default {
   components: {
-    ProposalCommentsSkeleton,
-    ProposalComment,
+    ProposalComments,
     NumberFormat
   },
   mixins: [quorum],
@@ -196,7 +195,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('governance/gov', ['proposals', 'voterReceipts', 'proposalComments', 'isSaveProposal']),
+    ...mapState('governance/gov', ['proposals', 'voterReceipts', 'isCastingVote']),
     ...mapState('metamask', ['ethAccount', 'isInitialized']),
     ...mapGetters('txHashKeeper', ['addressExplorerUrl']),
     ...mapGetters('metamask', ['networkConfig']),
@@ -205,7 +204,6 @@ export default {
       'constants',
       'votingPeriod',
       'isFetchingBalances',
-      'isFetchingProposalComments',
       'isEnabledGovernance'
     ]),
     readyForAction() {
@@ -239,9 +237,7 @@ export default {
     isInitialized: {
       handler(isInitialized) {
         if (isInitialized && this.isEnabledGovernance) {
-          const { id } = this.data
-          this.fetchReceipt({ id })
-          this.fetchProposalComments(this.data)
+          this.fetchReceipt({ id: this.data.id })
         }
       },
       immediate: true
@@ -282,13 +278,7 @@ export default {
     clearTimeout(this.timeId)
   },
   methods: {
-    ...mapActions('governance/gov', [
-      'castVote',
-      'executeProposal',
-      'fetchReceipt',
-      'fetchProposals',
-      'fetchProposalComments'
-    ]),
+    ...mapActions('governance/gov', ['castVote', 'executeProposal', 'fetchReceipt', 'fetchProposals']),
     getStatusType(status) {
       let statusType = ''
       switch (status) {
@@ -393,3 +383,20 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.proposal {
+  &--description {
+    word-break: break-word;
+  }
+
+  &--comments {
+    margin-top: 2rem;
+  }
+
+  &--blocks {
+    position: sticky;
+    top: 1rem;
+  }
+}
+</style>
