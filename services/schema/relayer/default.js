@@ -144,7 +144,6 @@ const statusSchema = {
       required: ['dai', 'cdai', 'usdc', 'usdt', 'torn', 'wbtc']
     },
     tornadoServiceFee: { type: 'number', maximum: 20, minimum: 0 },
-    miningServiceFee: { type: 'number', maximum: 20, minimum: 0 },
     latestBlock: { type: 'number' },
     version: { type: 'string' },
     health: {
@@ -157,16 +156,7 @@ const statusSchema = {
     },
     currentQueue: { type: 'number' }
   },
-  required: [
-    'rewardAccount',
-    'instances',
-    'netId',
-    'ethPrices',
-    'tornadoServiceFee',
-    'miningServiceFee',
-    'version',
-    'health'
-  ]
+  required: ['rewardAccount', 'instances', 'netId', 'ethPrices', 'tornadoServiceFee', 'version', 'health']
 }
 
 export { statusSchema }

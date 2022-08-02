@@ -106,7 +106,6 @@ export default {
         url: '',
         address: '',
         tornadoServiceFee: 0.0,
-        miningServiceFee: 0.0,
         ethPrices: {
           torn: '1'
         }
