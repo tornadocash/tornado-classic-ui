@@ -456,5 +456,10 @@
   "trustBanner": {
     "trustLess": "You are using a public IPFS gateway. Tornado Cash dApp can not use all security features of your browser. Check out {link} for alternatives",
     "link": "landing page"
+  },
+  "ethLinkBanner": {
+    "notification": "Due to the {issue} with eth.link domain, we highly recommend avoiding using this gateway. Consider {alternative} gateways.",
+    "issue": "issue",
+    "alternative": "alternative"
   }
 }
