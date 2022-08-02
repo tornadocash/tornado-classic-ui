@@ -70,7 +70,6 @@ export const state = () => {
       name: '',
       stakeBalance: 0,
       tornadoServiceFee: 0.05,
-      miningServiceFee: 0.05,
       address: null,
       ethPrices: {
         torn: '1'
@@ -271,7 +270,6 @@ export const actions = {
         ethPrices: response.data.ethPrices,
         address: response.data.rewardAccount,
         currentQueue: response.data.currentQueue,
-        miningServiceFee: response.data.miningServiceFee,
         tornadoServiceFee: response.data.tornadoServiceFee
       }
     } catch (e) {
@@ -310,8 +308,7 @@ export const actions = {
         address,
         ethPrices,
         stakeBalance,
-        tornadoServiceFee,
-        miningServiceFee
+        tornadoServiceFee
       } = pickWeightedRandomRelayer(statuses, netId)
 
       console.log('Selected relayer', name, tornadoServiceFee)
@@ -321,8 +318,7 @@ export const actions = {
         ethPrices,
         url: realUrl,
         stakeBalance,
-        tornadoServiceFee,
-        miningServiceFee
+        tornadoServiceFee
       })
     } catch {
       console.error('Method pickRandomRelayer has not picked relayer')
@@ -393,15 +389,10 @@ export const actions = {
     try {
       const relayerData = await dispatch('getRelayerData', { url, name })
 
-      const {
-        error,
-        isValid,
-        realUrl,
-        address,
-        ethPrices,
-        miningServiceFee,
-        tornadoServiceFee
-      } = await dispatch('askRelayerStatus', relayerData)
+      const { error, isValid, realUrl, address, ethPrices, tornadoServiceFee } = await dispatch(
+        'askRelayerStatus',
+        relayerData
+      )
 
       if (!isValid) {
         return { error, isValid: false }
@@ -413,7 +404,6 @@ export const actions = {
         url: realUrl || '',
         address: address || '',
         tornadoServiceFee: tornadoServiceFee || 0.0,
-        miningServiceFee: miningServiceFee || 0.0,
         ethPrices: ethPrices || { torn: '1' }
       }
     } catch (err) {
