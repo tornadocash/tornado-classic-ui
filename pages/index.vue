@@ -49,6 +49,32 @@
         </template>
       </i18n>
     </b-notification>
+
+    <b-notification
+      v-if="isEthLink"
+      :active="isActiveNotification.ethLink"
+      class="main-notification"
+      type="is-warning"
+      icon-pack="icon"
+      has-icon
+      :aria-close-label="$t('closeNotification')"
+      @close="disableNotification({ key: 'ethLink' })"
+    >
+      <i18n path="ethLinkBanner.notification">
+        <template v-slot:issue>
+          <a
+            href="https://discuss.ens.domains/t/eth-link-expiry/13899"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{{ $t('ethLinkBanner.issue') }}</a
+          >
+        </template>
+        <template v-slot:alternative>
+          <a href="https://tornado.cash/">{{ $t('ethLinkBanner.alternative') }}</a>
+        </template>
+      </i18n>
+    </b-notification>
+
     <div class="columns">
       <div class="column is-half">
         <b-tabs v-model="activeTab" class="is-tornado" :animated="false" @input="tabChanged">
@@ -81,7 +107,8 @@ export default {
   data() {
     return {
       activeTab: 0,
-      isActive: false
+      isActive: false,
+      isEthLink: window.location.host === 'tornadocash.eth.link'
     }
   },
   computed: {
