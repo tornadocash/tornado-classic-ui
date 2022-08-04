@@ -194,13 +194,18 @@ jobs:
       METAMASK_PHRASE: ${{ secrets.E2E_METAMASK_PHRASE }}
       RECIPIENT_ADDRESS: ${{ secrets.E2E_RECIPIENT_ADDRESS }}
       TEST_RPC_URL: http://127.0.0.1:8545
-      RELAYER_NAME: ${{ secrets.E2E_RELAYER_NAME }}
+      RELAYER_NAME: test-relayer
       RUN_RELAYER_URL: ${{ secrets.E2E_RELAYER_SERVERNAME }}
 
     steps:
-      - name: Check out this repo
+      - name: Checkout e2e-test repo
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+        with:
+          repository: ${{ secrets.E2E_REPOSITORY }}
+          ssh-key: ${{ secrets.E2E_ACCESS_KEY }}
+
+      - name: Set up node
+        uses: actions/setup-node@v3
         with:
           node-version: 16.14
 
