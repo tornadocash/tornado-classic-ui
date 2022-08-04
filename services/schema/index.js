@@ -30,6 +30,7 @@ function getRelayerValidateFunction(netId) {
 
     case 10:
     case 42161:
+    case 421611:
       return ajv.getSchema('l2Relayer')
 
     default:

@@ -27,6 +27,7 @@ const CHAIN_GRAPH_URLS = {
   100: 'https://api.thegraph.com/subgraphs/name/tornadocash/xdai-tornado-subgraph',
   137: 'https://api.thegraph.com/subgraphs/name/tornadocash/matic-tornado-subgraph',
   42161: 'https://api.thegraph.com/subgraphs/name/tornadocash/arbitrum-tornado-subgraph',
+  421611: 'https://api.thegraph.com/subgraphs/name/dan1kov/arbitrum-r-tornado-subgraph',
   43114: 'https://api.thegraph.com/subgraphs/name/tornadocash/avalanche-tornado-subgraph'
 }
 

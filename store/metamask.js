@@ -580,6 +580,17 @@ const actions = {
         },
         blockExplorerUrls: ['https://arbiscan.io']
       },
+      421611: {
+        chainId: '0x66EEB',
+        chainName: 'Arbitrum Rinkeby',
+        rpcUrls: ['https://rinkeby.arbitrum.io/rpc'],
+        nativeCurrency: {
+          name: 'Arbitrum Rinkeby Ether',
+          symbol: 'ARETH',
+          decimals: 18
+        },
+        blockExplorerUrls: ['https://testnet.arbiscan.io/']
+      },
       43114: {
         chainId: '0xA86A',
         chainName: 'Avalanche C-Chain',
