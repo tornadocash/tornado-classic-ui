@@ -73,6 +73,7 @@ jobs:
 
   tests:
     runs-on: [self-hosted]
+    needs: deploy-netlify
     services:
       hardhat:
         image: ghcr.io/feshchenkod/hardhat-docker:latest
