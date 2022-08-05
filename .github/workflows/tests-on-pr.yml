@@ -1,0 +1,281 @@
+name: pr tests
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Remove old artifacts
+        uses: c-hive/gha-remove-artifacts@v1
+        with:
+          age: 0 days
+          skip-tags: true
+          skip-recent: 2
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: yarn install
+      - name: Linting JS
+        run: yarn lint
+      - name: Build
+        run: yarn generate
+        env:
+          INFURA_KEY: ${{ secrets.INFURA_KEY }}
+          ALCHEMY_MAINNET_KEY: ${{ secrets.ALCHEMY_MAINNET_KEY }}
+          ALCHEMY_POLYGON_KEY: ${{ secrets.ALCHEMY_POLYGON_KEY }}
+          ALCHEMY_OPTIMISM_KEY: ${{ secrets.ALCHEMY_OPTIMISM_KEY }}
+          ALCHEMY_ARBITRUM_KEY: ${{ secrets.ALCHEMY_ARBITRUM_KEY }}
+          ALCHEMY_GOERLI_KEY: ${{ secrets.ALCHEMY_GOERLI_KEY }}
+          WC_BRIDGE: ${{ secrets.WC_BRIDGE }}
+          OLD_STORE_NAME: ${{ secrets.OLD_STORE_NAME }}
+          STORE_NAME: ${{ secrets.STORE_NAME }}
+          APP_ENS_NAME: ${{ secrets.APP_ENS_NAME }}
+      - name: Upload artefact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: dist-pr
+          path: dist
+
+  deploy-netlify:
+    runs-on: ubuntu-latest
+    needs: build
+    outputs:
+      deploy-url: ${{ steps.deploy-to-netlify.outputs.deploy-url }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download artifact `dist-pr`
+        uses: actions/download-artifact@v1
+        with:
+          name: dist-pr
+          path: dist
+      - name: Deploy to Netlify
+        id: deploy-to-netlify
+        uses: nwtgck/actions-netlify@v1.2
+        timeout-minutes: 1
+        with:
+          publish-dir: './dist'
+          #production-branch: master
+          alias: deploy-preview-${{ github.event.number }}
+          deploy-message: Deploy from GitHub Actions PR-${{ github.event.number }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  tests:
+    runs-on: [self-hosted]
+    needs: deploy-netlify
+    services:
+      hardhat:
+        image: ghcr.io/feshchenkod/hardhat-docker:latest
+        env:
+          INTERVAL: 6000
+          RPC_URL: ${{ secrets.E2E_RPC_MAINNET }}
+        ports:
+          - 8545:8545
+        options: >-
+          --name hardhat
+          --hostname hardhat
+          --health-cmd "curl -sS http://127.0.0.1:8545/ || exit 1"
+          --health-interval 60s
+          --health-timeout 10s
+          --health-retries 5
+          --health-start-period 30s
+
+      redis:
+        image: redis
+        options: >-
+          --name redis
+          --hostname redis
+          --health-cmd "redis-cli ping"
+          --health-interval 15s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+      server:
+        image: tornadocash/relayer:mining
+        options: >-
+          --name server --hostname server
+          --health-cmd "curl -sS http://127.0.0.1:8000/ || exit 1"
+          --health-interval 20s
+          --health-timeout 5s
+          --health-retries 5
+          --health-start-period 30s
+          -e HTTP_RPC_URL=http://hardhat:8545
+          -e ORACLE_RPC_URL=http://hardhat:8545
+          -e REDIS_URL=redis://redis:6379
+          -e PRIVATE_KEY=2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
+          -e REWARD_ACCOUNT=0x090D03d9f18e9336416A515EfC1E47dB68bC270E
+          -e REGULAR_TORNADO_WITHDRAW_FEE=0.05
+          -e MINING_SERVICE_FEE=0.05
+          -e CONFIRMATIONS=1
+          -e AGGREGATOR=0x8cb1436F64a3c33aD17bb42F94e255c4c0E871b2
+          -e GITHUB_ACTIONS=true -e CI=true tornadocash/relayer:mining server //
+        ports:
+          - 8000:8000
+      
+      priceWatcher:
+        image: tornadocash/relayer:mining
+        options: >-
+          --name priceWatcher --hostname priceWatcher
+          -e HTTP_RPC_URL=http://hardhat:8545
+          -e ORACLE_RPC_URL=http://hardhat:8545
+          -e REDIS_URL=redis://redis:6379
+          -e PRIVATE_KEY=2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
+          -e REWARD_ACCOUNT=0x090D03d9f18e9336416A515EfC1E47dB68bC270E
+          -e REGULAR_TORNADO_WITHDRAW_FEE=0.05
+          -e MINING_SERVICE_FEE=0.05
+          -e CONFIRMATIONS=1
+          -e MAX_GAS_PRICE=1000
+          -e BASE_FEE_RESERVE_PERCENTAGE=25
+          -e AGGREGATOR=0x8cb1436F64a3c33aD17bb42F94e255c4c0E871b2
+          -e GITHUB_ACTIONS=true -e CI=true tornadocash/relayer:mining priceWatcher //
+
+      healthWatcher:
+        image: tornadocash/relayer:mining
+        options: >-
+          --name healthWatcher --hostname healthWatcher
+          -e HTTP_RPC_URL=http://hardhat:8545
+          -e ORACLE_RPC_URL=http://hardhat:8545
+          -e REDIS_URL=redis://redis:6379
+          -e PRIVATE_KEY=2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
+          -e REWARD_ACCOUNT=0x090D03d9f18e9336416A515EfC1E47dB68bC270E
+          -e REGULAR_TORNADO_WITHDRAW_FEE=0.05
+          -e MINING_SERVICE_FEE=0.05
+          -e CONFIRMATIONS=1
+          -e MAX_GAS_PRICE=1000
+          -e BASE_FEE_RESERVE_PERCENTAGE=25
+          -e AGGREGATOR=0x8cb1436F64a3c33aD17bb42F94e255c4c0E871b2
+          -e GITHUB_ACTIONS=true -e CI=true tornadocash/relayer:mining healthWatcher //
+
+      worker1:
+        image: tornadocash/relayer:mining
+        options: >-
+          --name worker1 --hostname worker1
+          -e HTTP_RPC_URL=http://hardhat:8545
+          -e ORACLE_RPC_URL=http://hardhat:8545
+          -e REDIS_URL=redis://redis:6379
+          -e PRIVATE_KEY=2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
+          -e REWARD_ACCOUNT=0x090D03d9f18e9336416A515EfC1E47dB68bC270E
+          -e REGULAR_TORNADO_WITHDRAW_FEE=0.05
+          -e MINING_SERVICE_FEE=0.05
+          -e CONFIRMATIONS=1
+          -e MAX_GAS_PRICE=1000
+          -e BASE_FEE_RESERVE_PERCENTAGE=25
+          -e AGGREGATOR=0x8cb1436F64a3c33aD17bb42F94e255c4c0E871b2
+          -e GITHUB_ACTIONS=true -e CI=true tornadocash/relayer:mining worker //
+
+      nginx-relayer:
+        image: ghcr.io/feshchenkod/nginx-self-signed:latest
+        env:
+          UPSTREAM: server:8000
+          SERVERNAME: ${{ secrets.E2E_RELAYER_SERVERNAME }}
+          FULLCHAIN_PEM: ${{ secrets.E2E_RELAYER_CERT }}
+          KEY_PEM: ${{ secrets.E2E_RELAYER_KEY }}
+        ports:
+          - 443:443
+        options: >-
+          --name nginx-relayer --hostname nginx-relayer
+
+    env:
+      URL_TC_CLASSIC: ${{ needs.deploy-netlify.outputs.deploy-url }}
+      METAMASK_PASSWORD: ${{ secrets.E2E_METAMASK_PASSWORD }}
+      METAMASK_PHRASE: ${{ secrets.E2E_METAMASK_PHRASE }}
+      RECIPIENT_ADDRESS: ${{ secrets.E2E_RECIPIENT_ADDRESS }}
+      TEST_RPC_URL: http://127.0.0.1:8545
+      RELAYER_NAME: test-relayer
+      RUN_RELAYER_URL: ${{ secrets.E2E_RELAYER_SERVERNAME }}
+
+    steps:
+      - name: Checkout e2e-test repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ secrets.E2E_REPOSITORY }}
+          ssh-key: ${{ secrets.E2E_ACCESS_KEY }}
+
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      - name: Install Python dependencies
+        uses: py-actions/py-dependency-install@v3
+
+      - name: Install google-chrome
+        run: |
+          set -ex
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+      - name: Clone registry ui
+        run: |
+          git clone --depth 1 https://github.com/peppersec/test-registry-ui
+
+      - name: Install test registry ui
+        working-directory: ./test-registry-ui/
+        run: |
+          npm install --global yarn
+          yarn
+
+      - name: Prepare tests
+        run: |
+          mkdir screenshots
+          touch scripts/dir.txt
+          echo "127.0.0.1 api.thegraph.com" | sudo tee -a /etc/hosts
+          echo "127.0.0.1 $RUN_RELAYER_URL" | sudo tee -a /etc/hosts
+
+      - name: Run load money script
+        id: load_money
+        working-directory: ./test-registry-ui/
+        run: |
+          yarn start
+        env:
+          RPC_URL: ${{ env.TEST_RPC_URL }}
+          WALLET_ADDRESS: ${{ env.RECIPIENT_ADDRESS }}
+          MAINNET_RELAYER_URL: ${{ env.RUN_RELAYER_URL }}
+
+      - name: Sleep for 5 sec
+        run: sleep 5
+
+      - name: Test 1 - All relayer tests in one browser
+        if: always() && steps.load_money.outcome == 'success'
+        run: |
+          pytest -m relayer
+
+      - name: Test 2 - All wallet test in one browser
+        if: always() && steps.load_money.outcome == 'success'
+        run: |
+          pytest -s -v -m wallet
+
+      - name: Test 3 - Note account on Mainnet
+        if: always() && steps.load_money.outcome == 'success'
+        run: |
+          pytest -m note_account
+
+      - name: Test 4 - Lock Unlock TORN
+        if: always() && steps.load_money.outcome == 'success'
+        run: |
+          pytest -m voting_page
+
+      - name: Upload artefact
+        if: always()
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: screenshots
+          path: screenshots/
