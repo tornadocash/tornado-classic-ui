@@ -1,8 +1,8 @@
 {
   "closeNotification": "Cerrar notificación",
-  "indexNotification": "Tornado.cash {link}. No obstante, todavía es un software experimental. Por favor, úselo teniendo en cuenta el riesgo y bajo su responsabilidad.",
+  "indexNotification": "Tornado Cash {link}. No obstante, todavía es un software experimental. Por favor, úselo teniendo en cuenta el riesgo y bajo su responsabilidad.",
   "indexNotificationLinkText": "ha sido auditado",
-  "binanceInternalTxsNotification": "Por favor, no use direcciones a monederos Binance para retiros. Las transacciones internas (incluidos los retiros de Tornado.cash) actualmente no son compatibles con el Exchange de Binance. Si tiene problemas en la recepción de sus fondos, debería contactar con el soporte de Binance.",
+  "binanceInternalTxsNotification": "Por favor, no use direcciones a monederos Binance para retiros. Las transacciones internas (incluidos los retiros de Tornado Cash) actualmente no son compatibles con el Exchange de Binance. Si tiene problemas en la recepción de sus fondos, debería contactar con el soporte de Binance.",
   "deposit": "Depósito",
   "depositButton": "Depósito",
   "withdraw": "Retiro",
@@ -22,7 +22,7 @@
   "amount": "Cantidad",
   "amountTooltip": "Cada cantidad es una instancia independiente de Tornado Cash del conjunto anónimo correspondiente. Consulte el apartado Estadísticas para más información.",
   "approvalIsRequired": "Se requiere aprobación",
-  "inOrderToUse": "Para usar {currency} debe habilitarla para Tornado.cash. Seleccione la cantidad que desee aprobar:",
+  "inOrderToUse": "Para usar {currency} debe habilitarla para Tornado Cash. Seleccione la cantidad que desee aprobar:",
   "unlimited": "Ilimitada",
   "unlimitedTooltip": "La aprobación ilimitada resulta más conveniente si usted quiere realizar múltiples depósitos.",
   "enable": "Habilitar",
@@ -32,7 +32,7 @@
   "close": "cerrar",
   "yourNote": "Su ticket privado",
   "pleaseBackupYourNote": "Por favor, guarde y asegure su ticket. Lo necesitará más adelante para recuperar su depósito.",
-  "treatYourNote": "Considere su ticket como una clave privada - nunca lo comparta con nadie, incluyendo desarrolladores de tornado.cash.",
+  "treatYourNote": "Considere su ticket como una clave privada - nunca lo comparta con nadie, incluyendo desarrolladores de Tornado Cash.",
   "saveAsFile": "El buscador le preguntara si quiere guardar su ticket como un archivo:",
   "iBackedUpTheNote": "He guardado y asegurado el ticket",
   "iEncryptedTheNote": "Cree una copia segura on-chain de este ticket con su Cuenta {address}",
@@ -56,7 +56,7 @@
   "pleaseEnterYourNote": "Por favor introduzca su ticket",
   "turnOnWasm": "Error: Por favor active WebAssembly en las opciones de su buscador.<br /> Si usted utiliza el buscador Tor, habilite javascript.options.wasm  en about:config",
   "timePassed": "Tiempo transcurrido",
-  "timePassedTooltip": "Incluso si hay múltiples depósitos posteriores al suyo, podrían pertenecer a un mismo usuario. Por tanto, le recomendamos esperar un mínimo de 24 horas antes de retirar fondos para asegurar que varios usuarios hayan utilizado Tornado.cash durante ese periodo.",
+  "timePassedTooltip": "Incluso si hay múltiples depósitos posteriores al suyo, podrían pertenecer a un mismo usuario. Por tanto, le recomendamos esperar un mínimo de 24 horas antes de retirar fondos para asegurar que varios usuarios hayan utilizado Tornado Cash durante ese periodo.",
   "subsequentDeposits": "Depósitos subsiguientes",
   "subsequentDepositsTooltip": "La fuente mas probable de un retiro son los depósitos recientes. Por tanto, recomendamos esperar un mínimo de 5 depósitos posteriores al suyo para un mayor anonimato.",
   "recipientAddress": "Dirección de Recepción",
@@ -137,7 +137,7 @@
   "compliance": "Cumplimiento",
   "complianceTool": "herramienta de cumplimiento legal",
   "complianceReport": "Informe de cumplimiento legal",
-  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado.cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
+  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado Cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
   "from": "Desde",
   "to": "A",
   "withdrawal": "Retiro",
@@ -151,7 +151,7 @@
   "nullifierHash": "Hash del Nullifier",
   "verified": "Verificador",
   "generatePdfReport": "Genere informe PDF",
-  "compliancePrintWarning": "Este Informe de Compromiso es para propósito informativo unicamente. Debería confirmar la validez de este informe utilizando la Herramienta de Cumplimiento de Tornado (https://tornadocash.eth.link/compliance) o cualquier otro software criptográfico que pueda procesar y verificar la información contenida aquí(la \"Tornado Compliance Tool\"). Cualquier discrepancia entre la información recogida en este informe y entregado por la herramienta anterior indica que este informe no es riguroso y/o fraudulento.{newline}EL INFORME DE CUMPLIMIENTO SE PRESENTA \"COMO TAL,\" SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITAMENTE, INCLUYENDO PERO NO LIMITADA A LAS GARANTÍAS MERCANTILES, ADECUADAS PARA UN PROPÓSITO PARTICULAR Y LA NO INFRACCIÓN. EN NINGÚN CASO DEBERÍAN LOS AUTORES DE LA HERRAMIENTA DE CUMPLIMIENTO DE TORNADO.CASH SER RESPONSABLES U OBJETO DE CUALQUIER RECLAMO, DAÑO U OTRA RESPONSABILIDAD, YA SEA EN ACCIÓN CONTRACTUAL, AGRAVIADO O DE CUALQUIER OTRO MODO, DERIVADO DE, PRODUCTO DE O EN CONEXIÓN CON EL MENCIONADO INFORME DE CUMPLIMIENTO.",
+  "compliancePrintWarning": "Este Informe de Compromiso es para propósito informativo unicamente. Debería confirmar la validez de este informe utilizando la Herramienta de Cumplimiento de Tornado (https://tornadocash.eth.link/compliance) o cualquier otro software criptográfico que pueda procesar y verificar la información contenida aquí(la \"Tornado Compliance Tool\"). Cualquier discrepancia entre la información recogida en este informe y entregado por la herramienta anterior indica que este informe no es riguroso y/o fraudulento.{newline}EL INFORME DE CUMPLIMIENTO SE PRESENTA \"COMO TAL,\" SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITAMENTE, INCLUYENDO PERO NO LIMITADA A LAS GARANTÍAS MERCANTILES, ADECUADAS PARA UN PROPÓSITO PARTICULAR Y LA NO INFRACCIÓN. EN NINGÚN CASO DEBERÍAN LOS AUTORES DE LA HERRAMIENTA DE CUMPLIMIENTO DE TORNADO CASH SER RESPONSABLES U OBJETO DE CUALQUIER RECLAMO, DAÑO U OTRA RESPONSABILIDAD, YA SEA EN ACCIÓN CONTRACTUAL, AGRAVIADO O DE CUALQUIER OTRO MODO, DERIVADO DE, PRODUCTO DE O EN CONEXIÓN CON EL MENCIONADO INFORME DE CUMPLIMIENTO.",
   "relayRequestFailed": "El retransmisor {relayerName} no responde. Por favor escoja uno diferente.",
   "selectProvider": "Seleccione proveedor",
   "walletDoesNotSupported": "El monedero no es compatible",
@@ -315,7 +315,7 @@
       "setupAccount": {
         "title": "Configuración de cuenta",
         "label": "Clave de Cuenta de Tickets",
-        "description": "Esta clave se usa para encriptar y guardar sus tickets privados de Tornado.cash en la blockchain Ethereum. Por favor haga una copia de seguridad y nunca la comparta con nadie.",
+        "description": "Esta clave se usa para encriptar y guardar sus tickets privados de Tornado Cash en la blockchain Ethereum. Por favor haga una copia de seguridad y nunca la comparta con nadie.",
         "setupAccount": "Configurar cuenta",
         "setAccount": "Finalizar",
         "backedUp": "He asegurado la clave de Cuenta de Tickets",
@@ -372,7 +372,7 @@
       "recover": "Recuperar cuenta",
       "enterRawDesc": "Usar la clave de Cuenta de Tickets configurada",
       "enterRaw": "Introducir clave de cuenta",
-      "accSetupDescription": "Esta clave se usa para encriptar y guardar sus tickets privados de Tornado.cash en la blockchain Ethereum. Por favor haga una copia de seguridad y nunca la comparta con nadie."
+      "accSetupDescription": "Esta clave se usa para encriptar y guardar sus tickets privados de Tornado Cash en la blockchain Ethereum. Por favor haga una copia de seguridad y nunca la comparta con nadie."
     },
     "control": {
       "balance": "Balance de cuenta: {value}",
@@ -385,7 +385,7 @@
       "fileDesc": "Descargar tickets privados en bruto por defecto cuando haga un depósito"
     },
     "notification": {
-      "text": "Tornado.cash añadió un copia segura on-chain. Configure su {note} ahora o {medium} info.",
+      "text": "Tornado Cash añadió un copia segura on-chain. Configure su {note} ahora o {medium} info.",
       "link": {
         "note": "cuenta de tickets",
         "medium": "leer más"

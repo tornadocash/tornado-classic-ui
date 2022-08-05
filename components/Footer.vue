@@ -17,7 +17,7 @@
               >
             </div>
             <div class="level-subitem">
-              Tornado.cash version:
+              Tornado Cash version:
               <span class="footer-version__value">{{ commit }}</span>
             </div>
           </div>

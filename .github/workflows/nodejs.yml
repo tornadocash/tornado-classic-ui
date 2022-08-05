@@ -130,7 +130,7 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN}}
-          message: 🚀 Deployed commit [${{ steps.vars.outputs.sha_short }}](https://github.com/tornadocash/tornado-cash-ui/commit/${{ github.sha }}) of tornado.cash UI
+          message: 🚀 Deployed commit [${{ steps.vars.outputs.sha_short }}](https://github.com/tornadocash/tornado-cash-ui/commit/${{ github.sha }}) of Tornado Cash Classic UI
           format: markdown
       - name: Telegram Failure Notification
         uses: appleboy/telegram-action@v0.1.1

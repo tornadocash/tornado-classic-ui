@@ -1,8 +1,8 @@
 {
   "closeNotification": "Close notification",
-  "indexNotification": "Tornado.cash {link}. However, it is still an experimental software. Please use at your own risk.",
+  "indexNotification": "Tornado Cash {link}. However, it is still an experimental software. Please use at your own risk.",
   "indexNotificationLinkText": "was audited",
-  "binanceInternalTxsNotification": "Please, do not use Binance wallet addresses for withdrawals. Internal transactions (including Tornado.cash withdrawals) are not currently supported on Binance Exchange. If you have an issue receiving your funds, you should contact Binance support.",
+  "binanceInternalTxsNotification": "Please, do not use Binance wallet addresses for withdrawals. Internal transactions (including Tornado Cash withdrawals) are not currently supported on Binance Exchange. If you have an issue receiving your funds, you should contact Binance support.",
   "deposit": "Deposit",
   "depositButton": "Deposit",
   "withdraw": "Withdraw",
@@ -22,7 +22,7 @@
   "amount": "Amount",
   "amountTooltip": "Each amount is a standalone Tornado Cash instance with a separate anonymity set. Check the Stats tab for more info.",
   "approvalIsRequired": "Approval is required",
-  "inOrderToUse": "In order to use {currency} you have to enable it for Tornado.cash. Select the amount you would like to approve:",
+  "inOrderToUse": "In order to use {currency} you have to enable it for Tornado Cash. Select the amount you would like to approve:",
   "unlimited": "Unlimited",
   "unlimitedTooltip": "The unlimited approval is more convenient if you are going to make multiple deposits.",
   "enable": "Enable",
@@ -32,7 +32,7 @@
   "close": "Close",
   "yourNote": "Your private note",
   "pleaseBackupYourNote": "Please back up your note. You will need it later to withdraw your deposit.",
-  "treatYourNote": "Treat your note as a private key - never share it with anyone, including tornado.cash developers.",
+  "treatYourNote": "Treat your note as a private key - never share it with anyone, including Tornado Cash developers.",
   "saveAsFile": "The browser will ask to save your note as a file:",
   "iBackedUpTheNote": "I backed up the note",
   "iEncryptedTheNote": "Create an on-chain backup of this note with your Account {address}",
@@ -137,7 +137,7 @@
   "compliance": "Compliance",
   "complianceTool": "compliance tool",
   "complianceReport": "Compliance Report",
-  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado.cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
+  "complianceSubtitle": "Maintaining financial privacy is essential to preserving our freedom.{newline}However, it should not come at the cost of non-compliance. With Tornado Cash, you can always provide cryptographically verified proof of transactional history using the Ethereum address you used to deposit or withdraw funds. This might be necessary to show the source of assets held in your withdrawal address.{newline}To generate a compliance report, please enter your Tornado.сash Note below.",
   "from": "From",
   "to": "To",
   "withdrawal": "Withdrawal",
@@ -151,7 +151,7 @@
   "nullifierHash": "Nullifier Hash",
   "verified": "Verified",
   "generatePdfReport": "Generate PDF report",
-  "compliancePrintWarning": "This Compliance Report is for informational purposes only. You should confirm the validity of this report by using Tornado’s Compliance Tool (https://tornadocash.eth.link/compliance) or via any other cryptographic software that can compute and verify the information contained herein(the \"Tornado Compliance Tool\"). Any discrepancies between information found in this report and provided by the above tool indicate that the information in this report may be inaccurate and/or fraudulent.{newline}THE COMPLIANCE REPORT IS PROVIDED \"AS IS,\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OF THE TORNADO.CASH COMPLIANCE TOOL BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THIS COMPLIANCE REPORT.",
+  "compliancePrintWarning": "This Compliance Report is for informational purposes only. You should confirm the validity of this report by using Tornado’s Compliance Tool (https://tornadocash.eth.link/compliance) or via any other cryptographic software that can compute and verify the information contained herein(the \"Tornado Compliance Tool\"). Any discrepancies between information found in this report and provided by the above tool indicate that the information in this report may be inaccurate and/or fraudulent.{newline}THE COMPLIANCE REPORT IS PROVIDED \"AS IS,\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OF THE TORNADO CASH COMPLIANCE TOOL BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THIS COMPLIANCE REPORT.",
   "relayRequestFailed": "Relayer {relayerName} is down. Please choose a different relayer.",
   "selectProvider": "Select provider",
   "walletDoesNotSupported": "The wallet is not supported",
@@ -333,7 +333,7 @@
       "setupAccount": {
         "title": "Account setup",
         "label": "Note Account key",
-        "description": "This key is used to encrypt and store your Tornado.cash private notes on Ethereum blockchain. Please back it up and never share it with anyone.",
+        "description": "This key is used to encrypt and store your Tornado Cash private notes on Ethereum blockchain. Please back it up and never share it with anyone.",
         "setupAccount": "Setup account",
         "setAccount": "Finish",
         "backedUp": "I backed up the Note Account key",
@@ -390,7 +390,7 @@
       "recover": "Recover account",
       "enterRawDesc": "Use previously set Note Account key",
       "enterRaw": "Enter account key",
-      "accSetupDescription": "This key is used to encrypt and store your Tornado.cash private notes on Ethereum blockchain. Please back it up and never share it with anyone."
+      "accSetupDescription": "This key is used to encrypt and store your Tornado Cash private notes on Ethereum blockchain. Please back it up and never share it with anyone."
     },
     "control": {
       "balance": "Note account balance: {value}",
@@ -403,7 +403,7 @@
       "fileDesc": "Download raw private notes by default when you make a deposit"
     },
     "notification": {
-      "text": "Tornado.cash added on-chain note backups. Setup your {note} now or {medium} info.",
+      "text": "Tornado Cash added on-chain note backups. Setup your {note} now or {medium} info.",
       "link": {
         "note": "note account",
         "medium": "read more"
