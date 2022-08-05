@@ -339,6 +339,53 @@ export default {
     },
     'tornado-proxy-light.contract.tornadocash.eth': '0x0D5550d52428E7e3175bfc9550207e4ad3859b17'
   },
+  netId421611: {
+    rpcCallRetryAttempt: 15,
+    gasPrices: {
+      instant: 4,
+      fast: 3,
+      standard: 2.52,
+      low: 2.29
+    },
+    nativeCurrency: 'eth',
+    currencyName: 'ETH',
+    explorerUrl: {
+      tx: 'https://testnet.arbiscan.io/tx/',
+      address: 'https://testnet.arbiscan.io/address/',
+      block: 'https://testnet.arbiscan.io/block/'
+    },
+    merkleTreeHeight: 20,
+    emptyElement: '21663839004416932945382355908790599225266501822907911457504978515578255421292',
+    networkName: 'Arbitrum Rinkeby',
+    deployedBlock: 13970750,
+    multicall: '0x7eCfBaa8742fDf5756DAC92fbc8b90a19b8815bF',
+    echoContractAccount: '0xC1B35A64b179D3EdeF31a17C715daD187C26f310',
+    rpcUrls: {
+      Arbitrum: {
+        name: 'Arbitrum Public RPC',
+        url: 'https://rinkeby.arbitrum.io/rpc'
+      }
+    },
+    tokens: {
+      eth: {
+        instanceAddress: {
+          '0.1': '0x183CA333114587070d3FAF57038DC43Ec1d81376',
+          '1': '',
+          '10': '',
+          '100': ''
+        },
+        symbol: 'ETH',
+        decimals: 18
+      }
+    },
+    ensSubdomainKey: 'arbitrum-rinkeby-tornado',
+    pollInterval: 15,
+    constants: {
+      NOTE_ACCOUNT_BLOCK: 13970750,
+      ENCRYPTED_NOTES_BLOCK: 13970750
+    },
+    'tornado-proxy-light.contract.tornadocash.eth': '0xFfa8E36aB90180Df7d63767066e443e1f8d1A828'
+  },
   netId100: {
     rpcCallRetryAttempt: 15,
     gasPrices: {

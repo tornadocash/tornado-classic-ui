@@ -39,7 +39,7 @@ class IndexedDB {
         return
       }
 
-      this.db = await openDB(this.dbName, 34, this.options) // version (optional): Schema version, or undefined to open the current version.
+      this.db = await openDB(this.dbName, 35, this.options) // version (optional): Schema version, or undefined to open the current version.
       this.onEventHandler()
 
       this.dbExists = true

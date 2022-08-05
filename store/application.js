@@ -251,7 +251,7 @@ const getters = {
   },
   isArbitrumConnected: (state, getters, rootState, rootGetters) => {
     const netId = rootGetters['metamask/netId']
-    return Number(netId) === 42161
+    return [42161, 421611].includes(Number(netId))
   }
 }
 
