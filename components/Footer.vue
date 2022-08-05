@@ -5,7 +5,7 @@
         <div class="level-left">
           <div class="level-item is-column">
             <div class="level-subitem footer-address">
-              <div class="footer-address__name">
+              <div class="footer-address__name" data-test="donations_address_footer">
                 {{ $t('donationsAddress') }}
               </div>
               <a
