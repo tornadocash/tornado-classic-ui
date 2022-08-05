@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 /* eslint-disable import/order */
+
 import Web3 from 'web3'
+import { utils } from 'ethers'
 import { ToastProgrammatic as Toast } from 'buefy'
 
 import networkConfig from '@/networkConfig'
 
-import ERC20ABI from '@/abis/Governance.abi.json'
+import GovernanceABI from '@/abis/Governance.abi.json'
 import AggregatorABI from '@/abis/Aggregator.abi.json'
 
 const { numberToHex, toWei, fromWei, toBN, hexToNumber, hexToNumberString } = require('web3-utils')
@@ -25,6 +27,7 @@ const state = () => {
       status: null
     },
     isFetchingProposals: true,
+    isCastingVote: false,
     proposals: [],
     voterReceipts: [],
     hasActiveProposals: false,
@@ -39,13 +42,20 @@ const state = () => {
 }
 
 const getters = {
-  govContract: (state, getters, rootState) => ({ netId }) => {
-    const config = networkConfig[`netId${netId}`]
+  getConfig: (state, getters, rootState) => ({ netId }) => {
+    return networkConfig[`netId${netId}`]
+  },
+  getWeb3: (state, getters, rootState) => ({ netId }) => {
     const { url } = rootState.settings[`netId${netId}`].rpc
+    return new Web3(url)
+  },
+  govContract: (state, getters, rootState) => ({ netId }) => {
+    const config = getters.getConfig({ netId })
     const address = config['governance.contract.tornadocash.eth']
     if (address) {
-      const web3 = new Web3(url)
-      return new web3.eth.Contract(ERC20ABI, address)
+      const web3 = getters.getWeb3({ netId })
+      const contract = new web3.eth.Contract(GovernanceABI, address)
+      return contract
     }
 
     return null
@@ -93,6 +103,9 @@ const mutations = {
   },
   SAVE_FETCHING_PROPOSALS(state, status) {
     this._vm.$set(state, 'isFetchingProposals', status)
+  },
+  SAVE_CASTING_VOTE(state, status) {
+    this._vm.$set(state, 'isCastingVote', status)
   },
   SAVE_LOCKED_BALANCE(state, { balance }) {
     this._vm.$set(state, 'lockedBalance', balance)
@@ -152,6 +165,7 @@ const proposalIntervalConstants = [
   // 'VOTING_DELAY',
   'VOTING_PERIOD'
 ]
+
 const govConstants = ['PROPOSAL_THRESHOLD', 'QUORUM_VOTES']
 
 const actions = {
@@ -331,28 +345,45 @@ const actions = {
       })
     }
   },
-  async castVote({ getters, rootGetters, commit, rootState, dispatch, state }, { id, support }) {
+  async castVote(context, payload) {
+    const { getters, rootGetters, commit, rootState, dispatch, state } = context
+    const { id, support, contact = '', message = '' } = payload
+
+    commit('SAVE_CASTING_VOTE', true)
+
     try {
       const { ethAccount } = rootState.metamask
       const netId = rootGetters['metamask/netId']
       const govInstance = getters.govContract({ netId })
       const delegators = [...state.delegators]
+      const web3 = getters.getWeb3({ netId })
 
       if (toBN(state.lockedBalance).gt(toBN('0'))) {
         delegators.push(ethAccount)
       }
 
-      const gas = await govInstance.methods
-        .castDelegatedVote(delegators, id, support)
-        .estimateGas({ from: ethAccount, value: 0 })
-      const data = await govInstance.methods.castDelegatedVote(delegators, id, support).encodeABI()
+      const data = govInstance.methods.castDelegatedVote(delegators, id, support).encodeABI()
+      let dataWithTail = data
+
+      if (contact || message) {
+        const value = JSON.stringify([contact, message])
+        const tail = utils.defaultAbiCoder.encode(['string'], [value])
+        dataWithTail = utils.hexConcat([data, tail])
+      }
+
+      const gas = await web3.eth.estimateGas({
+        from: ethAccount,
+        to: govInstance._address,
+        value: 0,
+        data: dataWithTail
+      })
 
       const callParams = {
         method: 'eth_sendTransaction',
         params: {
           to: govInstance._address,
           gas: numberToHex(gas + 30000),
-          data
+          data: dataWithTail
         },
         watcherParams: {
           title: support ? 'votingFor' : 'votingAgainst',
@@ -392,6 +423,7 @@ const actions = {
       )
     } finally {
       dispatch('loading/disable', {}, { root: true })
+      commit('SAVE_CASTING_VOTE', false)
     }
   },
   async executeProposal({ getters, rootGetters, commit, rootState, dispatch }, { id }) {
@@ -619,6 +651,7 @@ const actions = {
       const netId = rootGetters['metamask/netId']
       const aggregatorContract = getters.aggregatorContract
       const govInstance = getters.govContract({ netId })
+      const config = getters.getConfig({ netId })
 
       if (!govInstance) {
         return
@@ -626,7 +659,7 @@ const actions = {
 
       const [events, statuses] = await Promise.all([
         govInstance.getPastEvents('ProposalCreated', {
-          fromBlock: 0,
+          fromBlock: config.constants.GOVERNANCE_BLOCK,
           toBlock: 'latest'
         }),
         aggregatorContract.methods.getAllProposals(govInstance._address).call()
@@ -663,7 +696,7 @@ const actions = {
       }
 
       proposals = events
-        .map(({ returnValues }, index) => {
+        .map(({ returnValues, blockNumber }, index) => {
           const id = Number(returnValues.id)
           const { state, startTime, endTime, forVotes, againstVotes } = statuses[index]
           const { title, description } = parseDescription({ id, text: returnValues.description })
@@ -677,6 +710,7 @@ const actions = {
             endTime: Number(endTime),
             startTime: Number(startTime),
             status: ProposalState[Number(state)],
+            blockNumber,
             results: {
               for: fromWei(forVotes),
               against: fromWei(againstVotes)
@@ -767,6 +801,7 @@ const actions = {
       }
 
       const netId = rootGetters['metamask/netId']
+      const config = getters.getConfig({ netId })
 
       const aggregatorContract = getters.aggregatorContract
       const govInstance = getters.govContract({ netId })
@@ -774,14 +809,14 @@ const actions = {
         filter: {
           to: ethAccount
         },
-        fromBlock: 0,
+        fromBlock: config.constants.GOVERNANCE_BLOCK,
         toBlock: 'latest'
       })
       let undelegatedAccs = await govInstance.getPastEvents('Undelegated', {
         filter: {
           from: ethAccount
         },
-        fromBlock: 0,
+        fromBlock: config.constants.GOVERNANCE_BLOCK,
         toBlock: 'latest'
       })
       delegatedAccs = delegatedAccs.map((acc) => acc.returnValues.account)

@@ -1,8 +1,8 @@
 <template>
-  <div class="proposals-box" @click="onClick">
+  <div class="proposals-box is-link" @click="onClick">
     <div class="columns is-gapless">
       <div class="column is-8-tablet is-9-desktop">
-        <div class="title">
+        <div class="proposals-box--title">
           {{ data.title }}
         </div>
         <div class="proposals-box--info">

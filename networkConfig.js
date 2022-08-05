@@ -116,6 +116,7 @@ export default {
     ensSubdomainKey: 'mainnet-tornado',
     pollInterval: 15,
     constants: {
+      GOVERNANCE_BLOCK: 11474695,
       NOTE_ACCOUNT_BLOCK: 11842486,
       ENCRYPTED_NOTES_BLOCK: 14248730,
       MINING_BLOCK_TIME: 15
@@ -534,6 +535,7 @@ export default {
     ensSubdomainKey: 'goerli-tornado',
     pollInterval: 15,
     constants: {
+      GOVERNANCE_BLOCK: 3945171,
       NOTE_ACCOUNT_BLOCK: 4131375,
       ENCRYPTED_NOTES_BLOCK: 4131375,
       MINING_BLOCK_TIME: 15
